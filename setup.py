@@ -17,7 +17,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 # tf.Metadata version.
-__version__ = '0.5.0'
+__version__ = '0.6.0'
 
 
 setup(
@@ -47,8 +47,13 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     namespace_packages=[],
-    install_requires=['googleapis-common-protos'],
-    python_requires='>=2.7,<3',
+    install_requires=[
+        'googleapis-common-protos',
+
+        # TF now requires protobuf>=3.6.0.
+        'protobuf>=3.6.0,<4',
+    ],
+    python_requires='>=2.7,<=3.7',
     packages=find_packages(),
     include_package_data=True,
     description=('Library and standards for schema and statistics.'),

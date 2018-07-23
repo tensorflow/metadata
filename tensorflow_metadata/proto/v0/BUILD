@@ -18,26 +18,30 @@ licenses(["notice"])  # Apache 2.0
 
 package(default_visibility = ["//visibility:public"])
 
-load("@protobuf_bzl//:protobuf.bzl", "cc_proto_library", "py_proto_library")
+load("@protobuf_archive//:protobuf.bzl", "cc_proto_library", "py_proto_library")
 
 cc_proto_library(
     name = "metadata_v0_proto_cc_pb2",
     srcs = [
+        "anomalies.proto",
         "schema.proto",
         "statistics.proto",
     ],
-    default_runtime = "@com_google_protobuf//:protobuf",
-    protoc = "@com_google_protobuf//:protoc",
+    cc_libs = ["@protobuf_archive//:protobuf"],
+    default_runtime = "@protobuf_archive//:protobuf",
+    protoc = "@protobuf_archive//:protoc",
 )
 
 py_proto_library(
     name = "metadata_v0_proto_py_pb2",
     srcs = [
+        "anomalies.proto",
         "schema.proto",
         "statistics.proto",
     ],
+    default_runtime = "@protobuf_archive//:protobuf_python",
+    protoc = "@protobuf_archive//:protoc",
+    deps = ["@protobuf_archive//:protobuf_python"],
     srcs_version = "PY2AND3",
-    default_runtime = "@com_google_protobuf//:protobuf_python",
-    protoc = "@com_google_protobuf//:protoc",
 )
 
