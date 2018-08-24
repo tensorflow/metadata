@@ -22,6 +22,8 @@ package tensorflow.metadata.v0;
 option java_package = "org.tensorflow.metadata.v0";
 option java_multiple_files = true;
 
+import "tensorflow_metadata/proto/v0/path.proto";
+
 // Copied from Facets feature_statistics.proto
 // Must be kept binary-compatible with the original, until all usages
 // are updated to use this version, or we write a proto-to-proto converter.
@@ -61,8 +63,18 @@ message FeatureNameStatistics {
     STRUCT = 4;
   }
 
-  // The feature name
-  string name = 1;
+  // One can identify a field either by the name (for simple fields), or by
+  // a path (for structured fields). Note that:
+  // name: "foo"
+  // is equivalent to:
+  // path: {step:"foo"}
+  oneof field_id {
+    // The feature name
+    string name = 1;
+
+    // The path of the feature.
+    Path path = 8;
+  }
 
   // The data type of the feature
   Type type = 2;
@@ -202,7 +214,7 @@ message BytesStatistics {
 }
 
 message StructStatistics {
-  CommonStatistics common_statistics = 1;
+  CommonStatistics common_stats = 1;
 }
 
 // Common statistics for all feature types

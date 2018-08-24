@@ -24,6 +24,7 @@ cc_proto_library(
     name = "metadata_v0_proto_cc_pb2",
     srcs = [
         "anomalies.proto",
+        "path.proto",
         "schema.proto",
         "statistics.proto",
     ],
@@ -36,12 +37,13 @@ py_proto_library(
     name = "metadata_v0_proto_py_pb2",
     srcs = [
         "anomalies.proto",
+        "path.proto",
         "schema.proto",
         "statistics.proto",
     ],
     default_runtime = "@protobuf_archive//:protobuf_python",
     protoc = "@protobuf_archive//:protoc",
-    deps = ["@protobuf_archive//:protobuf_python"],
     srcs_version = "PY2AND3",
+    deps = ["@protobuf_archive//:protobuf_python"],
 )
 
