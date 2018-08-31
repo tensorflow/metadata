@@ -17,11 +17,11 @@ from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-from absl.testing import absltest
+import unittest
 from tensorflow_metadata.proto.v0 import schema_pb2
 
 
-class ProtoTest(absltest.TestCase):
+class ProtoTest(unittest.TestCase):
 
   def test_import_works(self):
     """Checks that the import of the tensorflow_metadata module works."""
@@ -35,4 +35,4 @@ class ProtoTest(absltest.TestCase):
 
 
 if __name__ == '__main__':
-  absltest.main()
+  unittest.main()

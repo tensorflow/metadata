@@ -17,7 +17,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 # tf.Metadata version.
-__version__ = '0.9.0dev'
+__version__ = '0.9.0'
 
 
 setup(

@@ -85,7 +85,15 @@ message Feature {
     ValueCount value_count = 5;
   }
 
-  // Type of the feature's values
+  // Physical type of the feature's values.
+  // Note that you can have:
+  // type: BYTES
+  // int_domain: {
+  //   min: 0
+  //   max: 3
+  // }
+  // This would be a field that is syntactically BYTES (i.e. strings), but
+  // semantically an int, i.e. it would be "0", "1", "2", or "3".
   optional FeatureType type = 6;
 
   // Domain for the values of the feature.
