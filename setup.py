@@ -40,6 +40,7 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
         'Topic :: Scientific/Engineering :: Mathematics',
         'Topic :: Software Development',
@@ -53,7 +54,7 @@ setup(
         # TF now requires protobuf>=3.6.0.
         'protobuf>=3.6.0,<4',
     ],
-    python_requires='>=2.7,<=3.7',
+    python_requires='>=2.7,<4',
     packages=find_packages(),
     include_package_data=True,
     description=('Library and standards for schema and statistics.'),
