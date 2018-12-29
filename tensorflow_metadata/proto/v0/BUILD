@@ -13,37 +13,36 @@
 # limitations under the License.
 # ==============================================================================
 
-
 licenses(["notice"])  # Apache 2.0
 
 package(default_visibility = ["//visibility:public"])
 
-load("@protobuf_archive//:protobuf.bzl", "cc_proto_library", "py_proto_library")
+load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
+
+METADATA_PROTO_SRCS = [
+    "anomalies.proto",
+    "path.proto",
+    "schema.proto",
+    "statistics.proto",
+]
+
+proto_library(
+    name = "metadata_v0_proto",
+    srcs = METADATA_PROTO_SRCS,
+)
 
 cc_proto_library(
     name = "metadata_v0_proto_cc_pb2",
-    srcs = [
-        "anomalies.proto",
-        "path.proto",
-        "schema.proto",
-        "statistics.proto",
-    ],
-    cc_libs = ["@protobuf_archive//:protobuf"],
-    default_runtime = "@protobuf_archive//:protobuf",
-    protoc = "@protobuf_archive//:protoc",
+    deps = [":metadata_v0_proto"],
 )
 
 py_proto_library(
     name = "metadata_v0_proto_py_pb2",
-    srcs = [
-        "anomalies.proto",
-        "path.proto",
-        "schema.proto",
-        "statistics.proto",
-    ],
-    default_runtime = "@protobuf_archive//:protobuf_python",
-    protoc = "@protobuf_archive//:protoc",
+    srcs = METADATA_PROTO_SRCS,
     srcs_version = "PY2AND3",
-    deps = ["@protobuf_archive//:protobuf_python"],
 )
 
+java_proto_library(
+    name = "metadata_v0_proto_java_pb2",
+    deps = [":metadata_v0_proto"],
+)
