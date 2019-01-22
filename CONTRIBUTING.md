@@ -1,21 +1,23 @@
-# Contributing guidelines
+# How to Contribute
 
-## How to become a contributor and submit your own code
+We'd love to accept your patches and contributions to this project. There are
+just a few small guidelines you need to follow.
 
-### Contributor License Agreements
+## Contributor License Agreement
 
-We'd love to accept your patches! Before we can take them, we have to jump a couple of legal hurdles.
+Contributions to this project must be accompanied by a Contributor License
+Agreement. You (or your employer) retain the copyright to your contribution,
+this simply gives us permission to use and redistribute your contributions as
+part of the project. Head over to <https://cla.developers.google.com/> to see
+your current agreements on file or to sign a new one.
 
-Please fill out either the individual or corporate Contributor License Agreement (CLA).
+You generally only need to submit a CLA once, so if you've already submitted one
+(even if it was for a different project), you probably don't need to do it
+again.
 
-  * If you are an individual writing original source code and you're sure you own the intellectual property, then you'll need to sign an [individual CLA](http://code.google.com/legal/individual-cla-v1.0.html).
-  * If you work for a company that wants to allow you to contribute your work, then you'll need to sign a [corporate CLA](http://code.google.com/legal/corporate-cla-v1.0.html).
+## Code reviews
 
-Follow either of the two links above to access the appropriate CLA and instructions for how to sign and return it. Once we receive it, we'll be able to accept your pull requests.
-
-***NOTE***: Only original source code from you and other people that have signed the CLA can be accepted into the main repository.
-
-### Contributing code
-
-If you have improvements to TensorFlow Metadata, send us your pull requests!
-For those just getting started, GitHub has a [howto](https://help.github.com/articles/using-pull-requests/).
+All submissions, including submissions by project members, require review. We
+use GitHub pull requests for this purpose. Consult
+[GitHub Help](https://help.github.com/articles/about-pull-requests/) for more
+information on using pull requests.
