@@ -1,3 +1,16 @@
+# Current version (not yet released; still in development)
+
+## Major Features and Improvements
+
+* Add support for declaring sparse features.
+* Add support for schema diff regions.
+
+## Bug Fixes and Other Changes
+
+## Breaking changes
+
+## Deprecations
+
 # Version 0.9.0
 
 ## Major Features and Improvements

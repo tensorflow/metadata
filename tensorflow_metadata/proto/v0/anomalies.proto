@@ -44,6 +44,8 @@ message AnomalyInfo {
   // If there is a single reason for the anomaly, identical to
   // reason[0].short_description. Otherwise, summarizes all the reasons.
   optional string short_description = 6;
+  // The comparison between the existing schema and the fixed schema.
+  repeated DiffRegion diff_regions = 4;
 
   // Anomaly types begin with the name of the file that threw the error.
   enum Type {
@@ -138,6 +140,16 @@ message AnomalyInfo {
     COMPARATOR_L_INFTY_HIGH = 42;
     // No examples in the span.
     NO_DATA_IN_SPAN = 43;
+    // The value feature of a sparse feature is missing and at least one
+    // feature defining the sparse feature is present.
+    SPARSE_FEATURE_MISSING_VALUE = 44;
+    // An index feature of a sparse feature is missing and at least one
+    // feature defining the sparse feature is present.
+    SPARSE_FEATURE_MISSING_INDEX = 45;
+    // The length of the features representing a sparse feature does not match.
+    SPARSE_FEATURE_LENGTH_MISMATCH = 46;
+    // Name collision between a sparse feature and raw feature.
+    SPARSE_FEATURE_NAME_COLLISION = 47;
   }
   // Reason for the anomaly. There may be more than one reason,
   // e.g. the field might be missing sometimes AND a new value is
@@ -182,3 +194,59 @@ message Anomalies {
 
 }
 
+// Describes a region in the comparison between two text artifacts. Note that
+// a region also contains the contents of the two artifacts that correspond to
+// the region.
+message DiffRegion {
+  // Details for the chunk.
+  oneof details {
+    // An unchanged region of lines.
+    UnchangedRegion unchanged = 1;
+    // A region of lines removed from the left.
+    OneSideRegion removed = 2;
+    // A region of lines added to the right.
+    OneSideRegion added = 3;
+    // A region of lines that are different in the two artifacts.
+    ChangedRegion changed = 4;
+    // An unchanged region of lines whose contents are just hidden.
+    HiddenRegion hidden = 5;
+  }
+}
+
+// Describes a chunk that is the same in the two artifacts.
+message UnchangedRegion {
+  // The starting lines of the chunk in the two artifacts.
+  optional int32 left_start = 1;
+  optional int32 right_start = 2;
+  // The contents of the chunk. These are the same in both artifacts.
+  repeated string contents = 3;
+}
+
+// Describes a chunk that applies to only one of the two artifacts.
+message OneSideRegion {
+  // Starting line.
+  optional int32 start = 1;
+  // Contents.
+  repeated string contents = 2;
+}
+
+// Describes a chunk that represents changes in both artifacts over the same
+// number of lines.
+message ChangedRegion {
+  // Changed region in the left artifact, in terms of starting line number and
+  // contents.
+  optional int32 left_start = 1;
+  repeated string left_contents = 2;
+  // Ditto for the right artifact.
+  optional int32 right_start = 3;
+  repeated string right_contents = 4;
+}
+
+// A chunk that represents identical lines, whose contents are hidden.
+message HiddenRegion {
+  // Starting lines in the two artifacts.
+  optional int32 left_start = 1;
+  optional int32 right_start = 2;
+  // Size of the region in terms of lines.
+  optional int32 size = 3;
+}

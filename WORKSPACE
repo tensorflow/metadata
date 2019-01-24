@@ -1,4 +1,8 @@
 workspace(name = "tensorflow_metadata")
+
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 git_repository(
     name = "protobuf_bzl",
     # v3.4.0
@@ -29,7 +33,7 @@ http_archive(
 )
 
 # required by protobuf_python
-new_http_archive(
+http_archive(
     name = "six_archive",
     build_file = "@protobuf_bzl//:six.BUILD",
     sha256 = "105f8d68616f8248e24bf0e9372ef04d3cc10104f1980f54d57b2ce73a5ad56a",
