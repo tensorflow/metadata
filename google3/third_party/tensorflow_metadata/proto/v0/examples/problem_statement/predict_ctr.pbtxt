@@ -1,0 +1,26 @@
+// Example 1
+// A model that predict pCTR (classification model). The loss for optimization
+// is binary cross entropy. The model is evaluated based on AUC for vizier
+// and other meta-optimization cases.
+
+problem_statement: {
+  key: "ctr"
+  value: {
+    meta_optimization_target: {
+      task: “ctr”
+      performance_metric: auc{}
+    }
+    task: {
+      key: "ctr"
+      value: {
+        // Is this REALLY binary classification? And if not, why specify
+        // accuracy and prediction?
+        type: one_dimensional_regression {
+          label: "CLICKED"
+        }
+        weight: 1
+        objective_function: binary_cross_entropy {}
+      }
+    }
+  }
+}

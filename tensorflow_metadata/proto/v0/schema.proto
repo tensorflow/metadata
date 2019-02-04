@@ -13,7 +13,6 @@
 // limitations under the License.
 // =============================================================================
 
-
 syntax = "proto2";
 option cc_enable_arenas = true;
 
@@ -22,6 +21,8 @@ package tensorflow.metadata.v0;
 option java_package = "org.tensorflow.metadata.v0";
 option java_multiple_files = true;
 
+// LifecycleStage. Only UNKNOWN_STAGE, BETA, and PRODUCTION features are
+// PLANNED, ALPHA, and DEBUG are treated as DEPRECATED.
 enum LifecycleStage {
   UNKNOWN_STAGE = 0;  // Unknown stage.
   PLANNED = 1;        // Planned feature, may not be created yet.
@@ -41,6 +42,11 @@ message Schema {
   // Sparse features described in this schema.
   repeated SparseFeature sparse_feature = 6;
 
+  // Use StructDomain instead.
+  // Sequences described in this schema. A sequence may be described in terms of
+  // several features. Any features appearing within a sequence must *not* be
+  // declared as top-level features in <feature>.
+// GOOGLE-LEGACY   repeated Sequence sequence = 2;  
 
   // declared as top-level features in <feature>.
   // String domains referenced in the features.
@@ -61,18 +67,34 @@ message Schema {
   // See FeatureProto::not_in_environment and FeatureProto::in_environment.
   repeated string default_environment = 5;
 
+  /* BEGIN GOOGLE-LEGACY
+  // TODO(b/73109633): Change default to false, before removing this field.
+  optional bool generate_legacy_feature_spec = 7 [default = true];
+  END GOOGLE-LEGACY */
+
 }
 
 // Describes schema-level information about a specific feature.
+// NextID: 30
 message Feature {
-
   // The name of the feature.
   optional string name = 1;  // required
 
+  // This field is no longer supported. Instead, use:
+  // lifecycle_stage: DEPRECATED
+  // TODO(b/111450258): remove this.
+  optional bool deprecated = 2 [deprecated = true];
 
+  // Comment field for a human readable description of the field.
+  // TODO(b/123518108): remove this.
+// GOOGLE-LEGACY   optional string comment = 3 [deprecated = true];  
 
-  // Constraints on the presence of this feature in the examples.
-  optional FeaturePresence presence = 14;
+  oneof presence_constraints {
+    // Constraints on the presence of this feature in the examples.
+    FeaturePresence presence = 14;
+    // Only used in the context of a "group" context, e.g., inside a sequence.
+    FeaturePresenceWithinGroup group_presence = 17;
+  }
 
   // The shape of the feature which governs the number of values that appear in
   // each example.
@@ -106,10 +128,17 @@ message Feature {
     StringDomain string_domain = 11;
     BoolDomain bool_domain = 13;
     StructDomain struct_domain = 29;
+    // Supported semantic domains (Not supported in TFDV).
+    NaturalLanguageDomain natural_language_domain = 24;
+    ImageDomain image_domain = 25;
+    MIDDomain mid_domain = 26;
+    URLDomain url_domain = 27;
+    TimeDomain time_domain = 28;
   }
 
   // Constraints on the distribution of the feature values.
   // Currently only supported for StringDomains.
+  // TODO(b/69473628): Extend functionality to other domain types.
   optional DistributionConstraints distribution_constraints = 15;
 
   // Additional information about the feature for documentation purpose.
@@ -189,26 +218,79 @@ message ValueCount {
   optional int64 max = 2;
 }
 
+/* BEGIN GOOGLE-LEGACY
+// Constraint on the number of elements in a sequence.
+message LengthConstraint {
+  optional int64 min = 1;
+  optional int64 max = 2;
+}
+
+// A sequence is a logical feature that comprises several "raw" features that
+// encode values at different "steps" within the sequence.
+// TODO(b/110490010): Delete this. This is a special case of StructDomain.
+message Sequence {
+  // An optional name for this sequence. Used mostly for debugging and
+  // presentation.
+  optional string name = 1;
+
+  // Features that comprise the sequence. These features are "zipped" together
+  // to form the values for the sequence at different steps.
+  // - Use group_presence within each feature to encode presence constraints
+  //   within the sequence.
+  // - If all features have the same value-count constraints then
+  //   declare this once using the shape_constraint below.
+  repeated Feature feature = 2;
+
+  // Constraints on the presence of the sequence across all examples in the
+  // dataset. The sequence is assumed to be present if at least one of its
+  // features is present.
+  optional FeaturePresence presence = 3;
+
+  // Shape constraints that apply on all the features that comprise the
+  // sequence. If this is set then any value_count stanza in 'feature' is
+  // ignored.
+  // TODO(martinz): delete: there is no reason to believe the shape of the
+  // fields in a sequence will be the same. Use the fields in Feature instead.
+  oneof shape_constraint {
+    ValueCount value_count = 4;
+    FixedShape fixed_shape = 5;
+  }
+
+  // Constraint on the number of elements in a sequence.
+  optional LengthConstraint length_constraint = 6;
+}
+END GOOGLE-LEGACY */
 
 // A sparse feature represents a sparse tensor that is encoded with a
 // combination of raw features, namely index features and a value feature.  Each
 // index feature defines a list of indices in a different dimension.
+// TODO(b/65056393): Write checks for SparseFeature in Datum.
+// TODO(kestert): check if this is consistent.
 message SparseFeature {
   // Name for the sparse feature. This should not clash with other features in
   // the same schema.
   optional string name = 1;  // required
 
+  // This field is no longer supported. Instead, use:
+  // lifecycle_stage: DEPRECATED
+  // TODO(b/111450258): remove this.
+  optional bool deprecated = 2 [deprecated = true];
 
   // The lifecycle_stage determines where a feature is expected to be used,
   // and therefore how important issues with it are.
   optional LifecycleStage lifecycle_stage = 7;
 
+  // Comment field for a human readable description of the field.
+  // TODO(martinz): delete, convert to annotation.
+// GOOGLE-LEGACY   optional string comment = 3 [deprecated = true];  
 
   // Constraints on the presence of this feature in examples.
   // Deprecated, this is inferred by the referred features.
   optional FeaturePresence presence = 4 [deprecated = true];
 
   // Shape of the sparse tensor that this SparseFeature represents.
+  // Currently not supported.
+  // TODO(b/109669962): Consider deriving this from the referred features.
   optional FixedShape dense_shape = 5;
 
   // Features that represent indexes.
@@ -239,6 +321,7 @@ message SparseFeature {
 }
 
 // Models constraints on the distribution of a feature's values.
+// TODO(martinz): replace min_domain_mass with max_off_domain (but slowly).
 message DistributionConstraints {
   // The minimum fraction (in [0,1]) of values across all examples that
   // should come from the feature's domain, e.g.:
@@ -286,7 +369,6 @@ message StructDomain {
 
 // Encodes information for domains of string values.
 message StringDomain {
-
   // Id of the domain. Required if the domain is defined at the schema level. If
   // so, then the name must be unique within the schema.
   optional string name = 1;
@@ -308,6 +390,34 @@ message BoolDomain {
   optional string false_value = 3;
 }
 
+// BEGIN SEMANTIC-TYPES-PROTOS
+// Semantic domains are specialized feature domains. For example a string
+// Feature might represent a Time of a specific format.
+// Semantic domains are defined as protocol buffers to allow further sub-types /
+// specialization, e.g: NaturalLanguageDomain can provide information on the
+// language of the text.
+
+// Natural language text.
+message NaturalLanguageDomain {}
+
+// Image data.
+message ImageDomain {}
+
+// Knowledge graph ID, see: https://www.wikidata.org/wiki/Property:P646
+message MIDDomain {}
+
+// A URL, see: https://en.wikipedia.org/wiki/URL
+message URLDomain {}
+
+// Time representation.
+message TimeDomain {
+  // Expected format that contains a combination of regular characters and
+  // special format specifiers. Format specifiers are a subset of the
+  // strptime standard.
+  // Only set if the format is consistent for all values of the feature.
+  optional string format = 1;
+}
+// END SEMANTIC-TYPES-PROTOS
 
 // Describes the physical representation of a feature.
 // It may be different than the logical representation, which
@@ -328,6 +438,12 @@ message FeaturePresence {
   optional int64 min_count = 2;
 }
 
+// Records constraints on the presence of a feature inside a "group" context
+// (e.g., .presence inside a group of features that define a sequence).
+// TFDV does not support this feature yet.
+message FeaturePresenceWithinGroup {
+  optional bool required = 1;
+}
 
 message Domain {
   oneof domain_info {
@@ -339,6 +455,12 @@ message Domain {
     FloatDomain floats = 3;
     StringDomain strings = 4;
     BoolDomain bools = 5;
+    // Supported semantic domains. Not supported in TFDV.
+    NaturalLanguageDomain natural_language_domain = 7;
+    ImageDomain image_domain = 8;
+    MIDDomain mid_domain = 9;
+    URLDomain url_domain = 10;
+    TimeDomain time_domain = 11;
     StructDomain features = 12;
   }
 

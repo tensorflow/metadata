@@ -21,6 +21,8 @@ package tensorflow.metadata.v0;
 option java_package = "org.tensorflow.metadata.v0";
 option java_multiple_files = true;
 
+// TODO(b/123519907): Remove this.
+// GOOGLE-LEGACY import "net/proto2/bridge/proto/message_set.proto"; 
 import "tensorflow_metadata/proto/v0/path.proto";
 import "tensorflow_metadata/proto/v0/schema.proto";
 
@@ -192,6 +194,27 @@ message Anomalies {
   // True if numExamples == 0.
   optional bool data_missing = 3;
 
+  // TODO(b/123519907): Remove this.
+  // The hook to attach any usage and tool specific metadata. Example:
+  // message SchemaStamp {
+  //   // extension ID is any CL number that has not been used in an extension.
+  //   extend proto2.bridge.MessageSet {
+  //     optional StampedSchemaDiff message_set_extension = 123445554;
+  //   }
+  //   optional string schema_stamp = 1;
+  // }
+  //
+  // then, the following proto msg encodes an Anomalies with an embedded
+  // SchemaStamp:
+  //
+  // Anomalies {
+  //   metadata {
+  //     [SchemaStamp]: {
+  //        schema_stamp: "stamp"
+  //     }
+  //   }
+  // }
+// GOOGLE-LEGACY   optional proto2.bridge.MessageSet metadata = 5;  
 }
 
 // Describes a region in the comparison between two text artifacts. Note that

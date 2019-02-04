@@ -14,6 +14,8 @@
 // =============================================================================
 
 // Definitions for aggregated feature statistics for datasets.
+// TODO(b/80075690): make a Javascript build rule for this.
+// TODO(b/80075691): migrate Facets to use this.
 syntax = "proto3";
 option cc_enable_arenas = true;
 
@@ -174,6 +176,11 @@ message StringStatistics {
   // Weighted statistics for the feature, if the values have weights.
   WeightedStringStatistics weighted_string_stats = 6;
 
+  // A vocabulary file, used for vocabularies too large to store in the proto
+  // itself.  Note that the file may be relative to some context-dependent
+  // directory.  E.g. in TFX the feature statistics will live in a PPP and
+  // vocabulary file names will be relative to this PPP.
+  string vocabulary_file = 7;
 }
 
 // Statistics for a weighted numeric feature in a dataset.
