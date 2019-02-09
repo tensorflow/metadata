@@ -19,6 +19,13 @@ from setuptools import setup
 # tf.Metadata version.
 __version__ = '0.9.0'
 
+# Note: In order for the README to be rendered correctly, make sure to have the
+# following minimum required versions of the respective packages when building
+# and uploading the zip/wheel package to PyPI:
+# setuptools >= 38.6.0, wheel >= 0.31.0, twine >= 1.11.0
+# Get the long description from the README file.
+with open('README.md') as fp:
+  _LONG_DESCRIPTION = fp.read()
 
 setup(
     name='tensorflow-metadata',
@@ -57,6 +64,8 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     description=('Library and standards for schema and statistics.'),
+    long_description=_LONG_DESCRIPTION,
+    long_description_content_type='text/markdown',
     keywords='tensorflow metadata tfx',
     download_url='https://pypi.org/project/tensorflow-metadata',
     requires=[])

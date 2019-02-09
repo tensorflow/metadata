@@ -267,6 +267,7 @@ END GOOGLE-LEGACY */
 // TODO(b/65056393): Write checks for SparseFeature in Datum.
 // TODO(kestert): check if this is consistent.
 message SparseFeature {
+  reserved 11;
   // Name for the sparse feature. This should not clash with other features in
   // the same schema.
   optional string name = 1;  // required
@@ -314,10 +315,6 @@ message SparseFeature {
   // Type of value feature.
   // Deprecated, this is inferred by the referred features.
   optional FeatureType type = 10 [deprecated = true];
-
-  // Domain information
-  // Deprecated, this is inferred by the referred features.
-  optional Domain domain = 11 [deprecated = true];
 }
 
 // Models constraints on the distribution of a feature's values.
@@ -443,30 +440,6 @@ message FeaturePresence {
 // TFDV does not support this feature yet.
 message FeaturePresenceWithinGroup {
   optional bool required = 1;
-}
-
-message Domain {
-  oneof domain_info {
-    // Reference to a domain defined at the schema level.
-    string name = 1;
-
-    // Inline definitions of domains.
-    IntDomain ints = 2;
-    FloatDomain floats = 3;
-    StringDomain strings = 4;
-    BoolDomain bools = 5;
-    // Supported semantic domains. Not supported in TFDV.
-    NaturalLanguageDomain natural_language_domain = 7;
-    ImageDomain image_domain = 8;
-    MIDDomain mid_domain = 9;
-    URLDomain url_domain = 10;
-    TimeDomain time_domain = 11;
-    StructDomain features = 12;
-  }
-
-  // Constraints on the distribution of the feature values.
-  // Currently only supported for StringDomains.
-  optional DistributionConstraints distribution_constraints = 6;
 }
 
 // Checks that the L-infinity norm is below a certain threshold between the
