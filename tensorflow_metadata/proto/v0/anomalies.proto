@@ -152,6 +152,8 @@ message AnomalyInfo {
     SPARSE_FEATURE_LENGTH_MISMATCH = 46;
     // Name collision between a sparse feature and raw feature.
     SPARSE_FEATURE_NAME_COLLISION = 47;
+    // Invalid custom semantic domain.
+    SEMANTIC_DOMAIN_UPDATE = 48;
   }
   // Reason for the anomaly. There may be more than one reason,
   // e.g. the field might be missing sometimes AND a new value is
