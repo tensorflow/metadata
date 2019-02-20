@@ -51,9 +51,6 @@
 
 * Established tf.Metadata as a standalone package.
 
-# Version 0.9.0
-
-
 ## Bug Fixes and Other Changes
 
 ## Breaking changes
