@@ -1,7 +1,8 @@
-# Current version (not yet released; still in development)
+# Version 0.12.0
 
 ## Major Features and Improvements
 
+* Added ProblemStatement
 * Add support for declaring sparse features.
 * Add support for schema diff regions.
 
@@ -49,6 +50,9 @@
 ## Major Features and Improvements
 
 * Established tf.Metadata as a standalone package.
+
+# Version 0.9.0
+
 
 ## Bug Fixes and Other Changes
 
