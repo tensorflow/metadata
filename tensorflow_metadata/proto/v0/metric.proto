@@ -1,0 +1,184 @@
+// Copyright 2017 The TensorFlow Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// =============================================================================
+
+syntax = "proto3";
+
+option cc_enable_arenas = true;
+
+package tensorflow.metadata.v0;
+
+option java_package = "org.tensorflow.metadata.v0";
+option java_multiple_files = true;
+
+
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/binary_accuracy
+message BinaryAccuracy {
+}
+
+
+// categorical_accuracy(...)
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/categorical_accuracy
+message CategoricalAccuracy {
+}
+
+// categorical_crossentropy(...)
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/categorical_crossentropy
+message CategoricalCrossEntropy {
+}
+
+// cosine(...)
+// cosine_proximity(...)
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/cosine_proximity
+message Cosine {
+}
+
+
+// Linear Hinge Loss
+// hinge(...)
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/hinge
+message Hinge {
+}
+
+// kld(...)
+// kullback_leibler_divergence(...)
+// KLD(...)
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/kullback_leibler_divergence
+message KullbackLeiblerDivergence {
+}
+
+// MAE(...)
+// mae(...)
+// mean_absolute_error(...)
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/mean_absolute_error
+message MeanAbsoluteError {
+}
+
+// MAPE(...)
+// mape(...)
+// mean_absolute_percentage_error(...)
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/mean_absolute_percentage_error
+message MeanAbsolutePercentageError {
+}
+
+// MSE(...)
+// mse(...)
+// mean_squared_error(...)
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/mean_squared_error
+message MeanSquaredError {
+}
+
+// msle(...)
+// MSLE(...)
+// mean_squared_logarithmic_error(...)
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/mean_squared_logarithmic_error
+message MeanSquaredLogarithmicError {
+}
+
+// poisson(...)
+message Poisson {
+}
+
+// squared_hinge(...)
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/squared_hinge
+message SquaredHinge {
+}
+
+// top_k_categorical_accuracy(...)
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/top_k_categorical_accuracy
+message TopKCategoricalAccuracy {
+
+}
+
+// sparse_top_k_categorical_accuracy(...)
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/sparse_top_k_categorical_accuracy
+message SparseTopKCategoricalAccuracy {
+}
+
+// Binary cross entropy as a metric is equal to the negative log likelihood
+// (see logistic regression).
+// In addition, when used to solve a binary classification task, binary cross
+// entropy implies that the binary label will maximize binary accuracy.
+// binary_crossentropy(...)
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/binary_crossentropy
+message BinaryCrossEntropy {
+}
+
+// AKA the negative log likelihood or log loss.
+// Given a label y\in {0,1} and a predicted probability p in [0,1]:
+// -yln(p)-(1-y)ln(1-p)
+// TODO(martinz): if this is interpreted the same as binary_cross_entropy,
+// we may need to revisit the semantics.
+message LogisticRegression {
+}
+
+
+message AUC {
+}
+
+message PrecisionAtK {
+
+}
+
+message MeanReciprocalRank {
+}
+
+message BlockUtility {
+  repeated double weight = 1;
+}
+
+// A custom metric.
+message CustomMetric {
+  // The name of a metric computed by the model.
+  string name = 1;
+}
+
+// Objective functions are performance metrics that are differentiable, and
+// therefore can be directly optimized.
+// TODO(martinz): take metrics that are appropriate and make them objectives.
+message ObjectiveFunction {
+  oneof objective {
+    BinaryCrossEntropy binary_cross_entropy = 1;
+    LogisticRegression logistic_regression = 2;
+    MeanSquaredError squared_error = 3;
+    CustomMetric custom_metric = 4;
+  }
+}
+
+// Performance metrics measure the quality of a model. They need not be
+// differentiable.
+message PerformanceMetric {
+  oneof performance_metric {
+    AUC auc = 1;
+    BinaryAccuracy binary_accuracy = 2;
+    BinaryCrossEntropy binary_cross_entropy = 3;
+    BlockUtility block_utility = 4;
+    CategoricalAccuracy categorical_accuracy = 5;
+    CategoricalCrossEntropy categorical_cross_entropy = 6;
+    Cosine cosine = 7;
+    Hinge hinge = 8;
+    KullbackLeiblerDivergence kullback_leibler_divergence = 9;
+    LogisticRegression logistic_regression = 10;
+    MeanAbsoluteError mean_absolute_error = 11;
+    MeanAbsolutePercentageError mean_absolute_percentage_error = 12;
+    MeanSquaredError squared_error = 13;
+    MeanSquaredLogarithmicError mean_squared_logarithmic_error = 14;
+    MeanReciprocalRank mean_reciprocal_rank = 15;
+    Poisson poisson = 16;
+    PrecisionAtK precision_at_k = 17;
+    SquaredHinge squared_hinge = 18;
+    SparseTopKCategoricalAccuracy sparse_top_k_categorical_accuracy = 19;
+    TopKCategoricalAccuracy top_k_categorical_accuracy = 20;
+  }
+}

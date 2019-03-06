@@ -24,7 +24,9 @@ cc_proto_library(
     name = "metadata_v0_proto_cc_pb2",
     srcs = [
         "anomalies.proto",
+        "metric.proto",
         "path.proto",
+        "problem_statement.proto",
         "schema.proto",
         "statistics.proto",
     ],
@@ -37,7 +39,9 @@ py_proto_library(
     name = "metadata_v0_proto_py_pb2",
     srcs = [
         "anomalies.proto",
+        "metric.proto",
         "path.proto",
+        "problem_statement.proto",
         "schema.proto",
         "statistics.proto",
     ],

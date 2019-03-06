@@ -93,7 +93,8 @@ message FeatureNameStatistics {
   repeated CustomStatistic custom_stats = 6;
 }
 
-// Common weighted statistics for all feature types.
+// Common weighted statistics for all feature types. Statistics counting number
+// of values (i.e., avg_num_values and tot_num_values) include NaNs.
 // If the weighted column is missing, then this counts as a weight of 1
 // for that example.
 message WeightedCommonStatistics {
@@ -224,7 +225,9 @@ message StructStatistics {
   CommonStatistics common_stats = 1;
 }
 
-// Common statistics for all feature types
+// Common statistics for all feature types. Statistics counting number of values
+// (i.e., min_num_values, max_num_values, avg_num_values, and tot_num_values)
+// include NaNs.
 message CommonStatistics {
   // The number of examples with at least one value for this feature.
   uint64 num_non_missing = 1;

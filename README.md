@@ -10,6 +10,7 @@ The metadata serialization formats include:
 
 * A schema describing tabular data (e.g., tf.Examples).
 * A collection of summary statistics over such datasets.
+* A problem statement quantifying the objectives of a model.
 
 The metadata may be produced by hand or automatically during input data
 analysis, and may be consumed for data validation, exploration, and

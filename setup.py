@@ -16,8 +16,13 @@
 from setuptools import find_packages
 from setuptools import setup
 
+with open('tensorflow_metadata/version.py') as fp:
+  globals_dict = {}
+  exec (fp.read(), globals_dict)  # pylint: disable=exec-used
+
 # tf.Metadata version.
-__version__ = '0.12.0'
+__version__ = globals_dict['__version__']
+
 
 # Note: In order for the README to be rendered correctly, make sure to have the
 # following minimum required versions of the respective packages when building
@@ -58,8 +63,7 @@ setup(
     install_requires=[
         'googleapis-common-protos',
 
-        # TF now requires protobuf>=3.6.1.
-        'protobuf>=3.6.1,<4',
+        'protobuf>=3.7,<4',
     ],
     python_requires='>=2.7,<4',
     packages=find_packages(),
@@ -68,5 +72,5 @@ setup(
     long_description=_LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
     keywords='tensorflow metadata tfx',
-    download_url='https://pypi.org/project/tensorflow-metadata',
+    download_url='https://github.com/tensorflow/metadata/tags',
     requires=[])

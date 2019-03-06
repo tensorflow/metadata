@@ -1,0 +1,222 @@
+// Copyright 2017 The TensorFlow Authors. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+// =============================================================================
+
+syntax = "proto3";
+option cc_enable_arenas = true;
+
+import "tensorflow_metadata/proto/v0/metric.proto";
+
+package tensorflow.metadata.v0;
+
+option java_package = "org.tensorflow.metadata.v0";
+option java_multiple_files = true;
+
+message ProblemStatementNamespace {
+  // Map from a ProblemStatement name to a problem statement.
+  map<string, ProblemStatement> problem_statements = 2;
+}
+
+// A reference to another problem statement.
+message ProblemStatementReference {
+  // A description of the relationship between the problem statements.
+  string description = 1;
+  // The name of the other problem statement.
+  // Must be in the same ProblemStatementNamespace.
+  oneof references {
+    string name = 2;
+  }
+}
+
+// Configuration for a binary classification task.
+// The output is one of two possible class labels, encoded as the same type
+// as the label column.
+// BinaryClassification is the same as MultiClassClassification with
+// n_classes = 2.
+message BinaryClassification {
+  // The label column.
+  string label = 1;
+  // (optional) The weight column.
+  string example_weight = 2;
+}
+
+// Configuration for a multi-class classification task.
+// In this problem type, there are n_classes possible label values, and the
+// model predicts a single label.
+// The output is one of the class labels, out of n_classes possible classes.
+// The output type will correspond to the label column type.
+message MultiClassClassification {
+  // The label column.  There's only a single label per example.
+  // If the label column is a BoolDomain, use the BinaryClassification Type
+  // instead.
+  string label = 1;
+  // The weight column.
+  string example_weight = 2;
+  // (optional) The number of label classes. If unset, the solution provider
+  // is expected to infer the number of classes from the data.
+  uint64 n_classes = 3;
+}
+
+// Configuration for a top-K classification task.
+// In this problem type, there are n_classes possible label values, and the
+// model predicts n_predicted_labels labels.
+// The output is a sequence of n_predicted_labels labels, out of n_classes
+// possible classes. The order of the predicted output labels is determined
+// by the predictions_order field.
+// (*) MultiClassClassification is the same as TopKClassification with
+//     n_predicted_labels = 1.
+// (*) TopKClassification does NOT mean multi-class multi-label classification:
+//     e.g., the output contains a sequence of labels, all coming from the same
+//     label column in the data.
+message TopKClassification {
+  // The label column.
+  string label = 1;
+  // (optional) The weight column.
+  string example_weight = 2;
+  // (optional) The number of label classes. If unset, the solution provider
+  // is expected to infer the number of classes from the data.
+  uint64 n_classes = 3;
+  // (optional) The number of class labels to predict. If unset, we assume 1.
+  uint64 n_predicted_labels = 4;
+  enum Order {
+    UNSPECIFIED = 0;
+    // Predictions are ordered from the most likely to least likely.
+    SCORE_DESC = 1;
+    // Predictions are ordered from the least likely to most likely.
+    SCORE_ASC = 2;
+  }
+  Order predictions_order = 5;
+}
+
+// A one-dimensional regression task.
+// The output is a single real number, whose range is dependent upon the
+// objective.
+message OneDimensionalRegression {
+  // The label column.
+  string label = 1;
+  // (optional) The weight column.
+  string weight = 2;
+  // TODO(martinz): consider whether to specify the range of the outputs (e.g.,
+  // [0,1], (0,infty), or the whole real line).
+}
+
+// The type of a head or meta-objective. Specifies the label, weight,
+// and output type of the head.
+// TODO(martinz): add logistic regression.
+message Type {
+  oneof task_type {
+    BinaryClassification binary_classification = 1;
+    OneDimensionalRegression one_dimensional_regression = 2;
+    MultiClassClassification multi_class_classification = 3;
+    TopKClassification top_k_classification = 4;
+  }
+}
+
+// Describes a single task in a model and all its properties.
+// A task corresponds to a single output of the model.
+// Multiple tasks in the same problem statement correspond to different outputs
+// of the model.
+message Task {
+  // Specification of the label and weight columns, and the type of the
+  // prediction or classification.
+  Type type = 1;
+
+  // The task name. Tasks within the same ProblemStatement should have unique
+  // names.
+  string name = 5;
+
+  // Determines the weight of this head (relative to other heads) when
+  // calculating the loss and propagating the gradients.
+  // Not meaningful for a model with one head. For a model with multiple heads,
+  // the ProblemStatement proto is valid only if weight for all heads or for
+  // none (which means they heads are equal).
+  double task_weight = 2;
+
+  // Objective function used to measure the loss for the head.
+  // These must be protos so the functions themselves can be parameterized (e.g.
+  // Huber)
+  // TODO(martinz): we have to consider how less metrizable properties (such as
+  // calibration) fit here.
+  ObjectiveFunction objective_function = 3;
+
+  // This field includes performance metrics of this head that are important to
+  // the problem owner and need to be monitored and reported. However, unlike
+  // fields such as "objective_function" or "meta_optimization_target", these
+  // metrics are not automatically used in optimization or meta-optimization.
+  repeated PerformanceMetric performance_metric = 4;
+}
+
+// This is intended for use with optimization algorithms that do not require
+// differentiable objectives (e.g. grid search for hyperparameters).
+// This is intended to clarify targets for optimization process by an external
+// (to the model) meta optimizer, other than direct
+// optimization of params and hyperparams by a gradient descent optimization.
+// Target definitions include tasks, metrics, and any weighted combination of
+// them.
+message MetaOptimizationTarget {
+  // The name of a task in this problem statement producing the
+  // prediction or classification for the metric.
+  string task_name = 1;
+
+  // The type of the meta-objective.
+  // If this is not specified, use the type of the task.
+  Type type = 2;
+
+  // The performance metric to be evaluated.
+  // The prediction or classification is based upon the task.
+  // The label is from the type of the task, or from the override_task.
+  PerformanceMetric performance_metric = 3;
+
+  // If a model spec has multiple meta optimization targets, the weight
+  // of each can be specified. If not specified, value is 1.
+  // If multi_objective is specified, then the weights are ignored.
+  double weight = 4;
+}
+
+
+message ProblemStatement {
+  // Description of the problem statement. For example, should describe how
+  // the problem statement was arrived at: what experiments were run, what
+  // side-by-sides were considered.
+  string description = 2;
+  repeated string owner = 3;
+
+  // The environment of the ProblemStatement (optional). Specifies an
+  // environment string in the SchemaProto.
+  string environment = 4;
+
+  // Reference to another problem statement that is implemented by this
+  // problem statement. Specifically, the purpose of this problem statement
+  // is to build a model to satisfy the meta-objectives of the referenced
+  // problem statement.
+  // The actual connection may be specified in another file.
+  repeated ProblemStatementReference implements = 5;
+
+  // The target used for meta-optimization. This is used to compare two models
+  // that implement this model spec. For example, if two models have different
+  // hparams, a tuning tool can use meta_optimization_target to decide which
+  // model performs better.
+  // A repeated meta-optimization target implies the weighted sum of the
+  // meta_optimization targets if multi_objective=false, or independent
+  // objectives if multi_objective=true.
+  repeated MetaOptimizationTarget meta_optimization_target = 7;
+  // See meta_optimization_target above for details.
+  bool multi_objective = 8;
+
+  // Tasks for heads of the generated model. This field is repeated because some
+  // models are multi-task models. Each task should have a unique name.
+  // If you wish to directly optimize this problem statement, you need
+  // to specify the objective in the task.
+  repeated Task tasks = 9;
+}
