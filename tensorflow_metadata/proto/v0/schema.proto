@@ -14,10 +14,12 @@
 // =============================================================================
 
 syntax = "proto2";
-option cc_enable_arenas = true;
 
 package tensorflow.metadata.v0;
 
+import "google/protobuf/any.proto";
+
+option cc_enable_arenas = true;
 option java_package = "org.tensorflow.metadata.v0";
 option java_multiple_files = true;
 
@@ -31,10 +33,11 @@ enum LifecycleStage {
   PRODUCTION = 4;     // Used in a significant fraction of user traffic.
   DEPRECATED = 5;     // No longer supported: do not use in new models.
   DEBUG_ONLY = 6;     // Only exists for debugging purposes.
-};
+}
 
 //
 // Message to represent schema information.
+// NextID: 11
 message Schema {
   // Features described in this schema.
   repeated Feature feature = 1;
@@ -51,6 +54,12 @@ message Schema {
   // declared as top-level features in <feature>.
   // String domains referenced in the features.
   repeated StringDomain string_domain = 4;
+
+  // top level float domains that can be reused by features
+  repeated FloatDomain float_domain = 9;
+
+  // top level int domains that can be reused by features
+  repeated IntDomain int_domain = 10;
 
   // Default environments for each feature.
   // An environment represents both a type of location (e.g. a server or phone)
@@ -72,6 +81,9 @@ message Schema {
   optional bool generate_legacy_feature_spec = 7 [default = true];
   END GOOGLE-LEGACY */
 
+  // Additional information about the schema as a whole. Features may also
+  // be annotated individually.
+  optional Annotation annotation = 8;
 }
 
 // Describes schema-level information about a specific feature.
@@ -168,7 +180,7 @@ message Feature {
   optional LifecycleStage lifecycle_stage = 22;
 }
 
-// Additional information about the feature for documentation purposes.
+// Additional information about the schema or about a feature.
 message Annotation {
   // Tags can be used to mark features. For example, tag on user_age feature can
   // be `user_feature`, tag on user_country feature can be `location_feature`,
@@ -177,6 +189,8 @@ message Annotation {
   // Free-text comments. This can be used as a description of the feature,
   // developer notes etc.
   repeated string comment = 2;
+  // Application-specific metadata may be attached here.
+  repeated .google.protobuf.Any extra_metadata = 3;
 }
 
 // Specifies a fixed shape for the feature's values. The immediate implication
@@ -356,8 +370,10 @@ message FloatDomain {
 }
 
 // Domain for a recursive struct.
-// Notice that the features and sparse features of a StructDomain are deprecated
-// if any ancestor is deprecated, and can only be in environments of the parent.
+// NOTE: If a feature with a StructDomain is deprecated, then all the
+// child features (features and sparse_features of the StructDomain) are also
+// considered to be deprecated.  Similarly child features can only be in
+// environments of the parent feature.
 message StructDomain {
   repeated Feature feature = 1;
 
@@ -408,11 +424,24 @@ message URLDomain {}
 
 // Time representation.
 message TimeDomain {
-  // Expected format that contains a combination of regular characters and
-  // special format specifiers. Format specifiers are a subset of the
-  // strptime standard.
-  // Only set if the format is consistent for all values of the feature.
-  optional string format = 1;
+
+  enum IntegerTimeFormat {
+    FORMAT_UNKNOWN = 0;
+    UNIX_SECONDS = 1;
+    UNIX_MILLISECONDS = 2;
+    UNIX_MICROSECONDS = 3;
+    UNIX_NANOSECONDS = 4;
+  }
+
+  oneof format {
+    // Expected format that contains a combination of regular characters and
+    // special format specifiers. Format specifiers are a subset of the
+    // strptime standard.
+    string string_format = 1;
+
+    // Expected format of integer times.
+    IntegerTimeFormat integer_format = 2;
+  }
 }
 // END SEMANTIC-TYPES-PROTOS
 

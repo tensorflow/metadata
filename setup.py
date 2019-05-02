@@ -36,7 +36,7 @@ setup(
     name='tensorflow-metadata',
     version=__version__,
     author='Google Inc.',
-    author_email='tf-metadata-feedback@google.com',
+    author_email='tensorflow-extended-dev@googlegroups.com',
     license='Apache 2.0',
     classifiers=[
         'Development Status :: 4 - Beta',

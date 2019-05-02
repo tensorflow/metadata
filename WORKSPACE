@@ -25,11 +25,11 @@ bind(
     name = "protoc",
     actual = "@protobuf_bzl//:protoc",
 )
-# Using protobuf version 3.6.0
+# Using protobuf version 3.6.1.3
 http_archive(
-    name = "protobuf_archive",
-    strip_prefix = "protobuf-3.6.0",
-    urls = ["https://github.com/google/protobuf/archive/v3.6.0.zip"],
+    name = "com_google_protobuf",
+    strip_prefix = "protobuf-3.6.1.3",
+    urls = ["https://github.com/google/protobuf/archive/v3.6.1.3.zip"],
 )
 
 # required by protobuf_python

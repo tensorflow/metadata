@@ -16,6 +16,7 @@
 syntax = "proto3";
 option cc_enable_arenas = true;
 
+import "google/protobuf/descriptor.proto";
 import "tensorflow_metadata/proto/v0/metric.proto";
 
 package tensorflow.metadata.v0;
@@ -39,12 +40,25 @@ message ProblemStatementReference {
   }
 }
 
+enum TaskType {
+  UNKNOWN_TYPE = 0;
+  BINARY_CLASSIFICATION = 1;
+  MULTI_CLASS_CLASSIFICATION = 2;
+  TOP_K_CLASSIFICATION = 3;
+  ONE_DIMENSIONAL_REGRESSION = 4;
+}
+
+extend google.protobuf.MessageOptions {
+  TaskType task_type = 241943395;
+}
+
 // Configuration for a binary classification task.
 // The output is one of two possible class labels, encoded as the same type
 // as the label column.
 // BinaryClassification is the same as MultiClassClassification with
 // n_classes = 2.
 message BinaryClassification {
+  option (task_type) = BINARY_CLASSIFICATION;
   // The label column.
   string label = 1;
   // (optional) The weight column.
@@ -57,6 +71,7 @@ message BinaryClassification {
 // The output is one of the class labels, out of n_classes possible classes.
 // The output type will correspond to the label column type.
 message MultiClassClassification {
+  option (task_type) = MULTI_CLASS_CLASSIFICATION;
   // The label column.  There's only a single label per example.
   // If the label column is a BoolDomain, use the BinaryClassification Type
   // instead.
@@ -80,6 +95,7 @@ message MultiClassClassification {
 //     e.g., the output contains a sequence of labels, all coming from the same
 //     label column in the data.
 message TopKClassification {
+  option (task_type) = TOP_K_CLASSIFICATION;
   // The label column.
   string label = 1;
   // (optional) The weight column.
@@ -103,6 +119,7 @@ message TopKClassification {
 // The output is a single real number, whose range is dependent upon the
 // objective.
 message OneDimensionalRegression {
+  option (task_type) = ONE_DIMENSIONAL_REGRESSION;
   // The label column.
   string label = 1;
   // (optional) The weight column.

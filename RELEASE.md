@@ -1,3 +1,20 @@
+# Current version.
+
+
+## Major Features and Improvements
+
+## Bug Fixes and Other Changes
+
+* Added an Any field to Schema Feature, for storing arbitrary structured
+data.
+
+## Breaking changes
+
+* Refactoring ProblemStatement and related protos. At present, these are not 
+stable.
+
+## Deprecations
+
 # Version 0.13.0
 
 ## Major Features and Improvements

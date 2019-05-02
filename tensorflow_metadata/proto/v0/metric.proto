@@ -22,26 +22,49 @@ package tensorflow.metadata.v0;
 option java_package = "org.tensorflow.metadata.v0";
 option java_multiple_files = true;
 
+import "google/protobuf/descriptor.proto";
+
+
+// Metric type indicates which direction of a real-valued metric is "better".
+// For most message types, this is invariant. For custom message types,
+// is_maximized == true is like MAXIMIZE, and otherwise MINIMIZE.
+enum MetricType {
+  UNKNOWN = 0;
+  // Maximize the metric (i.e. a utility).
+  MAXIMIZE = 1;
+  // Minimize the metric (i.e. a loss).
+  MINIMIZE = 2;
+  // Look for a field is_maximized.
+  CUSTOM = 3;
+}
+
+extend google.protobuf.MessageOptions {
+  MetricType metric_type = 227673489;
+}
 
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/binary_accuracy
 message BinaryAccuracy {
+  option (metric_type) = MAXIMIZE;
 }
 
 
 // categorical_accuracy(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/categorical_accuracy
 message CategoricalAccuracy {
+  option (metric_type) = MAXIMIZE;
 }
 
 // categorical_crossentropy(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/categorical_crossentropy
 message CategoricalCrossEntropy {
+  option (metric_type) = MINIMIZE;
 }
 
 // cosine(...)
 // cosine_proximity(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/cosine_proximity
 message Cosine {
+  option (metric_type) = MINIMIZE;
 }
 
 
@@ -49,6 +72,7 @@ message Cosine {
 // hinge(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/hinge
 message Hinge {
+  option (metric_type) = MINIMIZE;
 }
 
 // kld(...)
@@ -56,6 +80,7 @@ message Hinge {
 // KLD(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/kullback_leibler_divergence
 message KullbackLeiblerDivergence {
+  option (metric_type) = MINIMIZE;
 }
 
 // MAE(...)
@@ -63,6 +88,7 @@ message KullbackLeiblerDivergence {
 // mean_absolute_error(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/mean_absolute_error
 message MeanAbsoluteError {
+  option (metric_type) = MINIMIZE;
 }
 
 // MAPE(...)
@@ -70,6 +96,7 @@ message MeanAbsoluteError {
 // mean_absolute_percentage_error(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/mean_absolute_percentage_error
 message MeanAbsolutePercentageError {
+  option (metric_type) = MINIMIZE;
 }
 
 // MSE(...)
@@ -77,6 +104,7 @@ message MeanAbsolutePercentageError {
 // mean_squared_error(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/mean_squared_error
 message MeanSquaredError {
+  option (metric_type) = MINIMIZE;
 }
 
 // msle(...)
@@ -84,26 +112,30 @@ message MeanSquaredError {
 // mean_squared_logarithmic_error(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/mean_squared_logarithmic_error
 message MeanSquaredLogarithmicError {
+  option (metric_type) = MINIMIZE;
 }
 
 // poisson(...)
 message Poisson {
+  option (metric_type) = MINIMIZE;
 }
 
 // squared_hinge(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/squared_hinge
 message SquaredHinge {
+  option (metric_type) = MINIMIZE;
 }
 
 // top_k_categorical_accuracy(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/top_k_categorical_accuracy
 message TopKCategoricalAccuracy {
-
+  option (metric_type) = MAXIMIZE;
 }
 
 // sparse_top_k_categorical_accuracy(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/sparse_top_k_categorical_accuracy
 message SparseTopKCategoricalAccuracy {
+  option (metric_type) = MAXIMIZE;
 }
 
 // Binary cross entropy as a metric is equal to the negative log likelihood
@@ -113,6 +145,7 @@ message SparseTopKCategoricalAccuracy {
 // binary_crossentropy(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/binary_crossentropy
 message BinaryCrossEntropy {
+  option (metric_type) = MINIMIZE;
 }
 
 // AKA the negative log likelihood or log loss.
@@ -121,27 +154,35 @@ message BinaryCrossEntropy {
 // TODO(martinz): if this is interpreted the same as binary_cross_entropy,
 // we may need to revisit the semantics.
 message LogisticRegression {
+  option (metric_type) = MINIMIZE;
 }
 
 
 message AUC {
+  option (metric_type) = MAXIMIZE;
 }
 
 message PrecisionAtK {
-
+  option (metric_type) = MAXIMIZE;
 }
 
 message MeanReciprocalRank {
 }
 
 message BlockUtility {
+  option (metric_type) = MAXIMIZE;
   repeated double weight = 1;
 }
 
 // A custom metric.
 message CustomMetric {
+  option (metric_type) = CUSTOM;
   // The name of a metric computed by the model.
   string name = 1;
+
+  // True if the metric is maximized: false if it is minimized.
+  // Must be specified if the CustomMetric is used as an objective.
+  bool is_maximized = 2;
 }
 
 // Objective functions are performance metrics that are differentiable, and
@@ -153,6 +194,10 @@ message ObjectiveFunction {
     LogisticRegression logistic_regression = 2;
     MeanSquaredError squared_error = 3;
     CustomMetric custom_metric = 4;
+    AUC auc = 5;
+    MeanAbsoluteError mean_absolute_error = 6;
+    MeanAbsolutePercentageError mean_absolute_percentage_error = 7;
+    MeanSquaredLogarithmicError mean_squared_logarithmic_error = 8;
   }
 }
 

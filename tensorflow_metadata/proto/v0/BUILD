@@ -18,10 +18,10 @@ licenses(["notice"])  # Apache 2.0
 
 package(default_visibility = ["//visibility:public"])
 
-load("@protobuf_archive//:protobuf.bzl", "cc_proto_library", "py_proto_library")
+load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
 
-cc_proto_library(
-    name = "metadata_v0_proto_cc_pb2",
+proto_library(
+    name = "metadata_proto",
     srcs = [
         "anomalies.proto",
         "metric.proto",
@@ -30,9 +30,15 @@ cc_proto_library(
         "schema.proto",
         "statistics.proto",
     ],
-    cc_libs = ["@protobuf_archive//:protobuf"],
-    default_runtime = "@protobuf_archive//:protobuf",
-    protoc = "@protobuf_archive//:protoc",
+    deps = [
+        "@com_google_protobuf//:any_proto",
+        "@com_google_protobuf//:descriptor_proto"
+    ],
+)
+
+cc_proto_library(
+    name = "metadata_v0_proto_cc_pb2",
+    deps = [":metadata_proto"],
 )
 
 py_proto_library(
@@ -45,9 +51,9 @@ py_proto_library(
         "schema.proto",
         "statistics.proto",
     ],
-    default_runtime = "@protobuf_archive//:protobuf_python",
-    protoc = "@protobuf_archive//:protoc",
+    default_runtime = "@com_google_protobuf//:protobuf_python",
+    protoc = "@com_google_protobuf//:protoc",
     srcs_version = "PY2AND3",
-    deps = ["@protobuf_archive//:protobuf_python"],
+    deps = ["@com_google_protobuf//:protobuf_python"],
 )
 
