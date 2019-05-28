@@ -49,6 +49,31 @@ message DatasetFeatureStatistics {
   double weighted_num_examples = 4;
   // The feature statistics for the dataset.
   repeated FeatureNameStatistics features = 3;
+
+  // Cross feature statistics for the dataset.
+  repeated CrossFeatureStatistics cross_features = 5;
+}
+
+message CrossFeatureStatistics {
+  // The path of feature x.
+  Path path_x = 1;
+  // The path of feature y.
+  Path path_y = 2;
+
+  // Number of occurrences of this feature cross in the data. If any of
+  // the features in the cross is missing, the example is ignored.
+  uint64 count = 3;
+
+  oneof cross_stats {
+    NumericCrossStatistics num_cross_stats = 4;
+  }
+}
+
+message NumericCrossStatistics {
+  // Pearson product-moment correlation coefficient.
+  float correlation = 1;
+  // Standard covariance. E[(X-E[X])*(Y-E[Y])]
+  float covariance = 2;
 }
 
 // The complete set of statistics for a given feature name for a dataset.
