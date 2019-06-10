@@ -198,6 +198,8 @@ message ObjectiveFunction {
     MeanAbsoluteError mean_absolute_error = 6;
     MeanAbsolutePercentageError mean_absolute_percentage_error = 7;
     MeanSquaredLogarithmicError mean_squared_logarithmic_error = 8;
+    CategoricalCrossEntropy categorical_cross_entropy = 9;
+    Poisson poisson = 10;
   }
 }
 
