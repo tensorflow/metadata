@@ -1,45 +1,39 @@
 workspace(name = "tensorflow_metadata")
 
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-git_repository(
-    name = "protobuf_bzl",
-    # v3.4.0
-    commit = "80a37e0782d2d702d52234b62dd4b9ec74fd2c95",
-    remote = "https://github.com/google/protobuf.git",
-)
-bind(
-    name = "protobuf",
-    actual = "@protobuf_bzl//:protobuf",
-)
-bind(
-    name = "protobuf_python",
-    actual = "@protobuf_bzl//:protobuf_python",
-)
-bind(
-    name = "protobuf_python_genproto",
-    actual = "@protobuf_bzl//:protobuf_python_genproto",
-)
-bind(
-    name = "protoc",
-    actual = "@protobuf_bzl//:protoc",
-)
-# Using protobuf version 3.6.1.3
+# updated: 2019/04/12
+_TENSORFLOW_GIT_COMMIT = "978dba096289fd03b9baa38c82e966eba03c6e1a"
 http_archive(
-    name = "com_google_protobuf",
-    strip_prefix = "protobuf-3.6.1.3",
-    urls = ["https://github.com/google/protobuf/archive/v3.6.1.3.zip"],
+    name = "org_tensorflow",
+    sha256 = "95ca6b06cd072f185e3752bec004a977619b28e10d21dcaeae916d2e440bd342",
+    urls = [
+      "https://mirror.bazel.build/github.com/tensorflow/tensorflow/archive/%s.tar.gz" % _TENSORFLOW_GIT_COMMIT,
+      "https://github.com/tensorflow/tensorflow/archive/%s.tar.gz" % _TENSORFLOW_GIT_COMMIT,
+    ],
+    strip_prefix = "tensorflow-%s" % _TENSORFLOW_GIT_COMMIT,
 )
 
-# required by protobuf_python
 http_archive(
-    name = "six_archive",
-    build_file = "@protobuf_bzl//:six.BUILD",
-    sha256 = "105f8d68616f8248e24bf0e9372ef04d3cc10104f1980f54d57b2ce73a5ad56a",
-    url = "https://pypi.python.org/packages/source/s/six/six-1.10.0.tar.gz#md5=34eed507548117b2ab523ab14b2f8b55",
+    name = "bazel_skylib",
+    sha256 = "2ef429f5d7ce7111263289644d233707dba35e39696377ebab8b0bc701f7818e",
+    urls = ["https://github.com/bazelbuild/bazel-skylib/releases/download/0.8.0/bazel-skylib.0.8.0.tar.gz"],
 )
-bind(
-    name = "six",
-    actual = "@six_archive//:six",
+
+# TensorFlow depends on "io_bazel_rules_closure" so we need this here.
+# Needs to be kept in sync with the same target in TensorFlow's WORKSPACE file.
+http_archive(
+    name = "io_bazel_rules_closure",
+    sha256 = "e0a111000aeed2051f29fcc7a3f83be3ad8c6c93c186e64beb1ad313f0c7f9f9",
+    strip_prefix = "rules_closure-cf1e44edb908e9616030cc83d085989b8e6cd6df",
+    urls = [
+        "http://mirror.tensorflow.org/github.com/bazelbuild/rules_closure/archive/cf1e44edb908e9616030cc83d085989b8e6cd6df.tar.gz",
+        "https://github.com/bazelbuild/rules_closure/archive/cf1e44edb908e9616030cc83d085989b8e6cd6df.tar.gz",  # 2019-04-04
+    ],
+)
+
+load("@org_tensorflow//tensorflow:workspace.bzl", "tf_workspace")
+tf_workspace(
+    path_prefix = "",
+    tf_repo_name = "org_tensorflow",
 )

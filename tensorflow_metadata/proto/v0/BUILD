@@ -18,10 +18,11 @@ licenses(["notice"])  # Apache 2.0
 
 package(default_visibility = ["//visibility:public"])
 
-load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
+load("@org_tensorflow//tensorflow/core:platform/default/build_config.bzl", "tf_proto_library_cc", "tf_proto_library_py")
 
-proto_library(
-    name = "metadata_proto",
+tf_proto_library_cc(
+    # TF generates rule with name cc_metadata_v0_proto_cc
+    name = "cc_metadata_v0_proto",
     srcs = [
         "anomalies.proto",
         "metric.proto",
@@ -29,20 +30,17 @@ proto_library(
         "problem_statement.proto",
         "schema.proto",
         "statistics.proto",
-    ],
-    deps = [
-        "@com_google_protobuf//:any_proto",
-        "@com_google_protobuf//:descriptor_proto"
-    ],
+    ]
 )
 
-cc_proto_library(
+cc_library(
     name = "metadata_v0_proto_cc_pb2",
-    deps = [":metadata_proto"],
+    deps = [":cc_metadata_v0_proto_cc"],
 )
 
-py_proto_library(
-    name = "metadata_v0_proto_py_pb2",
+tf_proto_library_py(
+    # TF generates rule with name py_metadata_v0_proto_py
+    name = "py_metadata_v0_proto",
     srcs = [
         "anomalies.proto",
         "metric.proto",
@@ -51,9 +49,10 @@ py_proto_library(
         "schema.proto",
         "statistics.proto",
     ],
-    default_runtime = "@com_google_protobuf//:protobuf_python",
-    protoc = "@com_google_protobuf//:protoc",
-    srcs_version = "PY2AND3",
-    deps = ["@com_google_protobuf//:protobuf_python"],
+)
+
+py_library(
+    name = "metadata_v0_proto_py_pb2",
+    deps = [":py_metadata_v0_proto_py"],
 )
 
