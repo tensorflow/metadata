@@ -38,7 +38,7 @@ enum LifecycleStage {
 
 //
 // Message to represent schema information.
-// NextID: 11
+// NextID: 12
 message Schema {
   // Features described in this schema.
   repeated Feature feature = 1;
@@ -85,6 +85,10 @@ message Schema {
   // Additional information about the schema as a whole. Features may also
   // be annotated individually.
   optional Annotation annotation = 8;
+
+  // Dataset-level constraints. This is currently used for specifying
+  // information about changes in num_examples.
+  optional DatasetConstraints dataset_constraints = 11;
 }
 
 // Describes schema-level information about a specific feature.
@@ -192,6 +196,27 @@ message Annotation {
   repeated string comment = 2;
   // Application-specific metadata may be attached here.
   repeated .google.protobuf.Any extra_metadata = 3;
+}
+
+// Checks that the ratio of the current value to the previous value is not below
+// the min_fraction_threshold or above the max_fraction_threshold. That is,
+// previous value * min_fraction_threshold <= current value <=
+// previous value * max_fraction_threshold.
+// To specify that the value cannot change, set both min_fraction_threshold and
+// max_fraction_threshold to 1.0.
+message NumericValueComparator {
+  optional double min_fraction_threshold = 1;
+  optional double max_fraction_threshold = 2;
+}
+
+// Constraints on the entire dataset.
+message DatasetConstraints {
+  // Tests differences in number of examples between the current data and the
+  // previous span.
+  optional NumericValueComparator num_examples_drift_comparator = 1;
+  // Tests comparisions in number of examples between the current data and the
+  // previous version of that data.
+  optional NumericValueComparator num_examples_version_comparator = 2;
 }
 
 // Specifies a fixed shape for the feature's values. The immediate implication

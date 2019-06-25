@@ -32,6 +32,7 @@ message AnomalyInfo {
   reserved 1, 3;
 
   // A path indicating where the anomaly occurred.
+  // Dataset-level anomalies do not have a path.
   optional Path path = 8;
 
   enum Severity {
@@ -154,6 +155,10 @@ message AnomalyInfo {
     SPARSE_FEATURE_NAME_COLLISION = 47;
     // Invalid custom semantic domain.
     SEMANTIC_DOMAIN_UPDATE = 48;
+    // There are not enough examples in the current data.
+    COMPARATOR_LOW_NUM_EXAMPLES = 49;
+    // There are too many examples in the current data.
+    COMPARATOR_HIGH_NUM_EXAMPLES = 50;
   }
   // Reason for the anomaly. There may be more than one reason,
   // e.g. the field might be missing sometimes AND a new value is
@@ -192,7 +197,10 @@ message Anomalies {
   // The format of the keys in anomaly_info.
   // If absent, default is DEFAULT.
   optional AnomalyNameFormat anomaly_name_format = 7;
+  // Information about feature-level anomalies.
   map<string, AnomalyInfo> anomaly_info = 2;
+  // Information about dataset-level anomalies.
+  optional AnomalyInfo dataset_anomaly_info = 8;
   // True if numExamples == 0.
   optional bool data_missing = 3;
 
