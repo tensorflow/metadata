@@ -14,10 +14,10 @@
 // =============================================================================
 
 syntax = "proto2";
-option cc_enable_arenas = true;
 
 package tensorflow.metadata.v0;
 
+option cc_enable_arenas = true;
 option java_package = "org.tensorflow.metadata.v0";
 option java_multiple_files = true;
 
@@ -39,7 +39,7 @@ message AnomalyInfo {
     UNKNOWN = 0;
     WARNING = 1;
     ERROR = 2;
-  };
+  }
   optional Severity severity = 5;
   // A description of the entire anomaly.
   optional string description = 2;
@@ -135,9 +135,9 @@ message AnomalyInfo {
     STRING_TYPE_NOW_FLOAT = 38;
     // Expected STRING type, but it was INT.
     STRING_TYPE_NOW_INT = 39;
-    // Control data is missing (either training data or previous day).
+    // Control data is missing (either scoring data or previous day).
     COMPARATOR_CONTROL_DATA_MISSING = 40;
-    // Treatment data is missing (either scoring data or current day).
+    // Treatment data is missing (either treatment data or current day).
     COMPARATOR_TREATMENT_DATA_MISSING = 41;
     // L infinity between treatment and control is high.
     COMPARATOR_L_INFTY_HIGH = 42;
