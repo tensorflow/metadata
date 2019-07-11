@@ -95,6 +95,8 @@ message FeatureNameStatistics {
   // name: "foo"
   // is equivalent to:
   // path: {step:"foo"}
+  // Note: this oneof must be consistently either name or path across all
+  // FeatureNameStatistics in one DatasetFeatureStatistics.
   oneof field_id {
     // The feature name
     string name = 1;
