@@ -48,7 +48,7 @@ cp -f tensorflow_metadata/proto/v0/statistics_pb2.py \
 # Create the wheel
 cd ${BUILD_WORKSPACE_DIRECTORY}
 
-${PYTHON_BIN_PATH} setup.py bdist_wheel
+${PYTHON_BIN_PATH} setup.py bdist_wheel --universal
 
 # Cleanup
 cd -
