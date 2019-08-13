@@ -227,5 +227,6 @@ message PerformanceMetric {
     SquaredHinge squared_hinge = 18;
     SparseTopKCategoricalAccuracy sparse_top_k_categorical_accuracy = 19;
     TopKCategoricalAccuracy top_k_categorical_accuracy = 20;
+    CustomMetric custom_metric = 21;
   }
 }
