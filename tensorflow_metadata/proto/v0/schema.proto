@@ -304,7 +304,6 @@ END GOOGLE-LEGACY */
 // A sparse feature represents a sparse tensor that is encoded with a
 // combination of raw features, namely index features and a value feature.  Each
 // index feature defines a list of indices in a different dimension.
-// TODO(b/65056393): Write checks for SparseFeature in Datum.
 // TODO(kestert): check if this is consistent.
 message SparseFeature {
   reserved 11;
