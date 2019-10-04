@@ -1,3 +1,17 @@
+# Version 0.15.0
+
+No significant changes. Upgrading to keep version alignment.
+
+## Major Features and Improvements
+
+## Bug Fixes and Other Changes
+
+* Adding CustomMetric to PerformanceMetric.
+
+## Breaking changes
+
+## Deprecations
+
 # Version 0.14.0
 
 ## Major Features and Improvements
