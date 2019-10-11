@@ -18,6 +18,7 @@ syntax = "proto2";
 package tensorflow.metadata.v0;
 
 import "google/protobuf/any.proto";
+import "tensorflow_metadata/proto/v0/path.proto";
 
 option cc_enable_arenas = true;
 option java_package = "org.tensorflow.metadata.v0";
@@ -38,13 +39,16 @@ enum LifecycleStage {
 
 //
 // Message to represent schema information.
-// NextID: 12
+// NextID: 13
 message Schema {
   // Features described in this schema.
   repeated Feature feature = 1;
 
   // Sparse features described in this schema.
   repeated SparseFeature sparse_feature = 6;
+
+  // Weighted features described in this schema.
+  repeated WeightedFeature weighted_feature = 12;
 
   // Use StructDomain instead.
   // Sequences described in this schema. A sequence may be described in terms of
@@ -301,10 +305,29 @@ message Sequence {
 }
 END GOOGLE-LEGACY */
 
+// Represents a weighted feature that is encoded as a combination of raw base
+// features. The `weight_feature` should be a float feature with identical
+// shape as the `feature`. This is useful for representing weights associated
+// with categorical tokens (e.g. a TFIDF weight associated with each token).
+// TODO(b/142122960): Handle WeightedCategorical end to end in TFX (validation,
+// TFX Unit Testing, etc)
+message WeightedFeature {
+  // Name for the weighted feature. This should not clash with other features in
+  // the same schema.
+  optional string name = 1;  // required
+  // Path of a base feature to be weighted. Required.
+  optional Path feature = 2;
+  // Path of weight feature to associate with the base feature. Must be same
+  // shape as feature. Required.
+  optional Path weight_feature = 3;
+  // The lifecycle_stage determines where a feature is expected to be used,
+  // and therefore how important issues with it are.
+  optional LifecycleStage lifecycle_stage = 4;
+}
+
 // A sparse feature represents a sparse tensor that is encoded with a
-// combination of raw features, namely index features and a value feature.  Each
+// combination of raw features, namely index features and a value feature. Each
 // index feature defines a list of indices in a different dimension.
-// TODO(kestert): check if this is consistent.
 message SparseFeature {
   reserved 11;
   // Name for the sparse feature. This should not clash with other features in
@@ -333,7 +356,7 @@ message SparseFeature {
   // TODO(b/109669962): Consider deriving this from the referred features.
   optional FixedShape dense_shape = 5;
 
-  // Features that represent indexes.
+  // Features that represent indexes. Should be integers >= 0.
   repeated IndexFeature index_feature = 6;  // at least one
   message IndexFeature {
     // Name of the index-feature. This should be a reference to an existing
