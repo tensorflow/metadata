@@ -155,10 +155,14 @@ message AnomalyInfo {
     SPARSE_FEATURE_NAME_COLLISION = 47;
     // Invalid custom semantic domain.
     SEMANTIC_DOMAIN_UPDATE = 48;
-    // There are not enough examples in the current data.
+    // There are not enough examples in the current data as compared to a
+    // control dataset.
     COMPARATOR_LOW_NUM_EXAMPLES = 49;
-    // There are too many examples in the current data.
+    // There are too many examples in the current data as compared to a control
+    // dataset.
     COMPARATOR_HIGH_NUM_EXAMPLES = 50;
+    // There are not enough examples in the dataset.
+    DATASET_LOW_NUM_EXAMPLES = 51;
   }
   // Reason for the anomaly. There may be more than one reason,
   // e.g. the field might be missing sometimes AND a new value is

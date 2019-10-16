@@ -221,6 +221,8 @@ message DatasetConstraints {
   // Tests comparisions in number of examples between the current data and the
   // previous version of that data.
   optional NumericValueComparator num_examples_version_comparator = 2;
+  // Minimum number of examples in the dataset.
+  optional int64 min_examples_count = 3;
 }
 
 // Specifies a fixed shape for the feature's values. The immediate implication
