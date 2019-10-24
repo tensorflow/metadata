@@ -1,3 +1,12 @@
+# Version 0.15.1
+
+## Bug Fixes and Other Changes
+
+* Add WeightedFeature to schema.
+* Add min_examples_count to DatasetConstraints and DATASET_LOW_NUM_EXAMPLES
+  anomaly type.
+* Add TimeOfDay domain and UNIX_DAY granularity for TimeDomain in schema.
+
 # Version 0.15.0
 
 No significant changes. Upgrading to keep version alignment.
