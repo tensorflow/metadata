@@ -39,7 +39,7 @@ enum LifecycleStage {
 
 //
 // Message to represent schema information.
-// NextID: 13
+// NextID: 14
 message Schema {
   // Features described in this schema.
   repeated Feature feature = 1;
@@ -93,6 +93,13 @@ message Schema {
   // Dataset-level constraints. This is currently used for specifying
   // information about changes in num_examples.
   optional DatasetConstraints dataset_constraints = 11;
+
+  // TensorRepresentation groups. The keys are the names of the groups.
+  // Key "" (empty string) denotes the "default" group, which is what should
+  // be used when a group name is not provided.
+  // See the documentation at TensorRepresentationGroup for more info.
+  // Under development. DO NOT USE.
+  map<string, TensorRepresentationGroup> tensor_representation_group = 13;
 }
 
 // Describes schema-level information about a specific feature.
@@ -475,7 +482,6 @@ message URLDomain {}
 
 // Time or date representation.
 message TimeDomain {
-
   enum IntegerTimeFormat {
     FORMAT_UNKNOWN = 0;
     UNIX_DAYS = 5;  // Number of days since 1970-01-01.
@@ -558,4 +564,89 @@ message InfinityNorm {
 
 message FeatureComparator {
   optional InfinityNorm infinity_norm = 1;
+}
+
+// A TensorRepresentation captures the intent for converting columns in a
+// dataset to TensorFlow Tensors (or more generally, tf.CompositeTensors).
+// Note that one tf.CompositeTensor may consist of data from multiple columns,
+// for example, a N-dimensional tf.SparseTensor may need N + 1 columns to
+// provide the sparse indices and values.
+message TensorRepresentation {
+  message DefaultValue {
+    oneof kind {
+      double float_value = 1;
+      // Note that the data column might be of a shorter integral type. It's the
+      // user's responsitiblity to make sure the default value fits that type.
+      int64 int_value = 2;
+      bytes bytes_value = 3;
+      // uint_value should only be used if the default value can't fit in a
+      // int64 (`int_value`).
+      uint64 uint_value = 4;
+    }
+  }
+
+  // A tf.Tensor
+  message DenseTensor {
+    // Identifies the column in the dataset that provides the values of this
+    // Tensor.
+    optional string column_name = 1;
+    // The shape of each row of the data (i.e. does not include the batch
+    // dimension)
+    optional FixedShape shape = 2;
+    // If this column is missing values in a row, the default_value will be
+    // used to fill that row.
+    optional DefaultValue default_value = 3;
+  }
+
+  // A ragged tf.SparseTensor that models nested lists.
+  message VarLenSparseTensor {
+    // Identifies the column in the dataset that should be converted to the
+    // VarLenSparseTensor.
+    optional string column_name = 1;
+  }
+
+  oneof kind {
+    DenseTensor dense_tensor = 1;
+    VarLenSparseTensor varlen_sparse_tensor = 2;
+  }
+}
+
+// A TensorRepresentationGroup is a collection of TensorRepresentations with
+// names. These names may serve as identifiers when converting the dataset
+// to a collection of Tensors or tf.CompositeTensors.
+// For example, given the following group:
+// {
+//   key: "dense_tensor"
+//   tensor_representation {
+//     dense_tensor {
+//       column_name: "univalent_feature"
+//       shape {
+//         dim {
+//           size: 1
+//         }
+//       }
+//       default_value {
+//         float_value: 0
+//       }
+//     }
+//   }
+// }
+// {
+//   key: "varlen_sparse_tensor"
+//   tensor_representation {
+//     varlen_sparse_tensor {
+//       column_name: "multivalent_feature"
+//     }
+//   }
+// }
+//
+// Then the schema is expected to have feature "univalent_feature" and
+// "multivalent_feature", and when a batch of data is converted to Tensors using
+// this TensorRepresentationGroup, the result may be the following dict:
+// {
+//   "dense_tensor": tf.Tensor(...),
+//   "varlen_sparse_tensor": tf.SparseTensor(...),
+// }
+message TensorRepresentationGroup {
+  map<string, TensorRepresentation> tensor_representation = 1;
 }

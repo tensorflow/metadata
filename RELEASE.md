@@ -1,3 +1,14 @@
+# Current version (not yet released; still in development)
+
+## Major Features and Improvements
+* Added TensorRepresentation to schema.
+
+## Bug Fixes and Other Changes
+
+## Breaking Changes
+
+## Deprecations
+
 # Version 0.15.1
 
 ## Bug Fixes and Other Changes
