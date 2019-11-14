@@ -1,14 +1,3 @@
-# Current version (not yet released; still in development)
-
-## Major Features and Improvements
-* Added TensorRepresentation to schema.
-
-## Bug Fixes and Other Changes
-
-## Breaking Changes
-
-## Deprecations
-
 # Version 0.15.1
 
 ## Bug Fixes and Other Changes
@@ -17,6 +6,7 @@
 * Add min_examples_count to DatasetConstraints and DATASET_LOW_NUM_EXAMPLES
   anomaly type.
 * Add TimeOfDay domain and UNIX_DAY granularity for TimeDomain in schema.
+* Added TensorRepresentation to schema.
 
 # Version 0.15.0
 
