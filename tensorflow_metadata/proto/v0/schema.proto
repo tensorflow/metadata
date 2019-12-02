@@ -156,7 +156,7 @@ message Feature {
     StringDomain string_domain = 11;
     BoolDomain bool_domain = 13;
     StructDomain struct_domain = 29;
-    // Supported semantic domains (Not supported in TFDV).
+    // Supported semantic domains.
     NaturalLanguageDomain natural_language_domain = 24;
     ImageDomain image_domain = 25;
     MIDDomain mid_domain = 26;
@@ -547,7 +547,6 @@ message FeaturePresence {
 
 // Records constraints on the presence of a feature inside a "group" context
 // (e.g., .presence inside a group of features that define a sequence).
-// TFDV does not support this feature yet.
 message FeaturePresenceWithinGroup {
   optional bool required = 1;
 }
