@@ -71,6 +71,8 @@ message AnomalyInfo {
     BOOL_TYPE_STRING_NOT_INT = 8;
     // Expected a string, but not the string seen
     BOOL_TYPE_UNEXPECTED_STRING = 9;
+    // Boolean had float values other than 0 and 1.
+    BOOL_TYPE_UNEXPECTED_FLOAT = 52;
     // BYTES type when expected STRING type
     ENUM_TYPE_BYTES_NOT_STRING = 10;
     // FLOAT type when expected STRING type
