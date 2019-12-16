@@ -570,6 +570,10 @@ message FeatureComparator {
 // Note that one tf.CompositeTensor may consist of data from multiple columns,
 // for example, a N-dimensional tf.SparseTensor may need N + 1 columns to
 // provide the sparse indices and values.
+// Note that the "column name" that a TensorRepresentation needs is a
+// string, not a Path -- it means that the column name identifies a top-level
+// Feature in the schema (i.e. you cannot specify a Feature nested in a STRUCT
+// Feature).
 message TensorRepresentation {
   message DefaultValue {
     oneof kind {
@@ -604,9 +608,26 @@ message TensorRepresentation {
     optional string column_name = 1;
   }
 
+  // A tf.SparseTensor whose indices and values come from separate data columns.
+  // This will replace Schema.sparse_feature eventually.
+  // The index columns must be of INT type, and all the columns must co-occur
+  // and have the same valency at the same row.
+  message SparseTensor {
+    // The dense shape of the resulting SparseTensor (does not include the batch
+    // dimension).
+    optional FixedShape dense_shape = 1;
+    // The columns constitute the coordinates of the values.
+    // indices_column[i][j] contains the coordinate of the i-th dimension of the
+    // j-th value.
+    repeated string index_column_names = 2;
+    // The column that contains the values.
+    optional string value_column_name = 3;
+  }
+
   oneof kind {
     DenseTensor dense_tensor = 1;
     VarLenSparseTensor varlen_sparse_tensor = 2;
+    SparseTensor sparse_tensor = 3;
   }
 }
 

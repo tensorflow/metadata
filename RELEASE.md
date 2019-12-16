@@ -4,6 +4,8 @@
 
 ## Bug Fixes and Other Changes
 
+* Added SparseTensor to TensorRepresentation.
+
 ## Breaking Changes
 
 ## Deprecations
