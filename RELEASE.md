@@ -10,6 +10,20 @@
 
 ## Deprecations
 
+# Version 0.15.2
+
+## Major Features and Improvements
+
+## Bug Fixes and Other Changes
+
+* Added SparseTensor to TensorRepresentation.
+* Added a new type of Anomaly
+
+## Breaking Changes
+
+## Deprecations
+
+
 # Version 0.15.1
 
 ## Bug Fixes and Other Changes
