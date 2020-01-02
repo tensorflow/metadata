@@ -66,6 +66,7 @@ message CrossFeatureStatistics {
 
   oneof cross_stats {
     NumericCrossStatistics num_cross_stats = 4;
+    CategoricalCrossStatistics categorical_cross_stats = 5;
   }
 }
 
@@ -74,6 +75,54 @@ message NumericCrossStatistics {
   float correlation = 1;
   // Standard covariance. E[(X-E[X])*(Y-E[Y])]
   float covariance = 2;
+}
+
+message CategoricalCrossStatistics {
+  // Lift information for each value of path_y. Lift is defined for each pair of
+  // values (x,y) as P(path_y=y | path_x=x) | P(path_y=y).
+  repeated LiftSeries lift_series = 1;
+}
+
+message LiftSeries {
+  // A bucket for referring to binned numeric features.
+  message Bucket {
+    // The low value of the bucket, inclusive.
+    double low_value = 1;
+    // The high value of the bucket, exclusive (unless the high_value is
+    // positive infinity).
+    double high_value = 2;
+  }
+
+  // The particular value of path_y corresponding to this LiftSeries. Each
+  // element in lift_values corresponds to the lift a different x_value and
+  // this specific y_value.
+  oneof y_value {
+    int32 y_int = 1;
+    string y_string = 2;
+    Bucket y_bucket = 3;
+  }
+
+  // The number of examples in which y_value appears.
+  uint64 y_count = 4;
+
+  // A container for lift information about a specific value of path_x.
+  message LiftValue {
+    oneof x_value {
+      int32 x_int = 1;
+      string x_string = 2;
+    }
+    // P(path_y=y|path_x=x) / P(path_y=y) for x_value and the enclosing y_value.
+    // In terms of concrete fields, this number represents:
+    // (x_and_y_count / x_count) / (y_count / num_examples)
+    float lift = 3;
+    // The number of examples in which x_value appears.
+    uint64 x_count = 4;
+    // The number of examples in which x_value appears and y_value appears.
+    uint64 x_and_y_count = 5;
+  }
+
+  // The lifts for a each path_x value and this y_value.
+  repeated LiftValue lift_values = 5;
 }
 
 // The complete set of statistics for a given feature name for a dataset.

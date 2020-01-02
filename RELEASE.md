@@ -2,6 +2,9 @@
 
 ## Major Features and Improvements
 
+* Added protos for categorical cross statistics using lift.
+
+
 ## Bug Fixes and Other Changes
 
 * Added SparseTensor to TensorRepresentation.
