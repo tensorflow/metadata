@@ -1,13 +1,10 @@
-# Current version (not yet released; still in development)
+# Version 0.15.3
 
 ## Major Features and Improvements
 
-* Added protos for categorical cross statistics using lift.
-
-
 ## Bug Fixes and Other Changes
 
-* Added SparseTensor to TensorRepresentation.
+* Added protos for categorical cross statistics using lift.
 
 ## Breaking Changes
 
