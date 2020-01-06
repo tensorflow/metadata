@@ -14,4 +14,4 @@
 """Contains the version string of TFMD."""
 
 # Note that setup.py uses this version.
-__version__ = '0.15.3'
+__version__ = '0.21.0'
