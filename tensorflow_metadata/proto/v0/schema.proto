@@ -425,6 +425,9 @@ message FloatDomain {
   // Min and max values of the domain.
   optional float min = 3;
   optional float max = 4;
+
+  // If true, feature should not contain NaNs.
+  optional bool disallow_nan = 5;
 }
 
 // Domain for a recursive struct.

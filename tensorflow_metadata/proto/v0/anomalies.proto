@@ -111,6 +111,8 @@ message AnomalyInfo {
     FLOAT_TYPE_NON_STRING = 26;
     // The type is completely unknown
     FLOAT_TYPE_UNKNOWN_TYPE_NUMBER = 27;
+    // Float feature includes NaN values.
+    FLOAT_TYPE_HAS_NAN = 53;
     // There is an unexpectedly large integer
     INT_TYPE_BIG_INT = 28;
     // The type was supposed to be INT, but it was not.

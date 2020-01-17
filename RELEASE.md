@@ -15,6 +15,8 @@
 ## Bug Fixes and Other Changes
 
 * Added protos for categorical cross statistics using lift.
+* Added a new type of Anomaly: FLOAT_TYPE_HAS_NAN
+* Added a new field to float_domain: disallow_nans
 
 ## Breaking Changes
 
