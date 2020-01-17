@@ -4,6 +4,8 @@
 
 ## Bug Fixes and Other Changes
 
+* Added support for specifying behavior of rare / OOV multiclass labels.
+
 ## Breaking changes
 
 ## Deprecations

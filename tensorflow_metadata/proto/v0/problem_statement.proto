@@ -65,6 +65,28 @@ message BinaryClassification {
   string example_weight = 2;
 }
 
+// Specifies a dynamic multiclass problem where the number of label classes is
+// inferred from the data.
+message DynamicClassSpec {
+  // Note: it is up to a solution provider to implement support for OOV labels.
+  // Note: both a frequency_threshold and a top_k may be set. A class is grouped
+  // into the OOV class if it fails to meet either of the criteria below.
+  message OovClassSpec {
+    // If set, labels are grouped into the "OOV" class if they occur less than
+    // frequency_threshold times in the training dataset. If 0, labels
+    // that appear in test / validation splits but not in training would be
+    // still classified as the "OOV" class.
+    int64 frequency_threshold = 1;
+    // If set, only the top_k labels in the training set are used and all others
+    // are grouped into an "OOV" class.
+    int64 top_k = 2;
+  }
+  // Optional. If specified, an Out-Of-Vocabulary (OOV) class is created and
+  // populated based on frequencies in the training set. If no OOV class is
+  // specified, the model's label vocabulary should consist of all labels that
+  // appear in the training set.
+  OovClassSpec oov_class_spec = 1;
+}
 // Configuration for a multi-class classification task.
 // In this problem type, there are n_classes possible label values, and the
 // model predicts a single label.
@@ -72,15 +94,19 @@ message BinaryClassification {
 // The output type will correspond to the label column type.
 message MultiClassClassification {
   option (task_type) = MULTI_CLASS_CLASSIFICATION;
+
   // The label column.  There's only a single label per example.
   // If the label column is a BoolDomain, use the BinaryClassification Type
   // instead.
   string label = 1;
   // The weight column.
   string example_weight = 2;
-  // (optional) The number of label classes. If unset, the solution provider
-  // is expected to infer the number of classes from the data.
-  uint64 n_classes = 3;
+  oneof class_spec {
+    // The exact number of label classes.
+    uint64 n_classes = 3;
+    // The number of label classes should be inferred dynamically from the data.
+    DynamicClassSpec dynamic_class_spec = 4;
+  }
 }
 
 // Configuration for a top-K classification task.
