@@ -78,11 +78,20 @@ message NumericCrossStatistics {
 }
 
 message CategoricalCrossStatistics {
-  // Lift information for each value of path_y. Lift is defined for each pair of
-  // values (x,y) as P(path_y=y | path_x=x) | P(path_y=y).
-  repeated LiftSeries lift_series = 1;
+   LiftStatistics lift = 1;
 }
 
+message LiftStatistics {
+  // Lift information for each value of path_y. Lift is defined for each pair of
+  // values (x,y) as P(path_y=y|path_x=x)/P(path_y=y).
+  repeated LiftSeries lift_series = 1;
+  // Weighted lift information for each value of path_y. Weighted lift is
+  // defined for each pair of values (x,y) as P(path_y=y|path_x=x)/P(path_y=y)
+  // where probabilities are computed over weighted example space.
+  repeated LiftSeries weighted_lift_series = 2;
+}
+
+// Container for lift information for a specific y-value.
 message LiftSeries {
   // A bucket for referring to binned numeric features.
   message Bucket {
@@ -103,7 +112,10 @@ message LiftSeries {
   }
 
   // The number of examples in which y_value appears.
-  uint64 y_count = 4;
+  oneof y_count_value {
+    uint64 y_count = 4;
+    double weighted_y_count = 5;
+  }
 
   // A container for lift information about a specific value of path_x.
   message LiftValue {
@@ -114,15 +126,21 @@ message LiftSeries {
     // P(path_y=y|path_x=x) / P(path_y=y) for x_value and the enclosing y_value.
     // In terms of concrete fields, this number represents:
     // (x_and_y_count / x_count) / (y_count / num_examples)
-    float lift = 3;
+    double lift = 3;
     // The number of examples in which x_value appears.
-    uint64 x_count = 4;
+    oneof x_count_value {
+      uint64 x_count = 4;
+      double weighted_x_count = 5;
+    }
     // The number of examples in which x_value appears and y_value appears.
-    uint64 x_and_y_count = 5;
+    oneof x_and_y_count_value {
+      uint64 x_and_y_count = 6;
+      double weighted_x_and_y_count = 7;
+    }
   }
 
   // The lifts for a each path_x value and this y_value.
-  repeated LiftValue lift_values = 5;
+  repeated LiftValue lift_values = 6;
 }
 
 // The complete set of statistics for a given feature name for a dataset.

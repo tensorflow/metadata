@@ -6,6 +6,7 @@
 
 * Added support for specifying behavior of rare / OOV multiclass labels.
 * Added anomaly types related to weighted features.
+* Added support for storing lift stats on weighted examples.
 
 ## Breaking changes
 
