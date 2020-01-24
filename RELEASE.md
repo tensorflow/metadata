@@ -5,6 +5,7 @@
 ## Bug Fixes and Other Changes
 
 * Added support for specifying behavior of rare / OOV multiclass labels.
+* Added anomaly types related to weighted features.
 
 ## Breaking changes
 

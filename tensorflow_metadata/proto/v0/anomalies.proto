@@ -51,6 +51,7 @@ message AnomalyInfo {
   repeated DiffRegion diff_regions = 4;
 
   // Anomaly types begin with the name of the file that threw the error.
+  // Next ID: 58
   enum Type {
     UNKNOWN_TYPE = 0;
     // Integer larger than 1
@@ -167,6 +168,17 @@ message AnomalyInfo {
     COMPARATOR_HIGH_NUM_EXAMPLES = 50;
     // There are not enough examples in the dataset.
     DATASET_LOW_NUM_EXAMPLES = 51;
+    // Name collision between a weighted feature and a raw feature.
+    WEIGHTED_FEATURE_NAME_COLLISION = 54;
+    // The value feature of a weighted feature is missing on examples where the
+    // weight feature is present.
+    WEIGHTED_FEATURE_MISSING_VALUE = 55;
+    // The weight feature of a weighted feature is missing on examples where the
+    // value feature is present.
+    WEIGHTED_FEATURE_MISSING_WEIGHT = 56;
+    // The length of the features representing a weighted feature does not
+    // match.
+    WEIGHTED_FEATURE_LENGTH_MISMATCH = 57;
   }
   // Reason for the anomaly. There may be more than one reason,
   // e.g. the field might be missing sometimes AND a new value is
