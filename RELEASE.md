@@ -1,4 +1,4 @@
-# Current version (not yet released; still in development)
+# Version 0.21.1
 
 ## Major Features and Improvements
 
@@ -9,6 +9,11 @@
 * Added support for storing lift stats on weighted examples.
 
 ## Breaking changes
+
+* The removal of `lift_series` from `CategoricalCrossStats` and the change of
+  type of `LiftSeries.LiftValue.lift` from float to double will cause parsing
+  failures for serialized protos written written by version 0.21.0 which
+  contained the deleted or changed fields.
 
 ## Deprecations
 
