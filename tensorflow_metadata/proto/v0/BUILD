@@ -18,7 +18,8 @@ licenses(["notice"])  # Apache 2.0
 
 package(default_visibility = ["//visibility:public"])
 
-load("@org_tensorflow//tensorflow/core:platform/default/build_config.bzl", "tf_proto_library_cc", "tf_proto_library_py")
+load("@org_tensorflow//tensorflow/core/platform:default/build_config.bzl", "tf_proto_library_cc", "tf_proto_library_py")
+
 
 tf_proto_library_cc(
     # TF generates rule with name cc_metadata_v0_proto_cc
