@@ -1,8 +1,11 @@
-# Current version (not yet released; still in development)
+# Version 0.21.2
 
 ## Major Features and Improvements
 
 ## Bug Fixes and Other Changes
+
+* Fixed a compatibility issue with newer bazel versions.
+* Started pulling TF 1.15.2 source for building.
 
 ## Breaking Changes
 
