@@ -15,15 +15,14 @@
 
 syntax = "proto3";
 
-option cc_enable_arenas = true;
-
 package tensorflow.metadata.v0;
 
-option java_package = "org.tensorflow.metadata.v0";
-option java_multiple_files = true;
-
+import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
 
+option cc_enable_arenas = true;
+option java_package = "org.tensorflow.metadata.v0";
+option java_multiple_files = true;
 
 // Metric type indicates which direction of a real-valued metric is "better".
 // For most message types, this is invariant. For custom message types,
@@ -47,7 +46,6 @@ message BinaryAccuracy {
   option (metric_type) = MAXIMIZE;
 }
 
-
 // categorical_accuracy(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/categorical_accuracy
 message CategoricalAccuracy {
@@ -66,7 +64,6 @@ message CategoricalCrossEntropy {
 message Cosine {
   option (metric_type) = MINIMIZE;
 }
-
 
 // Linear Hinge Loss
 // hinge(...)
@@ -157,32 +154,75 @@ message LogisticRegression {
   option (metric_type) = MINIMIZE;
 }
 
-
+// Area under curve for the ROC-curve.
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/AUC
 message AUC {
   option (metric_type) = MAXIMIZE;
+}
+
+// Area under curve for the precision-recall-curve.
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/AUC
+message AUCPR {
+  option (metric_type) = MAXIMIZE;
+}
+
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/SensitivityAtSpecificity
+message SensitivityAtSpecificity {
+  option (metric_type) = MAXIMIZE;
+
+  // Minimal required specificity, (0.0, 1.0).
+  google.protobuf.DoubleValue specificity = 1;
+}
+
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/SpecificityAtSensitivity
+message SpecificityAtSensitivity {
+  option (metric_type) = MAXIMIZE;
+
+  // Minimal required sensitivity, (0.0, 1.0).
+  google.protobuf.DoubleValue sensitivity = 1;
+}
+
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/PrecisionAtRecall
+message PrecisionAtRecall {
+  option (metric_type) = MAXIMIZE;
+
+  // Minimal required recall, (0.0, 1.0).
+  google.protobuf.DoubleValue recall = 1;
+}
+
+// https://www.tensorflow.org/api_docs/python/tf/keras/metrics/RecallAtPrecision
+message RecallAtPrecision {
+  option (metric_type) = MAXIMIZE;
+
+  // Minimal required precision, (0.0, 1.0).
+  google.protobuf.DoubleValue precision = 1;
 }
 
 message PrecisionAtK {
   option (metric_type) = MAXIMIZE;
 }
 
-message MeanReciprocalRank {
-}
+message MeanReciprocalRank {}
 
 message BlockUtility {
   option (metric_type) = MAXIMIZE;
+
   repeated double weight = 1;
 }
 
 // A custom metric.
+// Prefer using or adding an explicit metric message
+// and only use this generic message as a last resort.
 message CustomMetric {
   option (metric_type) = CUSTOM;
+
   // The name of a metric computed by the model.
   string name = 1;
 
   // True if the metric is maximized: false if it is minimized.
   // Must be specified if the CustomMetric is used as an objective.
   bool is_maximized = 2;
+  // NEXT_TAG: 3;
 }
 
 // Objective functions are performance metrics that are differentiable, and
@@ -201,6 +241,7 @@ message ObjectiveFunction {
     CategoricalCrossEntropy categorical_cross_entropy = 9;
     Poisson poisson = 10;
   }
+  // NEXT_TAG: 11;
 }
 
 // Performance metrics measure the quality of a model. They need not be
@@ -208,6 +249,7 @@ message ObjectiveFunction {
 message PerformanceMetric {
   oneof performance_metric {
     AUC auc = 1;
+    AUCPR auc_pr = 26;
     BinaryAccuracy binary_accuracy = 2;
     BinaryCrossEntropy binary_cross_entropy = 3;
     BlockUtility block_utility = 4;
@@ -228,5 +270,10 @@ message PerformanceMetric {
     SparseTopKCategoricalAccuracy sparse_top_k_categorical_accuracy = 19;
     TopKCategoricalAccuracy top_k_categorical_accuracy = 20;
     CustomMetric custom_metric = 21;
+    SensitivityAtSpecificity sensitivity_at_specificity = 22;
+    SpecificityAtSensitivity specificity_at_sensitivity = 23;
+    PrecisionAtRecall precision_at_recall = 24;
+    RecallAtPrecision recall_at_precision = 25;
   }
+  // NEXT_TAG: 27;
 }
