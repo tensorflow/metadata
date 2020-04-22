@@ -162,7 +162,7 @@ message AUC {
 
 // Area under curve for the precision-recall-curve.
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/AUC
-message AUCPR {
+message AUCPrecisionRecall {
   option (metric_type) = MAXIMIZE;
 }
 
@@ -249,7 +249,7 @@ message ObjectiveFunction {
 message PerformanceMetric {
   oneof performance_metric {
     AUC auc = 1;
-    AUCPR auc_pr = 26;
+    AUCPrecisionRecall auc_precision_recall = 26;
     BinaryAccuracy binary_accuracy = 2;
     BinaryCrossEntropy binary_cross_entropy = 3;
     BlockUtility block_utility = 4;

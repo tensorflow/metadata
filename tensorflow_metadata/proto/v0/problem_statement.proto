@@ -186,12 +186,13 @@ message Task {
   // none (which means they heads are equal).
   double task_weight = 2;
 
+  // Deprecated since the objective function should be part of the estimator
+  // specification, not the problem specification.
+  //
   // Objective function used to measure the loss for the head.
   // These must be protos so the functions themselves can be parameterized (e.g.
   // Huber)
-  // TODO(martinz): we have to consider how less metrizable properties (such as
-  // calibration) fit here.
-  ObjectiveFunction objective_function = 3;
+  ObjectiveFunction objective_function = 3 [deprecated = true];
 
   // This field includes performance metrics of this head that are important to
   // the problem owner and need to be monitored and reported. However, unlike
