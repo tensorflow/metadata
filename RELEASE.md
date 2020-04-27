@@ -16,6 +16,8 @@
 
 * Fixed a compatibility issue with newer bazel versions.
 * Started pulling TF 1.15.2 source for building.
+* Added a new type of Anomaly: DATASET_HIGH_NUM_EXAMPLES
+* Added a new field to dataset_constraints: max_examples_count
 
 ## Breaking Changes
 

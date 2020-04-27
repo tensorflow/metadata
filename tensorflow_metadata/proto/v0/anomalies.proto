@@ -51,7 +51,7 @@ message AnomalyInfo {
   repeated DiffRegion diff_regions = 4;
 
   // Anomaly types begin with the name of the file that threw the error.
-  // Next ID: 58
+  // Next ID: 59
   enum Type {
     UNKNOWN_TYPE = 0;
     // Integer larger than 1
@@ -168,6 +168,8 @@ message AnomalyInfo {
     COMPARATOR_HIGH_NUM_EXAMPLES = 50;
     // There are not enough examples in the dataset.
     DATASET_LOW_NUM_EXAMPLES = 51;
+    // There are too many examples in the dataset.
+    DATASET_HIGH_NUM_EXAMPLES = 58;
     // Name collision between a weighted feature and a raw feature.
     WEIGHTED_FEATURE_NAME_COLLISION = 54;
     // The value feature of a weighted feature is missing on examples where the
