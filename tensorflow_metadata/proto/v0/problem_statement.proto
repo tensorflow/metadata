@@ -24,22 +24,6 @@ package tensorflow.metadata.v0;
 option java_package = "org.tensorflow.metadata.v0";
 option java_multiple_files = true;
 
-message ProblemStatementNamespace {
-  // Map from a ProblemStatement name to a problem statement.
-  map<string, ProblemStatement> problem_statements = 2;
-}
-
-// A reference to another problem statement.
-message ProblemStatementReference {
-  // A description of the relationship between the problem statements.
-  string description = 1;
-  // The name of the other problem statement.
-  // Must be in the same ProblemStatementNamespace.
-  oneof references {
-    string name = 2;
-  }
-}
-
 enum TaskType {
   UNKNOWN_TYPE = 0;
   BINARY_CLASSIFICATION = 1;
@@ -240,13 +224,6 @@ message ProblemStatement {
   // environment string in the SchemaProto.
   string environment = 4;
 
-  // Reference to another problem statement that is implemented by this
-  // problem statement. Specifically, the purpose of this problem statement
-  // is to build a model to satisfy the meta-objectives of the referenced
-  // problem statement.
-  // The actual connection may be specified in another file.
-  repeated ProblemStatementReference implements = 5;
-
   // The target used for meta-optimization. This is used to compare two models
   // that implement this model spec. For example, if two models have different
   // hparams, a tuning tool can use meta_optimization_target to decide which
@@ -257,6 +234,8 @@ message ProblemStatement {
   repeated MetaOptimizationTarget meta_optimization_target = 7;
   // See meta_optimization_target above for details.
   bool multi_objective = 8;
+
+  reserved 5;
 
   // Tasks for heads of the generated model. This field is repeated because some
   // models are multi-task models. Each task should have a unique name.
