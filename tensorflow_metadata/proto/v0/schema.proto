@@ -166,8 +166,7 @@ message Feature {
   }
 
   // Constraints on the distribution of the feature values.
-  // Currently only supported for StringDomains.
-  // TODO(b/69473628): Extend functionality to other domain types.
+  // Only supported for StringDomains.
   optional DistributionConstraints distribution_constraints = 15;
 
   // Additional information about the feature for documentation purpose.
