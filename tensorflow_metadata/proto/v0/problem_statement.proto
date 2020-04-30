@@ -163,11 +163,12 @@ message Task {
   // names.
   string name = 5;
 
-  // Determines the weight of this head (relative to other heads) when
-  // calculating the loss and propagating the gradients.
-  // Not meaningful for a model with one head. For a model with multiple heads,
-  // the ProblemStatement proto is valid only if weight for all heads or for
-  // none (which means they heads are equal).
+  // If a Problem is composed of mulitple sub-tasks, the weight of each task
+  // determines the importance of solving each sub-task. It is used to
+  // rank and select the best solution for multi-task problems.
+  // Not meaningful for a problem with one task.
+  // If the problem has multiple tasks and all task_weight=0 (unset) then all
+  // tasks are weighted equally.
   double task_weight = 2;
 
   // Deprecated since the objective function should be part of the estimator
@@ -224,10 +225,10 @@ message ProblemStatement {
   // environment string in the SchemaProto.
   string environment = 4;
 
-  // The target used for meta-optimization. This is used to compare two models
-  // that implement this model spec. For example, if two models have different
-  // hparams, a tuning tool can use meta_optimization_target to decide which
-  // model performs better.
+  // The target used for meta-optimization. This is used to compare multiple
+  // solutions for this problem. For example, if two solutions have different
+  // candidates, a tuning tool can use meta_optimization_target to decide which
+  // candidate performs the best.
   // A repeated meta-optimization target implies the weighted sum of the
   // meta_optimization targets if multi_objective=false, or independent
   // objectives if multi_objective=true.
