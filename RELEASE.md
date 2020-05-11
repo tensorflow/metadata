@@ -1,8 +1,14 @@
-# Current Version(Still in Development)
+# Version 0.22.0
 
 ## Major Features and Improvements
 
 ## Bug Fixes and Other Changes
+
+* Added a new type of Anomaly: DATASET_HIGH_NUM_EXAMPLES
+* Added a new field to dataset_constraints: max_examples_count
+* Removed ProblemStatementNamespace proto
+* Removed ProblemStatementReference proto
+* Removed field ProblemStatement.implements
 
 ## Breaking Changes
 
@@ -16,8 +22,6 @@
 
 * Fixed a compatibility issue with newer bazel versions.
 * Started pulling TF 1.15.2 source for building.
-* Added a new type of Anomaly: DATASET_HIGH_NUM_EXAMPLES
-* Added a new field to dataset_constraints: max_examples_count
 
 ## Breaking Changes
 
