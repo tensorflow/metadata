@@ -628,10 +628,38 @@ message TensorRepresentation {
     optional string value_column_name = 3;
   }
 
+  // A tf.RaggedTensor that models nested lists.
+  // Currently there is no way for the user to specify the shape of the leaf
+  // value (the innermost value tensor of the RaggedTensor). The leaf value will
+  // always be a 1-D tensor.
+  message RaggedTensor {
+    // Identifies the leaf feature in the column to convert to RaggedTensor. A
+    // leaf feature is a non-struct type feature that does not contain any
+    // struct type sub fields.
+    // The first step of the path refers to a top-level feature in the data. The
+    // remaining steps refer to STRUCT features under the top-level feature,
+    // recursively.
+    optional Path feature_path = 1;
+
+    // The data type of the ragged tensor's row partitions. This will default to
+    // INT64 if it is not specified.
+    optional RowPartitionDType row_partition_dtype = 2;
+  }
+
+  // RaggedTensor consists of RowPartitions. This enum allows the user to
+  // specify the dtype of those RowPartitions. If it is UNSPECIFIED, then we
+  // default to INT64.
+  enum RowPartitionDType {
+    UNSPECIFIED = 0;
+    INT64 = 1;
+    INT32 = 2;
+  }
+
   oneof kind {
     DenseTensor dense_tensor = 1;
     VarLenSparseTensor varlen_sparse_tensor = 2;
     SparseTensor sparse_tensor = 3;
+    RaggedTensor ragged_tensor = 4;
   }
 }
 

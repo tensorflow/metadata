@@ -2,6 +2,8 @@
 
 ## Major Features and Improvements
 
+* Added RaggedTensor in TensorRepresentation
+
 ## Bug Fixes and Other Changes
 
 ## Breaking changes
