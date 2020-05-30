@@ -28,6 +28,7 @@
 
 * Added a new type of Anomaly: DATASET_HIGH_NUM_EXAMPLES
 * Added a new field to dataset_constraints: max_examples_count
+* Added a multi-label TaskType.
 * Removed ProblemStatementNamespace proto
 * Removed ProblemStatementReference proto
 * Removed field ProblemStatement.implements

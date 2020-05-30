@@ -14,13 +14,13 @@
 // =============================================================================
 
 syntax = "proto3";
-option cc_enable_arenas = true;
+
+package tensorflow.metadata.v0;
 
 import "google/protobuf/descriptor.proto";
 import "tensorflow_metadata/proto/v0/metric.proto";
 
-package tensorflow.metadata.v0;
-
+option cc_enable_arenas = true;
 option java_package = "org.tensorflow.metadata.v0";
 option java_multiple_files = true;
 
@@ -30,6 +30,7 @@ enum TaskType {
   MULTI_CLASS_CLASSIFICATION = 2;
   TOP_K_CLASSIFICATION = 3;
   ONE_DIMENSIONAL_REGRESSION = 4;
+  MULTI_LABEL_CLASSIFICATION = 5;
 }
 
 extend google.protobuf.MessageOptions {
@@ -43,14 +44,15 @@ extend google.protobuf.MessageOptions {
 // n_classes = 2.
 message BinaryClassification {
   option (task_type) = BINARY_CLASSIFICATION;
+
   // The label column.
   string label = 1;
   // (optional) The weight column.
   string example_weight = 2;
 }
 
-// Specifies a dynamic multiclass problem where the number of label classes is
-// inferred from the data.
+// Specifies a dynamic multiclass/multi-label problem where the number of label
+//  classes is inferred from the data.
 message DynamicClassSpec {
   // Note: it is up to a solution provider to implement support for OOV labels.
   // Note: both a frequency_threshold and a top_k may be set. A class is grouped
@@ -88,7 +90,31 @@ message MultiClassClassification {
   oneof class_spec {
     // The exact number of label classes.
     uint64 n_classes = 3;
-    // The number of label classes should be inferred dynamically from the data.
+    // The number of label classes that should be inferred dynamically from the
+    // data.
+    DynamicClassSpec dynamic_class_spec = 4;
+  }
+}
+// Configuration for a multi-label classification task.
+// In this problem type there are n_classes unique possible label values
+// overall. There can be from zero up to n_classes unique labels per example.
+// The output, which is of type real number, is class probabilities associated
+// with each class. It will be of n_classes dimension for each example, if
+// n_classes is specified. Otherwise, the dimension will be set to the number
+// of unique class labels that are dynamically inferred from the data based on
+// dynamic_class_spec.
+message MultiLabelClassification {
+  option (task_type) = MULTI_LABEL_CLASSIFICATION;
+
+  // The label column. There can be one or more labels per example.
+  string label = 1;
+  // The weight column.
+  string example_weight = 2;
+  oneof class_spec {
+    // The exact number of unique class labels.
+    uint64 n_classes = 3;
+    // The maximal number of label classes that should be inferred dynamically
+    // from the data.
     DynamicClassSpec dynamic_class_spec = 4;
   }
 }
@@ -106,6 +132,7 @@ message MultiClassClassification {
 //     label column in the data.
 message TopKClassification {
   option (task_type) = TOP_K_CLASSIFICATION;
+
   // The label column.
   string label = 1;
   // (optional) The weight column.
@@ -130,6 +157,7 @@ message TopKClassification {
 // objective.
 message OneDimensionalRegression {
   option (task_type) = ONE_DIMENSIONAL_REGRESSION;
+
   // The label column.
   string label = 1;
   // (optional) The weight column.
@@ -147,6 +175,7 @@ message Type {
     OneDimensionalRegression one_dimensional_regression = 2;
     MultiClassClassification multi_class_classification = 3;
     TopKClassification top_k_classification = 4;
+    MultiLabelClassification multi_label_classification = 5;
   }
 }
 
@@ -212,7 +241,6 @@ message MetaOptimizationTarget {
   // If multi_objective is specified, then the weights are ignored.
   double weight = 4;
 }
-
 
 message ProblemStatement {
   // Description of the problem statement. For example, should describe how
