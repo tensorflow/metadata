@@ -319,6 +319,28 @@ message StructStatistics {
   CommonStatistics common_stats = 1;
 }
 
+// Statistics about the presence and valency of feature values. Feature values
+// could be nested lists. A feature in tf.Examples or other "flat" datasets has
+// values of nest level 1 -- they are lists of primitives. A nest level N
+// (N > 1) feature value is a list of lists of nest level (N - 1).
+// This proto can be used to describe the presence and valency of values at each
+// level.
+message PresenceAndValencyStatistics {
+  // Note: missing and non-missing counts are conditioned on the upper level
+  // being non-missing (i.e. if the upper level is missing/null, all the levels
+  // nested below are by definition missing, but not counted).
+  // Number non-missing (not-null) values.
+  uint64 num_non_missing = 1;
+  // Number of missing (null) values.
+  uint64 num_missing = 2;
+  // Minimum length of the values (note that nulls are not considered).
+  uint64 min_num_values = 3;
+  // Maximum length of the values.
+  uint64 max_num_values = 4;
+  // Total number of values.
+  uint64 tot_num_values = 5;
+}
+
 // Common statistics for all feature types. Statistics counting number of values
 // (i.e., min_num_values, max_num_values, avg_num_values, and tot_num_values)
 // include NaNs.
@@ -346,6 +368,15 @@ message CommonStatistics {
   // the length of the feature list for this feature in an example (where each
   // feature list can contain multiple values).
   Histogram feature_list_length_histogram = 9;
+
+  // Contains presence and valency stats for each nest level of the feature.
+  // The first item corresponds to the outermost level, and by definition,
+  // the stats it contains equals to the corresponding stats defined above.
+  // May not be populated if the feature is of nest level 1.
+  repeated PresenceAndValencyStatistics presence_and_valency_stats = 10;
+
+  // If not empty, it's parallel to presence_and_valency_stats.
+  repeated WeightedCommonStatistics weighted_presence_and_valency_stats = 11;
 }
 
 // The data used to create a histogram of a numeric feature for a dataset.

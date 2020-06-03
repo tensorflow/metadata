@@ -13,6 +13,7 @@
 ## Major Features and Improvements
 
 * Added RaggedTensor in TensorRepresentation
+* Added PresenceAndValencyStatistics to CommonStatistics.
 
 ## Bug Fixes and Other Changes
 
