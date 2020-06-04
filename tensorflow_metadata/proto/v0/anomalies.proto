@@ -51,7 +51,7 @@ message AnomalyInfo {
   repeated DiffRegion diff_regions = 4;
 
   // Anomaly types begin with the name of the file that threw the error.
-  // Next ID: 59
+  // Next ID: 62
   enum Type {
     UNKNOWN_TYPE = 0;
     // Integer larger than 1
@@ -98,6 +98,16 @@ message AnomalyInfo {
     FEATURE_TYPE_NO_VALUES = 20;
     // The feature is repeated in an example, but was expected to be a singleton
     FEATURE_TYPE_UNEXPECTED_REPEATED = 21;
+    // The feature had too many unique values (string and categorical features
+    // only).
+    FEATURE_TYPE_HIGH_UNIQUE = 59;
+    // The feature had too few unique values (string and categorical features
+    // only).
+    FEATURE_TYPE_LOW_UNIQUE = 60;
+    // The feature has a constraint on the number of unique values but is not of
+    // a type that has the number of unique values counted (i.e., is not string
+    // or categorical).
+    FEATURE_TYPE_NO_UNIQUE = 61;
     // There is a float value that is too high
     FLOAT_TYPE_BIG_FLOAT = 22;
     // The type is not FLOAT

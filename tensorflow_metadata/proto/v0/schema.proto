@@ -103,7 +103,7 @@ message Schema {
 }
 
 // Describes schema-level information about a specific feature.
-// NextID: 31
+// NextID: 32
 message Feature {
   // The name of the feature.
   optional string name = 1;  // required
@@ -194,6 +194,10 @@ message Feature {
   // The lifecycle stage of a feature. It can also apply to its descendants.
   // i.e., if a struct is DEPRECATED, its children are implicitly deprecated.
   optional LifecycleStage lifecycle_stage = 22;
+
+  // Constraints on the number of unique values for a given feature.
+  // This is supported for string and categorical features only.
+  optional UniqueConstraints unique_constraints = 31;
 }
 
 // Additional information about the schema or about a feature.
@@ -567,6 +571,13 @@ message InfinityNorm {
 
 message FeatureComparator {
   optional InfinityNorm infinity_norm = 1;
+}
+
+// Checks that the number of unique values is greater than or equal to the min,
+// and less than or equal to the max.
+message UniqueConstraints {
+  optional int64 min = 1;
+  optional int64 max = 2;
 }
 
 // A TensorRepresentation captures the intent for converting columns in a

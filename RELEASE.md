@@ -2,6 +2,10 @@
 
 ## Major Features and Improvements
 
+* Added UniqueConstraints to Feature message in schema.proto.
+* Added new Anomaly types to describe data that does not conform to
+  UniqueConstraints.
+
 ## Bug Fixes and Other Changes
 
 ## Breaking changes
