@@ -1,10 +1,11 @@
-# Current version (not yet released; still in development)
+# Version 0.22.2
 
 ## Major Features and Improvements
 
 * Added UniqueConstraints to Feature message in schema.proto.
 * Added new Anomaly types to describe data that does not conform to
   UniqueConstraints.
+* Added PresenceAndValencyStatistics to CommonStatistics.
 
 ## Bug Fixes and Other Changes
 
@@ -17,7 +18,6 @@
 ## Major Features and Improvements
 
 * Added RaggedTensor in TensorRepresentation
-* Added PresenceAndValencyStatistics to CommonStatistics.
 
 ## Bug Fixes and Other Changes
 
