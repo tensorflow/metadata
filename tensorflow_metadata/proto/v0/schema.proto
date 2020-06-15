@@ -433,6 +433,8 @@ message FloatDomain {
 
   // If true, feature should not contain NaNs.
   optional bool disallow_nan = 5;
+  // If true, feature should not contain Inf or -Inf.
+  optional bool disallow_inf = 6;
 }
 
 // Domain for a recursive struct.

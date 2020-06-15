@@ -2,6 +2,9 @@
 
 ## Major Features and Improvements
 
+* Added disallow_inf to FloatDomain message in schema.proto.
+* Added new Anomaly type to describe data that has unexpected Infs / -Infs.
+
 ## Bug Fixes and Other Changes
 
 ## Breaking changes

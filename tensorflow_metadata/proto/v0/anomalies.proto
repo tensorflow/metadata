@@ -51,7 +51,7 @@ message AnomalyInfo {
   repeated DiffRegion diff_regions = 4;
 
   // Anomaly types begin with the name of the file that threw the error.
-  // Next ID: 62
+  // Next ID: 63
   enum Type {
     UNKNOWN_TYPE = 0;
     // Integer larger than 1
@@ -124,6 +124,8 @@ message AnomalyInfo {
     FLOAT_TYPE_UNKNOWN_TYPE_NUMBER = 27;
     // Float feature includes NaN values.
     FLOAT_TYPE_HAS_NAN = 53;
+    // Float feature includes Inf or -Inf values.
+    FLOAT_TYPE_HAS_INF = 62;
     // There is an unexpectedly large integer
     INT_TYPE_BIG_INT = 28;
     // The type was supposed to be INT, but it was not.
