@@ -571,8 +571,19 @@ message InfinityNorm {
   optional double threshold = 1;
 }
 
+// EXPERIMENTAL: This message and the functionality it supports is under
+// continued development and may be changed or removed.
+// Checks that the approximate Jensen-Shannon Divergence is below a certain
+// threshold between the two distributions.
+message JensenShannonDivergence {
+  // The JensenShannonDivergence will be in the interval [0.0, 1.0] so sensible
+  // bounds should be in the interval [0.0, 1.0).
+  optional double threshold = 1;
+}
+
 message FeatureComparator {
   optional InfinityNorm infinity_norm = 1;
+  optional JensenShannonDivergence jensen_shannon_divergence = 2;
 }
 
 // Checks that the number of unique values is greater than or equal to the min,

@@ -51,7 +51,7 @@ message AnomalyInfo {
   repeated DiffRegion diff_regions = 4;
 
   // Anomaly types begin with the name of the file that threw the error.
-  // Next ID: 63
+  // Next ID: 64
   enum Type {
     UNKNOWN_TYPE = 0;
     // Integer larger than 1
@@ -158,6 +158,9 @@ message AnomalyInfo {
     COMPARATOR_TREATMENT_DATA_MISSING = 41;
     // L infinity between treatment and control is high.
     COMPARATOR_L_INFTY_HIGH = 42;
+    // Approximate Jensen-Shannon divergence between treatment and control is
+    // high.
+    COMPARATOR_JENSEN_SHANNON_DIVERGENCE_HIGH = 63;
     // No examples in the span.
     NO_DATA_IN_SPAN = 43;
     // The value feature of a sparse feature is missing and at least one
