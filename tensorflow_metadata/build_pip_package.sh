@@ -33,17 +33,40 @@ fi
 
 set -u -x
 
-cp -f tensorflow_metadata/proto/v0/schema_pb2.py \
-  ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
+PLATFORM="$(uname -s | tr 'A-Z' 'a-z')"
+function is_windows() {
+  if [[ "${PLATFORM}" =~ (cygwin|mingw32|mingw64|msys)_nt* ]]; then
+    true
+  else
+    false
+  fi
+}
 
-cp -f tensorflow_metadata/proto/v0/path_pb2.py \
-  ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
+if is_windows; then
+  cp -f ${BUILD_WORKSPACE_DIRECTORY}/bazel-genfiles/tensorflow_metadata/proto/v0/schema_pb2.py \
+    ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
 
-cp -f tensorflow_metadata/proto/v0/anomalies_pb2.py \
-  ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
+  cp -f ${BUILD_WORKSPACE_DIRECTORY}/bazel-genfiles/tensorflow_metadata/proto/v0/path_pb2.py \
+    ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
 
-cp -f tensorflow_metadata/proto/v0/statistics_pb2.py \
-  ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
+  cp -f ${BUILD_WORKSPACE_DIRECTORY}/bazel-genfiles/tensorflow_metadata/proto/v0/anomalies_pb2.py \
+    ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
+
+  cp -f ${BUILD_WORKSPACE_DIRECTORY}/bazel-genfiles/tensorflow_metadata/proto/v0/statistics_pb2.py \
+    ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
+else
+  cp -f tensorflow_metadata/proto/v0/schema_pb2.py \
+    ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
+
+  cp -f tensorflow_metadata/proto/v0/path_pb2.py \
+    ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
+
+  cp -f tensorflow_metadata/proto/v0/anomalies_pb2.py \
+    ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
+
+  cp -f tensorflow_metadata/proto/v0/statistics_pb2.py \
+    ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
+fi
 
 # Create the wheel
 cd ${BUILD_WORKSPACE_DIRECTORY}
