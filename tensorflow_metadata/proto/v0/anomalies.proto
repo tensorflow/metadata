@@ -51,7 +51,7 @@ message AnomalyInfo {
   repeated DiffRegion diff_regions = 4;
 
   // Anomaly types begin with the name of the file that threw the error.
-  // Next ID: 64
+  // Next ID: 65
   enum Type {
     UNKNOWN_TYPE = 0;
     // Integer larger than 1
@@ -142,6 +142,9 @@ message AnomalyInfo {
     INT_TYPE_STRING_EXPECTED = 33;
     // Unknown type in stats proto
     INT_TYPE_UNKNOWN_TYPE_NUMBER = 34;
+    // The fraction of examples containing TensorFlow supported images is lower
+    // than the threshold set in the Schema.
+    LOW_SUPPORTED_IMAGE_FRACTION = 64;
     // There are no stats for a column at all
     SCHEMA_MISSING_COLUMN = 35;
     // There is a new column that is not in the schema.

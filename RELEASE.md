@@ -4,6 +4,7 @@
 
 * Added disallow_inf to FloatDomain message in schema.proto.
 * Added new Anomaly type to describe data that has unexpected Infs / -Infs.
+* Added new Anomaly and Schema field for specifying ratio of supported images.
 
 ## Bug Fixes and Other Changes
 
