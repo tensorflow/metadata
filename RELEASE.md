@@ -1,7 +1,5 @@
 # Current version (not yet released; still in development)
 
-* Add ProblemStatement and Metric Python proto stubs.
-
 ## Major Features and Improvements
 
 * Added disallow_inf to FloatDomain message in schema.proto.
@@ -9,6 +7,8 @@
 * Added new Anomaly and Schema field for specifying ratio of supported images.
 
 ## Bug Fixes and Other Changes
+
+* Add ProblemStatement and Metric Python proto stubs.
 
 ## Breaking changes
 
