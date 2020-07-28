@@ -18,6 +18,8 @@
 
 ## Deprecations
 
+*   Drops Python 2 support.
+
 # Version 0.22.2
 
 ## Major Features and Improvements

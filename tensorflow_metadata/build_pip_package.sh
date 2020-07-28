@@ -83,7 +83,7 @@ fi
 # Create the wheel
 cd ${BUILD_WORKSPACE_DIRECTORY}
 
-${PYTHON_BIN_PATH} setup.py bdist_wheel --universal
+${PYTHON_BIN_PATH} setup.py bdist_wheel
 
 # Cleanup
 cd -

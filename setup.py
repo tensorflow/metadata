@@ -46,13 +46,11 @@ setup(
         'License :: OSI Approved :: Apache Software License',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3 :: Only'
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
         'Topic :: Scientific/Engineering :: Mathematics',
         'Topic :: Software Development',
@@ -65,7 +63,7 @@ setup(
 
         'protobuf>=3.7,<4',
     ],
-    python_requires='>=2.7,<4',
+    python_requires='>=3.5,<4',
     packages=find_packages(),
     include_package_data=True,
     description=('Library and standards for schema and statistics.'),
