@@ -5,6 +5,10 @@
 * Added disallow_inf to FloatDomain message in schema.proto.
 * Added new Anomaly type to describe data that has unexpected Infs / -Infs.
 * Added new Anomaly and Schema field for specifying ratio of supported images.
+* Added value_counts field to Feature message in schema.proto, which describes
+  the number of values for features that have more than one nestedness level.
+* Added new anomaly type VALUE_NESTEDNESS_MISMATCH to describe data that has a
+  nestedness level that does not match the schema.
 
 ## Bug Fixes and Other Changes
 

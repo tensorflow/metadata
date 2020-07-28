@@ -102,8 +102,12 @@ message Schema {
   map<string, TensorRepresentationGroup> tensor_representation_group = 13;
 }
 
+message ValueCountList {
+  repeated ValueCount value_count = 1;
+}
+
 // Describes schema-level information about a specific feature.
-// NextID: 32
+// NextID: 33
 message Feature {
   // The name of the feature.
   optional string name = 1;  // required
@@ -133,6 +137,9 @@ message Feature {
     // The feature doesn't have a well defined shape. All we know are limits on
     // the minimum and maximum number of values.
     ValueCount value_count = 5;
+    // Captures the same information as value_count but for features with
+    // nested values. A ValueCount is provided for each nest level.
+    ValueCountList value_counts = 32;
   }
 
   // Physical type of the feature's values.

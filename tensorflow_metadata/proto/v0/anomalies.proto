@@ -51,7 +51,7 @@ message AnomalyInfo {
   repeated DiffRegion diff_regions = 4;
 
   // Anomaly types begin with the name of the file that threw the error.
-  // Next ID: 65
+  // Next ID: 66
   enum Type {
     UNKNOWN_TYPE = 0;
     // Integer larger than 1
@@ -199,6 +199,8 @@ message AnomalyInfo {
     // The length of the features representing a weighted feature does not
     // match.
     WEIGHTED_FEATURE_LENGTH_MISMATCH = 57;
+    // The nesting level of the feature values does not match.
+    VALUE_NESTEDNESS_MISMATCH = 65;
   }
   // Reason for the anomaly. There may be more than one reason,
   // e.g. the field might be missing sometimes AND a new value is
