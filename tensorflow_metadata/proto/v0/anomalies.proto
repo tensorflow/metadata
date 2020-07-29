@@ -50,7 +50,6 @@ message AnomalyInfo {
   // The comparison between the existing schema and the fixed schema.
   repeated DiffRegion diff_regions = 4;
 
-  // Anomaly types begin with the name of the file that threw the error.
   // Next ID: 66
   enum Type {
     UNKNOWN_TYPE = 0;
