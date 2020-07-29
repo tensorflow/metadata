@@ -9,6 +9,7 @@
   the number of values for features that have more than one nestedness level.
 * Added new anomaly type VALUE_NESTEDNESS_MISMATCH to describe data that has a
   nestedness level that does not match the schema.
+* Added new Any type value to CustomStatistic.
 
 ## Bug Fixes and Other Changes
 
