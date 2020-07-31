@@ -14,6 +14,7 @@
 ## Bug Fixes and Other Changes
 
 * Add ProblemStatement and Metric Python proto stubs.
+* Use absltest instead of unittest.
 
 ## Breaking changes
 
