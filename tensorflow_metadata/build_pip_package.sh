@@ -43,22 +43,28 @@ function is_windows() {
 }
 
 if is_windows; then
-  cp -f ${BUILD_WORKSPACE_DIRECTORY}/bazel-genfiles/tensorflow_metadata/proto/v0/schema_pb2.py \
+  # Newer bazel does not create bazel-genfiles any more (
+  # https://github.com/bazelbuild/bazel/issues/6761). It's merged with bazel-bin
+  GENFILES=bazel-genfiles
+  if [[ ! -d ${BUILD_WORKSPACE_DIRECTORY}/${GENFILES} ]]; then
+    GENFILES=bazel-bin
+  fi
+  cp -f ${BUILD_WORKSPACE_DIRECTORY}/${GENFILES}/tensorflow_metadata/proto/v0/schema_pb2.py \
     ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
 
-  cp -f ${BUILD_WORKSPACE_DIRECTORY}/bazel-genfiles/tensorflow_metadata/proto/v0/path_pb2.py \
+  cp -f ${BUILD_WORKSPACE_DIRECTORY}/${GENFILES}/tensorflow_metadata/proto/v0/path_pb2.py \
     ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
 
-  cp -f ${BUILD_WORKSPACE_DIRECTORY}/bazel-genfiles/tensorflow_metadata/proto/v0/anomalies_pb2.py \
+  cp -f ${BUILD_WORKSPACE_DIRECTORY}/${GENFILES}/tensorflow_metadata/proto/v0/anomalies_pb2.py \
     ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
 
-  cp -f ${BUILD_WORKSPACE_DIRECTORY}/bazel-genfiles/tensorflow_metadata/proto/v0/statistics_pb2.py \
+  cp -f ${BUILD_WORKSPACE_DIRECTORY}/${GENFILES}/tensorflow_metadata/proto/v0/statistics_pb2.py \
     ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
 
-  cp -f ${BUILD_WORKSPACE_DIRECTORY}/bazel-genfiles/tensorflow_metadata/proto/v0/problem_statement_pb2.py \
+  cp -f ${BUILD_WORKSPACE_DIRECTORY}/${GENFILES}/tensorflow_metadata/proto/v0/problem_statement_pb2.py \
     ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
 
-  cp -f ${BUILD_WORKSPACE_DIRECTORY}/bazel-genfiles/tensorflow_metadata/proto/v0/metric_pb2.py \
+  cp -f ${BUILD_WORKSPACE_DIRECTORY}/${GENFILES}/tensorflow_metadata/proto/v0/metric_pb2.py \
     ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
 else
   cp -f tensorflow_metadata/proto/v0/schema_pb2.py \
