@@ -204,6 +204,27 @@ message PrecisionAtK {
 
 message MeanReciprocalRank {}
 
+// Area under ROC-curve calculated globally for MultiClassClassification (model
+// predicts a single label) or MultiLabelClassification (model predicts class
+// probabilities). The area is calculated by treating the entire set of data as
+// an aggregate result, and computing a single metric rather than k metrics
+// (one for each target label) that get averaged together. For example, the FPR
+// and TPR at a given point on the AUC curve for k targer labels are:
+//   FPR = (FP1 + FP2 + ... + FPk) / ((FP1 + FP2 + ... + FPk) +
+//                                    (TN1 + TN2 + ... + TNk))
+//   TPR = (TP1 + TP2 + ... +TPk) / ((TP1 + TP2 + ... + TPk) +
+//                                   (FN1 + FN2 + ... + FNk))
+message MicroAUC {
+  option (metric_type) = MAXIMIZE;
+}
+
+// Cross entropy for MultiLabelClassification where each target and
+// prediction is the probabily of belonging to that class independent of other
+// classes.
+message MultilabelCrossEntropy {
+  option (metric_type) = MINIMIZE;
+}
+
 message BlockUtility {
   option (metric_type) = MAXIMIZE;
 
@@ -264,6 +285,8 @@ message PerformanceMetric {
     MeanSquaredError squared_error = 13;
     MeanSquaredLogarithmicError mean_squared_logarithmic_error = 14;
     MeanReciprocalRank mean_reciprocal_rank = 15;
+    MicroAUC micro_auc = 27;
+    MultilabelCrossEntropy multilabel_cross_entropy = 28;
     Poisson poisson = 16;
     PrecisionAtK precision_at_k = 17;
     SquaredHinge squared_hinge = 18;
