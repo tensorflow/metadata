@@ -286,7 +286,7 @@ message PerformanceMetric {
     MeanSquaredLogarithmicError mean_squared_logarithmic_error = 14;
     MeanReciprocalRank mean_reciprocal_rank = 15;
     MicroAUC micro_auc = 27;
-    MultilabelCrossEntropy multilabel_cross_entropy = 28;
+    MultilabelCrossEntropy multi_label_cross_entropy = 28;
     Poisson poisson = 16;
     PrecisionAtK precision_at_k = 17;
     SquaredHinge squared_hinge = 18;
@@ -298,5 +298,5 @@ message PerformanceMetric {
     PrecisionAtRecall precision_at_recall = 24;
     RecallAtPrecision recall_at_precision = 25;
   }
-  // NEXT_TAG: 27;
+  // NEXT_TAG: 29;
 }
