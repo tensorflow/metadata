@@ -1,4 +1,4 @@
-# Current version (not yet released; still in development)
+# Version 0.23.0
 
 ## Major Features and Improvements
 
@@ -18,9 +18,11 @@
 
 ## Breaking changes
 
+* N/A
+
 ## Deprecations
 
-*   Drops Python 2 support.
+* Drops Python 2 support.
 
 # Version 0.22.2
 
