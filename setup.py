@@ -59,7 +59,7 @@ setup(
     ],
     namespace_packages=[],
     install_requires=[
-        'absl-py>=0.7,<0.9',
+        'absl-py>=0.7,<0.10',
         'googleapis-common-protos',
         'protobuf>=3.7,<4',
     ],
