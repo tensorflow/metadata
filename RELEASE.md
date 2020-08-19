@@ -4,6 +4,9 @@
 
 ## Bug Fixes and Other Changes
 
+* When installing from source, you don't need any steps other than
+  `pip install` (needs Bazel).
+
 ## Breaking changes
 
 ## Deprecations
