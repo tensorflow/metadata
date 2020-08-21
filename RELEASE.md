@@ -6,6 +6,8 @@
 
 * When installing from source, you don't need any steps other than
   `pip install` (needs Bazel).
+* Depends on `absl-py>=0.9,<0.11`.
+* Depends on `googleapis-common-protos>=1.52.0,<2`.
 
 ## Breaking changes
 
