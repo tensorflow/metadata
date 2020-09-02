@@ -19,6 +19,7 @@ package tensorflow.metadata.v0;
 
 import "google/protobuf/descriptor.proto";
 import "tensorflow_metadata/proto/v0/metric.proto";
+import "tensorflow_metadata/proto/v0/path.proto";
 
 option cc_enable_arenas = true;
 option java_package = "org.tensorflow.metadata.v0";
@@ -46,7 +47,12 @@ message BinaryClassification {
   option (task_type) = BINARY_CLASSIFICATION;
 
   // The label column.
-  string label = 1;
+  oneof label_id {
+    // The name of the label. Assumes the label is a flat, top-level field.
+    string label = 1;
+    // A path can be used instead of a flat string if the label is nested.
+    Path label_path = 3;
+  }
   // (optional) The weight column.
   string example_weight = 2;
 }
@@ -84,7 +90,12 @@ message MultiClassClassification {
   // The label column.  There's only a single label per example.
   // If the label column is a BoolDomain, use the BinaryClassification Type
   // instead.
-  string label = 1;
+  oneof label_id {
+    // The name of the label. Assumes the label is a flat, top-level field.
+    string label = 1;
+    // A path can be used instead of a flat string if the label is nested.
+    Path label_path = 5;
+  }
   // The weight column.
   string example_weight = 2;
   oneof class_spec {
@@ -107,7 +118,12 @@ message MultiLabelClassification {
   option (task_type) = MULTI_LABEL_CLASSIFICATION;
 
   // The label column. There can be one or more labels per example.
-  string label = 1;
+  oneof label_id {
+    // The name of the label. Assumes the label is a flat, top-level field.
+    string label = 1;
+    // A path can be used instead of a flat string if the label is nested.
+    Path label_path = 5;
+  }
   // The weight column.
   string example_weight = 2;
   oneof class_spec {
@@ -134,7 +150,12 @@ message TopKClassification {
   option (task_type) = TOP_K_CLASSIFICATION;
 
   // The label column.
-  string label = 1;
+  oneof label_id {
+    // The name of the label. Assumes the label is a flat, top-level field.
+    string label = 1;
+    // A path can be used instead of a flat string if the label is nested.
+    Path label_path = 6;
+  }
   // (optional) The weight column.
   string example_weight = 2;
   // (optional) The number of label classes. If unset, the solution provider
@@ -159,7 +180,12 @@ message OneDimensionalRegression {
   option (task_type) = ONE_DIMENSIONAL_REGRESSION;
 
   // The label column.
-  string label = 1;
+  oneof label_id {
+    // The name of the label. Assumes the label is a flat, top-level field.
+    string label = 1;
+    // A path can be used instead of a flat string if the label is nested.
+    Path label_path = 3;
+  }
   // (optional) The weight column.
   string weight = 2;
   // TODO(martinz): consider whether to specify the range of the outputs (e.g.,
