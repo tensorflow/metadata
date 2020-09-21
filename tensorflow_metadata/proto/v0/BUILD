@@ -14,16 +14,15 @@
 # ==============================================================================
 
 
+load("@com_google_protobuf//:protobuf.bzl", "cc_proto_library", "py_proto_library")
+
 licenses(["notice"])  # Apache 2.0
 
 package(default_visibility = ["//visibility:public"])
 
-load("@org_tensorflow//tensorflow/core/platform:default/build_config.bzl", "tf_proto_library_cc", "tf_proto_library_py")
 
-
-tf_proto_library_cc(
-    # TF generates rule with name cc_metadata_v0_proto_cc
-    name = "cc_metadata_v0_proto",
+cc_proto_library(
+    name = "cc_metadata_v0_proto_cc",
     srcs = [
         "anomalies.proto",
         "metric.proto",
@@ -31,7 +30,11 @@ tf_proto_library_cc(
         "problem_statement.proto",
         "schema.proto",
         "statistics.proto",
-    ]
+    ],
+    deps = [
+        # For well-known proto types like protobuf.Any.
+        "@com_google_protobuf//:cc_wkt_protos",
+    ],
 )
 
 cc_library(
@@ -39,9 +42,8 @@ cc_library(
     deps = [":cc_metadata_v0_proto_cc"],
 )
 
-tf_proto_library_py(
-    # TF generates rule with name py_metadata_v0_proto_py
-    name = "py_metadata_v0_proto",
+py_proto_library(
+    name = "py_metadata_v0_proto_py",
     srcs = [
         "anomalies.proto",
         "metric.proto",
@@ -49,6 +51,10 @@ tf_proto_library_py(
         "problem_statement.proto",
         "schema.proto",
         "statistics.proto",
+    ],
+    deps = [
+        # For well-known proto types like protobuf.Any.
+        "@com_google_protobuf//:protobuf_python",
     ],
 )
 
