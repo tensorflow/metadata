@@ -8,6 +8,12 @@
 
 ## Bug Fixes and Other Changes
 
+* Added new Anomaly type to describe when a domain is incompatible with the
+  data type.
+* Added new Anomaly types for invalid schema configurations (missing name,
+  missing type, etc).
+* Added new Anomaly type to describe when type does not match the data.
+
 ## Breaking changes
 
 ## Deprecations

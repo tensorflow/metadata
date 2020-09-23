@@ -50,7 +50,7 @@ message AnomalyInfo {
   // The comparison between the existing schema and the fixed schema.
   repeated DiffRegion diff_regions = 4;
 
-  // Next ID: 66
+  // Next ID: 71
   enum Type {
     UNKNOWN_TYPE = 0;
     // Integer larger than 1
@@ -200,6 +200,16 @@ message AnomalyInfo {
     WEIGHTED_FEATURE_LENGTH_MISMATCH = 57;
     // The nesting level of the feature values does not match.
     VALUE_NESTEDNESS_MISMATCH = 65;
+    // The domain specified is not compatible with the physical type.
+    DOMAIN_INVALID_FOR_TYPE = 66;
+    // Feature on schema has no name.
+    FEATURE_MISSING_NAME = 67;
+    // Feature on schema has no type.
+    FEATURE_MISSING_TYPE = 68;
+    // Triggered for invalid schema specifications, e.g. min_fraction < 0
+    INVALID_SCHEMA_SPECIFICATION = 69;
+    // The type of the data is inconsistent with the specified type.
+    UNEXPECTED_DATA_TYPE = 70;
   }
   // Reason for the anomaly. There may be more than one reason,
   // e.g. the field might be missing sometimes AND a new value is
