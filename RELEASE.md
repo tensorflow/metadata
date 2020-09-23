@@ -3,6 +3,9 @@
 
 ## Major Features and Improvements
 
+* Added new Anomaly and Schema field to support drift and distribution skew
+  detection for numeric features.
+
 ## Bug Fixes and Other Changes
 
 ## Breaking changes
