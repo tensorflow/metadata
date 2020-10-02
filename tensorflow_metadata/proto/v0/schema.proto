@@ -188,14 +188,14 @@ message Feature {
   // List of environments this feature is present in.
   // Should be disjoint from not_in_environment.
   // This feature is in environment "foo" if:
-  // ("foo" is in in_environment or default_environments) AND
+  // ("foo" is in in_environment or default_environment) AND
   // "foo" is not in not_in_environment.
-  // See Schema::default_environments.
+  // See Schema::default_environment.
   repeated string in_environment = 20;
 
   // List of environments this feature is not present in.
   // Should be disjoint from of in_environment.
-  // See Schema::default_environments and in_environment.
+  // See Schema::default_environment and in_environment.
   repeated string not_in_environment = 19;
 
   // The lifecycle stage of a feature. It can also apply to its descendants.
