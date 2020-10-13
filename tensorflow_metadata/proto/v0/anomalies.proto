@@ -224,6 +224,34 @@ message AnomalyInfo {
   repeated Reason reason = 7;
 }
 
+// Message to contain the result of the drift/skew measurements for a feature.
+message DriftSkewInfo {
+  message Measurement {
+    enum Type {
+      UNKNOWN = 0;
+      L_INFTY = 1;
+      JENSEN_SHANNON_DIVERGENCE = 2;
+    }
+    // Type of the measurement.
+    optional Type type = 1;
+    // Value of the measurement.
+    optional double value = 2;
+    // Threshold used to determine whether the measurement results in an
+    // anomaly.
+    optional double threshold = 3;
+  }
+
+  // Identifies the feature;
+  optional Path path = 1;
+
+  // The drift/skew may be measured in the same invocation of TFDV, in which
+  // case both of the following fields are populated.
+  // Also the drift/skew may be quantified by different measurements, thus
+  // repeated.
+  repeated Measurement drift_measurements = 2;
+  repeated Measurement skew_measurements = 3;
+}
+
 // Message to represent the anomalies, which describe the mismatches (if any)
 // between the stats and the schema.
 message Anomalies {
@@ -255,6 +283,10 @@ message Anomalies {
   // True if numExamples == 0.
   optional bool data_missing = 3;
 
+  // If drift / skew detection was conducted, this field will hold the
+  // comparison results for all the features compared, regardless whether a
+  // related anomaly was reported.
+  repeated DriftSkewInfo drift_skew_info = 9;
   // TODO(b/123519907): Remove this.
   // The hook to attach any usage and tool specific metadata. Example:
   // message SchemaStamp {

@@ -5,6 +5,8 @@
 
 * Added new Anomaly and Schema field to support drift and distribution skew
   detection for numeric features.
+* Added a new field in Anomalies proto to report the raw measurements of
+  distribution skew detection.
 
 ## Bug Fixes and Other Changes
 
