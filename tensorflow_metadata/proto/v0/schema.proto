@@ -26,7 +26,7 @@ option java_multiple_files = true;
 
 // LifecycleStage. Only UNKNOWN_STAGE, BETA, and PRODUCTION features are
 // actually validated.
-// PLANNED, ALPHA, and DEBUG are treated as DEPRECATED.
+// PLANNED, ALPHA, DISABLED, and DEBUG are treated as DEPRECATED.
 enum LifecycleStage {
   UNKNOWN_STAGE = 0;  // Unknown stage.
   PLANNED = 1;        // Planned feature, may not be created yet.
@@ -35,6 +35,8 @@ enum LifecycleStage {
   PRODUCTION = 4;     // Used in a significant fraction of user traffic.
   DEPRECATED = 5;     // No longer supported: do not use in new models.
   DEBUG_ONLY = 6;     // Only exists for debugging purposes.
+  DISABLED = 7;       // Generic indication that feature is disabled / excluded
+                      // from models, regardless of specific reason.
 }
 
 //
