@@ -3,19 +3,32 @@
 
 ## Major Features and Improvements
 
-* Added new Anomaly and Schema field to support drift and distribution skew
-  detection for numeric features.
-* Added a new field in Anomalies proto to report the raw measurements of
-  distribution skew detection.
+*   Added new Anomaly and Schema field to support drift and distribution skew
+    detection for numeric features.
+*   Added a new field in Anomalies proto to report the raw measurements of
+    distribution skew detection.
+*   From this release TFMD will also be hosting nightly packages on
+    https://pypi-nightly.tensorflow.org. To install the nightly package use the
+    following command:
+
+    ```
+    pip install -i https://pypi-nightly.tensorflow.org/simple tensorflow-metadata
+    ```
+
+    Note: These nightly packages are unstable and breakages are likely to
+    happen. The fix could often take a week or more depending on the complexity
+    involved for the wheels to be available on the PyPI cloud service. You can
+    always use the stable version of TFMD available on PyPI by running the
+    command `pip install tensorflow-metadata` .
 
 ## Bug Fixes and Other Changes
 
-* Added new Anomaly type to describe when a domain is incompatible with the
-  data type.
-* Added new Anomaly types for invalid schema configurations (missing name,
-  missing type, etc).
-* Added new Anomaly type to describe when type does not match the data.
-* Added new LifecycleStage:DISABLED.
+*   Added new Anomaly type to describe when a domain is incompatible with the
+    data type.
+*   Added new Anomaly types for invalid schema configurations (missing name,
+    missing type, etc).
+*   Added new Anomaly type to describe when type does not match the data.
+*   Added new LifecycleStage:DISABLED.
 
 ## Breaking changes
 
