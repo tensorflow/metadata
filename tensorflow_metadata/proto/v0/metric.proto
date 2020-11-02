@@ -20,6 +20,7 @@ package tensorflow.metadata.v0;
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
 
+// GOOGLE-LEGACY option jspb_use_correct_proto2_semantics = false; 
 option cc_enable_arenas = true;
 option java_package = "org.tensorflow.metadata.v0";
 option java_multiple_files = true;
