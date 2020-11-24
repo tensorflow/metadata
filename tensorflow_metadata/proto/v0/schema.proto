@@ -20,7 +20,7 @@ package tensorflow.metadata.v0;
 import "google/protobuf/any.proto";
 import "tensorflow_metadata/proto/v0/path.proto";
 
-// GOOGLE-LEGACY option jspb_use_correct_proto2_semantics = false; 
+// GOOGLE-LEGACY option jspb_use_correct_proto2_semantics = false;  
 option cc_enable_arenas = true;
 option java_package = "org.tensorflow.metadata.v0";
 option java_multiple_files = true;
@@ -414,6 +414,41 @@ message DistributionConstraints {
   optional double min_domain_mass = 1 [default = 1.0];
 }
 
+// Encodes vocabulary coverage constraints.
+message FeatureCoverageConstraints {
+  // Fraction of feature values that map to a vocab entry (i.e. are not oov).
+  optional float min_coverage = 1;
+  // Average length of tokens. Used for cases such as wordpiece that fallback
+  // to character-level tokenization.
+  optional float min_avg_token_length = 2;
+
+  // String tokens to exclude when calculating min_coverage and
+  // min_avg_token_length. Useful for tokens such as PAD.
+  repeated string excluded_string_tokens = 3;
+
+  // Integer tokens to exclude when calculating min_coverage and
+  // min_avg_token_length.
+  repeated int64 excluded_int_tokens = 4 [packed = true];
+}
+
+// Encodes constraints on specific values in sequences.
+message SequenceValueConstraints {
+  // The value which to express constraints for. Can be either an integer or
+  // a string.
+  oneof value {
+    int64 int_value = 1;
+    string string_value = 2;
+  }
+
+  // Min / max number of times the value can occur in a sequence.
+  optional int64 min_per_sequence = 3;
+  optional int64 max_per_sequence = 4;
+
+  // Min / max fraction of sequences that must contain the value.
+  optional float min_fraction_of_sequences = 5;
+  optional float max_fraction_of_sequences = 6;
+}
+
 // Encodes information for domains of integer values.
 // Note that FeatureType could be either INT or BYTES.
 message IntDomain {
@@ -489,7 +524,32 @@ message BoolDomain {
 // language of the text.
 
 // Natural language text.
-message NaturalLanguageDomain {}
+//
+// Support for the fields in NaturalLanguageDomain is not ready so please do  not
+// use them.
+// TODO(b/174175636): Remove warning once fields in NaturalLanguageDomain are
+// supported.
+message NaturalLanguageDomain {
+  // Name of the vocabulary associated with the NaturalLanguageDomain.
+  // When computing and validating stats using TFDV,
+  // tfdv.StatsOptions.vocab_paths should map this name to a vocabulary file.
+  optional string vocabulary = 1;
+  optional FeatureCoverageConstraints coverage = 2;
+  repeated SequenceValueConstraints token_constraints = 3;
+
+  // Specifies the location constraints as a function of the tokens specified
+  // in token_constraints.
+  //
+  // String tokens will be specified by S_TOKEN_, (e.g. S_(PAD)_) and integer
+  // tokens will be specified as I_#_ (e.g. I_123_).
+  // A_T_ will match any token that has not been specified in token_constraints.
+  // Parenthesis, +, and * are supported.
+  // _ will be escapable with a \ for tokens containing it (e.g. FOO\_BAR).
+  //
+  // For example, a two-sequence BERT model may look as follows:
+  // S_(CLS)_ A_T_+ S_(SEP)_ A_T_+ S_(SEP)_ S_(PAD)_*
+  optional string location_constraint_regex = 4;
+}
 
 // Image data.
 message ImageDomain {
