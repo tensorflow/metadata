@@ -17,16 +17,16 @@
 // TODO(b/80075690): make a Javascript build rule for this.
 // TODO(b/80075691): migrate Facets to use this.
 syntax = "proto3";
-option cc_enable_arenas = true;
 
 package tensorflow.metadata.v0;
 
-// GOOGLE-LEGACY option jspb_use_correct_proto2_semantics = false; 
-option java_package = "org.tensorflow.metadata.v0";
-option java_multiple_files = true;
-
 import "google/protobuf/any.proto";
 import "tensorflow_metadata/proto/v0/path.proto";
+
+option cc_enable_arenas = true;
+// GOOGLE-LEGACY option jspb_use_correct_proto2_semantics = false;  
+option java_package = "org.tensorflow.metadata.v0";
+option java_multiple_files = true;
 
 // Copied from Facets feature_statistics.proto
 // Must be kept binary-compatible with the original, until all usages
@@ -80,7 +80,7 @@ message NumericCrossStatistics {
 }
 
 message CategoricalCrossStatistics {
-   LiftStatistics lift = 1;
+  LiftStatistics lift = 1;
 }
 
 message LiftStatistics {
@@ -281,6 +281,71 @@ message StringStatistics {
   string vocabulary_file = 7;
 }
 
+// Statistics for a feature containing a NL domain.
+message NaturalLanguageStatistics {
+  // Fraction of feature input tokens considered in-vocab.
+  double feature_coverage = 1;
+  // Average token length of tokens used by the feature.
+  double avg_token_length = 2;
+  // Histogram containing the distribution of token lengths.
+  Histogram token_length_histogram = 3;
+  // Number of of sequences which do not match the location constraint.
+  int64 location_misses = 4;
+
+  // Reported sequences that are sampled from the input and have small
+  // avg_token_length, low feature converage, or do not match the location
+  // regex.
+  message ReportedSequences {
+    message StringTokens {
+      repeated string tokens = 1;
+    }
+    message IntTokens {
+      repeated uint64 tokens = 1;
+    }
+    oneof tokens {
+      StringTokens string_tokens = 1;
+      IntTokens int_tokens = 2;
+    }
+  }
+  repeated ReportedSequences reported_sequences = 5;
+
+  message TokenStatistics {
+    // Token for which the statistics are reported.
+    oneof token {
+      string string_token = 1;
+      int64 int_token = 2;
+    }
+
+    // The number of times the value occurs. Stored as a double to be able to
+    // handle weighted features.
+    double frequency = 3;
+
+    // Fraction of sequences containing the token.
+    double fraction_of_sequences = 4;
+    // Min number of token occurrences within a sequence.
+    double per_sequence_min_frequency = 5;
+    // Average number of token occurrences within a sequence.
+    double per_sequence_avg_frequency = 6;
+    // Maximum number of token occurrences within a sequence.
+    double per_sequence_max_frequency = 7;
+    // Token positions within a sequence. Normalized by sequence length.
+    // (e.g. a token that occurres in position 0.5 occurs in the middle of
+    // a sequence).
+    Histogram positions = 8;
+  }
+
+  // Statistics for specified tokens. TokenStatistics are only reported for
+  // tokens specified in SequenceValueConstraints in the schema.
+  repeated TokenStatistics token_statistics = 6;
+
+  // The rank histogram for the tokens of the feature.
+  // The rank is used to measure of how commonly the token is found in the
+  // dataset. The most common token would have a rank of 1, with the second-most
+  // common value having a rank of 2, and so on.
+  RankHistogram rank_histogram = 7;
+  WeightedNaturalLanguageStatistics weighted_nl_statistics = 8;
+}
+
 // Statistics for a weighted numeric feature in a dataset.
 message WeightedNumericStatistics {
   // The weighted mean of the values
@@ -302,6 +367,22 @@ message WeightedStringStatistics {
 
   // The rank histogram for the weighted values of the feature.
   RankHistogram rank_histogram = 2;
+}
+
+// Statistics for a weighted feature with an NL domain.
+message WeightedNaturalLanguageStatistics {
+  // Weighted feature coverage.
+  double feature_coverage = 1;
+  // Weighted average token length.
+  double avg_token_length = 2;
+  // Histogram containing the distribution of token lengths.
+  Histogram token_length_histogram = 3;
+  // Weighted number of sequences that do not match the location constraint.
+  double location_misses = 4;
+  // Per-token weighted statistics.
+  NaturalLanguageStatistics.TokenStatistics token_statistics = 5;
+  // The rank histogram with the weighted tokens for the feature.
+  RankHistogram rank_histogram = 6;
 }
 
 // Statistics for a bytes feature in a dataset.

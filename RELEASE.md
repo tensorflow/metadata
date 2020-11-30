@@ -36,6 +36,8 @@
     (SequenceValueConstraints), constraints on vocabulary coverage
     (FeatureCoverageConstraints), and constraints on token location
     (location_constraints_regex).
+*   Added new NaturalLanguageStatistics message to the statistics.proto so that
+    we can compute statistics corresponding to Natural Language features.
 
 ## Bug Fixes and Other Changes
 
