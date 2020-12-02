@@ -4,6 +4,14 @@
 
 ## Major Features and Improvements
 
+*   Added new fields to NaturalLanguageDomain message in the schema, including
+    support for specifying vocabularies, constriants on sequence values
+    (SequenceValueConstraints), constraints on vocabulary coverage
+    (FeatureCoverageConstraints), and constraints on token location
+    (location_constraints_regex).
+*   Added new NaturalLanguageStatistics message to the statistics.proto so that
+    we can compute statistics corresponding to Natural Language features.
+
 ## Bug Fixes and Other Changes
 
 ## Breaking changes
@@ -31,13 +39,6 @@
     involved for the wheels to be available on the PyPI cloud service. You can
     always use the stable version of TFMD available on PyPI by running the
     command `pip install tensorflow-metadata` .
-*   Added new fields to NaturalLanguageDomain message in the schema, including
-    support for specifying vocabularies, constriants on sequence values
-    (SequenceValueConstraints), constraints on vocabulary coverage
-    (FeatureCoverageConstraints), and constraints on token location
-    (location_constraints_regex).
-*   Added new NaturalLanguageStatistics message to the statistics.proto so that
-    we can compute statistics corresponding to Natural Language features.
 
 ## Bug Fixes and Other Changes
 
