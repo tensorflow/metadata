@@ -423,12 +423,16 @@ message FeatureCoverageConstraints {
   optional float min_avg_token_length = 2;
 
   // String tokens to exclude when calculating min_coverage and
-  // min_avg_token_length. Useful for tokens such as PAD.
+  // min_avg_token_length. Useful for tokens such as [PAD].
   repeated string excluded_string_tokens = 3;
 
   // Integer tokens to exclude when calculating min_coverage and
   // min_avg_token_length.
   repeated int64 excluded_int_tokens = 4 [packed = true];
+
+  // String tokens to treat as oov tokens (e.g. [UNK]). These tokens are also
+  // excluded when calculating avg token length.
+  repeated string oov_string_tokens = 5;
 }
 
 // Encodes constraints on specific values in sequences.
@@ -525,7 +529,7 @@ message BoolDomain {
 
 // Natural language text.
 //
-// Support for the fields in NaturalLanguageDomain is not ready so please do  not
+// Support for the fields in NaturalLanguageDomain is not ready so please do not
 // use them.
 // TODO(b/174175636): Remove warning once fields in NaturalLanguageDomain are
 // supported.
