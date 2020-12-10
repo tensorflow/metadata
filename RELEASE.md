@@ -4,6 +4,16 @@
 
 ## Major Features and Improvements
 
+## Bug Fixes and Other Changes
+
+## Breaking changes
+
+## Deprecations
+
+# Version 0.26.0
+
+## Major Features and Improvements
+
 *   Added new fields to NaturalLanguageDomain message in the schema, including
     support for specifying vocabularies, constriants on sequence values
     (SequenceValueConstraints), constraints on vocabulary coverage
@@ -14,9 +24,15 @@
 
 ## Bug Fixes and Other Changes
 
+*   N/A
+
 ## Breaking changes
 
+*   N/A
+
 ## Deprecations
+
+*   N/A
 
 # Version 0.25.0
 
