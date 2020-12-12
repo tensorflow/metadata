@@ -17,7 +17,7 @@ syntax = "proto2";
 
 package tensorflow.metadata.v0;
 
-// GOOGLE-LEGACY option jspb_use_correct_proto2_semantics = false; 
+// GOOGLE-LEGACY option jspb_use_correct_proto2_semantics = false;  
 option cc_enable_arenas = true;
 option java_package = "org.tensorflow.metadata.v0";
 option java_multiple_files = true;
@@ -51,7 +51,7 @@ message AnomalyInfo {
   // The comparison between the existing schema and the fixed schema.
   repeated DiffRegion diff_regions = 4;
 
-  // Next ID: 71
+  // Next ID: 78
   enum Type {
     UNKNOWN_TYPE = 0;
     // Integer larger than 1
@@ -211,6 +211,20 @@ message AnomalyInfo {
     INVALID_SCHEMA_SPECIFICATION = 69;
     // The type of the data is inconsistent with the specified type.
     UNEXPECTED_DATA_TYPE = 70;
+    // A value did not show up the min number of times within a sequence.
+    SEQUENCE_VALUE_TOO_FEW_OCCURRENCES = 71;
+    // A value showed up more the max number of times within a sequence.
+    SEQUENCE_VALUE_TOO_MANY_OCCURRENCES = 72;
+    // A value did not show up in at least the min fraction of sequences.
+    SEQUENCE_VALUE_TOO_SMALL_FRACTION = 73;
+    // A value showed up in greater than the max fraction of sequences.
+    SEQUENCE_VALUE_TOO_LARGE_FRACTION = 74;
+    // Too small a fraction of feature values matched vocab entries.
+    FEATURE_COVERAGE_TOO_LOW = 75;
+    // The average token length was too short.
+    FEATURE_COVERAGE_TOO_SHORT_AVG_TOKEN_LENGTH = 76;
+    // A sequence violated the location constraint.
+    NLP_WRONG_LOCATION = 77;
   }
   // Reason for the anomaly. There may be more than one reason,
   // e.g. the field might be missing sometimes AND a new value is

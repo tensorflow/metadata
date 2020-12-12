@@ -3,6 +3,8 @@
 # Current version (not yet released; still in development)
 
 ## Major Features and Improvements
+*   Added new anomaly types to AnamalyInfo to report data issues with NL
+    features.
 
 ## Bug Fixes and Other Changes
 
