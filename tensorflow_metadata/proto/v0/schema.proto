@@ -484,6 +484,10 @@ message FloatDomain {
   optional bool disallow_nan = 5;
   // If true, feature should not contain Inf or -Inf.
   optional bool disallow_inf = 6;
+  // If True, this indicates that the feature is semantically an embedding. This
+  // can be useful for distinguishing fixed dimensional numeric features that
+  // should be fed to a model unmodified.
+  optional bool is_embedding = 7;
 }
 
 // Domain for a recursive struct.

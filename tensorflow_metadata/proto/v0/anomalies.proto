@@ -51,7 +51,7 @@ message AnomalyInfo {
   // The comparison between the existing schema and the fixed schema.
   repeated DiffRegion diff_regions = 4;
 
-  // Next ID: 78
+  // Next ID: 79
   enum Type {
     UNKNOWN_TYPE = 0;
     // Integer larger than 1
@@ -225,6 +225,8 @@ message AnomalyInfo {
     FEATURE_COVERAGE_TOO_SHORT_AVG_TOKEN_LENGTH = 76;
     // A sequence violated the location constraint.
     NLP_WRONG_LOCATION = 77;
+    // A feature was specified as an embedding but was not a fixed dimension.
+    EMBEDDING_SHAPE_INVALID = 78;
   }
   // Reason for the anomaly. There may be more than one reason,
   // e.g. the field might be missing sometimes AND a new value is

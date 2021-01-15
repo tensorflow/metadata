@@ -7,6 +7,8 @@
     features.
 
 ## Bug Fixes and Other Changes
+*   Added new FloatDomain field and anomaly type to designate and validate
+    features that represent fixed dimensional embeddings.
 
 ## Breaking changes
 
