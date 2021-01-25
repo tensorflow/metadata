@@ -3,16 +3,32 @@
 # Current version (not yet released; still in development)
 
 ## Major Features and Improvements
+
+## Bug Fixes and Other Changes
+
+## Breaking changes
+
+## Deprecations
+
+# Version 0.27.0
+
+## Major Features and Improvements
+
 *   Added new anomaly types to AnamalyInfo to report data issues with NL
     features.
 
 ## Bug Fixes and Other Changes
+
 *   Added new FloatDomain field and anomaly type to designate and validate
     features that represent fixed dimensional embeddings.
 
 ## Breaking changes
 
+*   N/A
+
 ## Deprecations
+
+*   N/A
 
 # Version 0.26.0
 
