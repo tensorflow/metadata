@@ -295,19 +295,7 @@ message NaturalLanguageStatistics {
   // Reported sequences that are sampled from the input and have small
   // avg_token_length, low feature converage, or do not match the location
   // regex.
-  message ReportedSequences {
-    message StringTokens {
-      repeated string tokens = 1;
-    }
-    message IntTokens {
-      repeated uint64 tokens = 1;
-    }
-    oneof tokens {
-      StringTokens string_tokens = 1;
-      IntTokens int_tokens = 2;
-    }
-  }
-  repeated ReportedSequences reported_sequences = 5;
+  repeated string reported_sequences = 5;
 
   message TokenStatistics {
     // Token for which the statistics are reported.
