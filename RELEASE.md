@@ -4,6 +4,8 @@
 
 ## Major Features and Improvements
 
+*   Added new anomaly type `MAX_IMAGE_BYTE_SIZE_EXCEEDED` for image_domain.
+
 ## Bug Fixes and Other Changes
 
 ## Breaking changes

@@ -564,6 +564,9 @@ message ImageDomain {
   // If set, at least this fraction of values should be TensorFlow supported
   // images.
   optional float minimum_supported_image_fraction = 1;
+
+  // If set, image should have less than this value of undecoded byte size.
+  optional int64 max_image_byte_size = 2;
 }
 
 // Knowledge graph ID, see: https://www.wikidata.org/wiki/Property:P646
