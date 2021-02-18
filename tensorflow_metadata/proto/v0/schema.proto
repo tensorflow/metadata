@@ -740,16 +740,48 @@ message TensorRepresentation {
   // value (the innermost value tensor of the RaggedTensor). The leaf value will
   // always be a 1-D tensor.
   message RaggedTensor {
-    // Identifies the leaf feature in the column to convert to RaggedTensor. A
-    // leaf feature is a non-struct type feature that does not contain any
+    // Identifies the leaf feature that provides values of the RaggedTensor.
     // struct type sub fields.
     // The first step of the path refers to a top-level feature in the data. The
     // remaining steps refer to STRUCT features under the top-level feature,
     // recursively.
-    optional Path feature_path = 1;
+    // If the feature has N outer ragged lists, they will become the first
+    // N dimensions of the resulting RaggedTensor and the contents will become
+    // the flat_values.
+    optional Path feature_path = 1;  // required.
 
-    // The data type of the ragged tensor's row partitions. This will default to
-    // INT64 if it is not specified.
+    // Further partition of the feature values at the leaf level.
+    message Partition {
+      oneof kind {
+        // If the final element(s) of partition are uniform_row_lengths [U0, U1,
+        // ...] , then the result RaggedTensor will have  their flat values (a
+        // dense tensor) being of shape [U0, U1, ...]. Otherwise, a
+        // uniform_row_length simply means a ragged dimension with row_lengths
+        // [uniform_row_length]*nrows.
+        int64 uniform_row_length = 1;
+        // Identifies a leaf feature who share the same parent of
+        // value_feature_path that contains the partition row lengths.
+        string row_length = 2;
+      }
+    }
+    // The result RaggedTensor would be of shape:
+    // [B, D_0, D_1, ..., D_N, P_0, P_1, ..., P_M, U_0, U_1, ..., U_P]
+    //
+    // Where the dimensions belong to different categories:
+    // * B: Batch size dimension
+    // * D_n: Dimensions specified by the nested structure specified by the
+    // value path until the leaf node. n>=1.
+    // * P_m: Dimensions specified by the partitions that do not define any
+    // fixed diomension size. m>=0.
+    // * U_0: Dimensions specified by the latest partitions of type
+    // uniform_row_length that can define the fixed inner shape of the tensor.
+    // If iterationg the partitions from the end to the beginning, these
+    // dimensions are defined by all the continuous uniform_row_length
+    // partitions present. p>=0.
+    repeated Partition partition = 3;
+
+    // The data type of the ragged tensor's row partitions. This will
+    // default to INT64 if it is not specified.
     optional RowPartitionDType row_partition_dtype = 2;
   }
 
