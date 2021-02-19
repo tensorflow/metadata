@@ -19,8 +19,9 @@ package tensorflow.metadata.v0;
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
+import "tensorflow_metadata/proto/v0/path.proto";
 
-// GOOGLE-LEGACY option jspb_use_correct_proto2_semantics = false; 
+// GOOGLE-LEGACY option jspb_use_correct_proto2_semantics = false;  
 option cc_enable_arenas = true;
 option java_package = "org.tensorflow.metadata.v0";
 option java_multiple_files = true;
@@ -205,6 +206,15 @@ message PrecisionAtK {
 
 message MeanReciprocalRank {}
 
+// https://www.tensorflow.org/responsible_ai/model_remediation/api_docs/python/model_remediation/min_diff/losses/MMDLoss
+message MaximumMeanDiscrepancy {
+  option (metric_type) = MINIMIZE;
+
+  // Kernel to apply to the predictions. Currently supported values are
+  // 'gaussian' and 'laplace'. Defaults to 'gaussian'.
+  string kernel = 1;
+}
+
 // Area under ROC-curve calculated globally for MultiClassClassification (model
 // predicts a single label) or MultiLabelClassification (model predicts class
 // probabilities). The area is calculated by treating the entire set of data as
@@ -299,5 +309,6 @@ message PerformanceMetric {
     PrecisionAtRecall precision_at_recall = 24;
     RecallAtPrecision recall_at_precision = 25;
   }
-  // NEXT_TAG: 29;
+  // NEXT_TAG: 30;
 }
+

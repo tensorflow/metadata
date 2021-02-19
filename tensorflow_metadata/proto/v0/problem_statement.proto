@@ -21,7 +21,7 @@ import "google/protobuf/descriptor.proto";
 import "tensorflow_metadata/proto/v0/metric.proto";
 import "tensorflow_metadata/proto/v0/path.proto";
 
-// GOOGLE-LEGACY option jspb_use_correct_proto2_semantics = false; 
+// GOOGLE-LEGACY option jspb_use_correct_proto2_semantics = false;  
 option cc_enable_arenas = true;
 option java_package = "org.tensorflow.metadata.v0";
 option java_multiple_files = true;
@@ -242,13 +242,15 @@ message Task {
   repeated PerformanceMetric performance_metric = 4;
 }
 
-// This is intended for use with optimization algorithms that do not require
-// differentiable objectives (e.g. grid search for hyperparameters).
-// This is intended to clarify targets for optimization process by an external
-// (to the model) meta optimizer, other than direct
-// optimization of params and hyperparams by a gradient descent optimization.
-// Target definitions include tasks, metrics, and any weighted combination of
-// them.
+// The high-level objectives described by this problem statement. These
+// objectives provide a basis for ranking models and can be optimized by a meta
+// optimizer (e.g. a grid search over hyperparameters). A solution provider may
+// also directly use the meta optimization targets to heuristically select
+// losses, etc without any meta-optimization process. If not specified, the
+// high-level meta optimization target is inferred from the task. These
+// objectives do not need to be differentiable, as the solution provider may use
+// proxy function to optimize model weights. Target definitions include tasks,
+// metrics, and any weighted combination of them.
 message MetaOptimizationTarget {
   // The name of a task in this problem statement producing the
   // prediction or classification for the metric.
