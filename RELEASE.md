@@ -4,15 +4,31 @@
 
 ## Major Features and Improvements
 
+## Bug Fixes and Other Changes
+
+## Breaking Changes
+
+## Deprecations
+
+# Version 0.28.0
+
+## Major Features and Improvements
+
 *   Added new anomaly type `MAX_IMAGE_BYTE_SIZE_EXCEEDED` for image_domain.
 *   Added new anomaly type `INVALID_FEATURE_SHAPE`.
 *   The `RaggedTensor` TensorRepresentation now supports additional partitions.
 
 ## Bug Fixes and Other Changes
 
-## Breaking changes
+*   N/A
+
+## Breaking Changes
+
+*   N/A
 
 ## Deprecations
+
+*   N/A
 
 # Version 0.27.0
 
