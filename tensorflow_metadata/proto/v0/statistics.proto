@@ -289,6 +289,11 @@ message NaturalLanguageStatistics {
   double avg_token_length = 2;
   // Histogram containing the distribution of token lengths.
   Histogram token_length_histogram = 3;
+  // Min / max sequence lengths.
+  int64 min_sequence_length = 10;
+  int64 max_sequence_length = 11;
+  // Histogram containing the distribution of sequence lengths.
+  Histogram sequence_length_histogram = 9;
   // Number of of sequences which do not match the location constraint.
   int64 location_misses = 4;
 
@@ -365,6 +370,8 @@ message WeightedNaturalLanguageStatistics {
   double avg_token_length = 2;
   // Histogram containing the distribution of token lengths.
   Histogram token_length_histogram = 3;
+  // Histogram containing the distribution of sequence lengths.
+  Histogram sequence_length_histogram = 9;
   // Weighted number of sequences that do not match the location constraint.
   double location_misses = 4;
   // Per-token weighted statistics.

@@ -453,6 +453,18 @@ message SequenceValueConstraints {
   optional float max_fraction_of_sequences = 6;
 }
 
+// Encodes constraints on sequence lengths.
+message SequenceLengthConstraints {
+  // Token values (int and string) that are excluded when calculating sequence
+  // length.
+  repeated int64 excluded_int_value = 1;
+  repeated string excluded_string_value = 2;
+
+  // Min / max sequence length.
+  optional int64 min_sequence_length = 3;
+  optional int64 max_sequence_length = 4;
+}
+
 // Encodes information for domains of integer values.
 // Note that FeatureType could be either INT or BYTES.
 message IntDomain {
@@ -544,6 +556,7 @@ message NaturalLanguageDomain {
   optional string vocabulary = 1;
   optional FeatureCoverageConstraints coverage = 2;
   repeated SequenceValueConstraints token_constraints = 3;
+  optional SequenceLengthConstraints sequence_length_constraints = 5;
 
   // Specifies the location constraints as a function of the tokens specified
   // in token_constraints.
