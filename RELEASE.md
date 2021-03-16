@@ -3,6 +3,7 @@
 # Current version (not yet released; still in development)
 
 ## Major Features and Improvements
+*   Adding the ability to specify and detect sequence length issues.
 
 ## Bug Fixes and Other Changes
 
@@ -17,7 +18,6 @@
 *   Added new anomaly type `MAX_IMAGE_BYTE_SIZE_EXCEEDED` for image_domain.
 *   Added new anomaly type `INVALID_FEATURE_SHAPE`.
 *   The `RaggedTensor` TensorRepresentation now supports additional partitions.
-*   Adding the ability specify and detect sequence length issues.
 
 ## Bug Fixes and Other Changes
 
