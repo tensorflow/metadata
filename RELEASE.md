@@ -4,6 +4,16 @@
 
 ## Major Features and Improvements
 
+## Bug Fixes and Other Changes
+
+## Breaking Changes
+
+## Deprecations
+
+# Version 0.29.0
+
+## Major Features and Improvements
+
 *   Adding the ability to specify and detect sequence length issues.
 
 ## Bug Fixes and Other Changes
@@ -12,7 +22,11 @@
 
 ## Breaking Changes
 
+*   N/A
+
 ## Deprecations
+
+*   N/A
 
 # Version 0.28.0
 
