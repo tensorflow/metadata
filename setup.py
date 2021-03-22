@@ -126,7 +126,7 @@ setup(
     ],
     namespace_packages=[],
     install_requires=[
-        'absl-py>=0.9,<0.11',
+        'absl-py>=0.9,<0.13',
         'googleapis-common-protos>=1.52.0,<2',
         'protobuf>=3.7,<4',
     ],

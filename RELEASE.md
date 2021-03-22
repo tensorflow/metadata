@@ -3,9 +3,12 @@
 # Current version (not yet released; still in development)
 
 ## Major Features and Improvements
+
 *   Adding the ability to specify and detect sequence length issues.
 
 ## Bug Fixes and Other Changes
+
+*   Depends on `absl-py>=0.9,<0.13`.
 
 ## Breaking Changes
 
