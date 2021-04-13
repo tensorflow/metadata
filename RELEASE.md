@@ -6,6 +6,9 @@
 
 ## Bug Fixes and Other Changes
 
+*  Added new anomaly types: `MULTIPLE_REASONS` and
+   `INVALID_DOMAIN_SPECIFICATION`.
+
 ## Breaking Changes
 
 ## Deprecations

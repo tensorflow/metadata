@@ -51,9 +51,11 @@ message AnomalyInfo {
   // The comparison between the existing schema and the fixed schema.
   repeated DiffRegion diff_regions = 4;
 
-  // Next ID: 81
+  // Next ID: 83
   enum Type {
     UNKNOWN_TYPE = 0;
+    // Multiple reasons for anomaly.
+    MULTIPLE_REASONS = 82;
     // Integer larger than 1
     BOOL_TYPE_BIG_INT = 1;
     // BYTES type when expected INT type
@@ -207,8 +209,10 @@ message AnomalyInfo {
     FEATURE_MISSING_NAME = 67;
     // Feature on schema has no type.
     FEATURE_MISSING_TYPE = 68;
-    // Triggered for invalid schema specifications, e.g. min_fraction < 0
+    // Triggered for invalid schema specifications, e.g. min_fraction < 0.
     INVALID_SCHEMA_SPECIFICATION = 69;
+    // Triggered for invalid domain specifications in schema.
+    INVALID_DOMAIN_SPECIFICATION = 81;
     // The type of the data is inconsistent with the specified type.
     UNEXPECTED_DATA_TYPE = 70;
     // A value did not show up the min number of times within a sequence.
