@@ -51,7 +51,7 @@ message AnomalyInfo {
   // The comparison between the existing schema and the fixed schema.
   repeated DiffRegion diff_regions = 4;
 
-  // Next ID: 83
+  // Next ID: 84
   enum Type {
     UNKNOWN_TYPE = 0;
     // Multiple reasons for anomaly.
@@ -236,6 +236,9 @@ message AnomalyInfo {
     // A feature is supposed to be of a fixed shape but its valency stats
     // do not agree.
     INVALID_FEATURE_SHAPE = 80;
+    // Constraints are specified within the but cannot be verified because the
+    // corresponding stats are not available.
+    STATS_NOT_AVAILABLE = 83;
   }
   // Reason for the anomaly. There may be more than one reason,
   // e.g. the field might be missing sometimes AND a new value is
