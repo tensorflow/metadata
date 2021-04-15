@@ -52,6 +52,7 @@ message AnomalyInfo {
   repeated DiffRegion diff_regions = 4;
 
   // Next ID: 84
+  // LINT.IfChange
   enum Type {
     UNKNOWN_TYPE = 0;
     // Multiple reasons for anomaly.
@@ -240,6 +241,7 @@ message AnomalyInfo {
     // corresponding stats are not available.
     STATS_NOT_AVAILABLE = 83;
   }
+  // LINT.ThenChange(//tensorflow_data_validation/g3doc/anomalies.md)
   // Reason for the anomaly. There may be more than one reason,
   // e.g. the field might be missing sometimes AND a new value is
   // present.
