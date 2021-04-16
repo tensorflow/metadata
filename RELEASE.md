@@ -8,7 +8,7 @@
 
 *  Added new anomaly types: `MULTIPLE_REASONS` and
    `INVALID_DOMAIN_SPECIFICATION`.
-*  Added new anomaly type: `NATURAL_LANGUAGE_STATS_NOT_COMPUTED`.
+*  Added new anomaly type: `STATS_NOT_AVAILABLE`.
 
 ## Breaking Changes
 
