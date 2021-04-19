@@ -6,13 +6,29 @@
 
 ## Bug Fixes and Other Changes
 
+## Breaking Changes
+
+## Deprecations
+
+# Version 0.30.0
+
+## Major Features and Improvements
+
+*   N/A
+
+## Bug Fixes and Other Changes
+
 *  Added new anomaly types: `MULTIPLE_REASONS` and
    `INVALID_DOMAIN_SPECIFICATION`.
 *  Added new anomaly type: `STATS_NOT_AVAILABLE`.
 
 ## Breaking Changes
 
+*   N/A
+
 ## Deprecations
+
+*   N/A
 
 # Version 0.29.0
 
