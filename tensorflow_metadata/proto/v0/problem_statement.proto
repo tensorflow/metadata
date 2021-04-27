@@ -181,7 +181,7 @@ message OneDimensionalRegression {
   option (task_type) = ONE_DIMENSIONAL_REGRESSION;
 
   // The label column.
-  oneof label_id {
+  oneof label_id {  // oneof label_id is required.
     // The name of the label. Assumes the label is a flat, top-level field.
     string label = 1;
     // A path can be used instead of a flat string if the label is nested.
@@ -189,8 +189,15 @@ message OneDimensionalRegression {
   }
   // (optional) The weight column.
   string weight = 2;
-  // TODO(martinz): consider whether to specify the range of the outputs (e.g.,
-  // [0,1], (0,infty), or the whole real line).
+
+  // Defines a regression problem where labels are in [0, 1] and represent a
+  // probability (e.g: probability of click).
+  message Probability {}
+
+  oneof label_type {
+    // When set means the label is a probability in range [0..1].
+    Probability probability = 4;
+  }
 }
 
 // The type of a head or meta-objective. Specifies the label, weight,
