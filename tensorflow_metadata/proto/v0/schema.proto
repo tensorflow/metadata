@@ -544,11 +544,6 @@ message BoolDomain {
 // language of the text.
 
 // Natural language text.
-//
-// Support for the fields in NaturalLanguageDomain is not ready so please do not
-// use them.
-// TODO(b/174175636): Remove warning once fields in NaturalLanguageDomain are
-// supported.
 message NaturalLanguageDomain {
   // Name of the vocabulary associated with the NaturalLanguageDomain.
   // When computing and validating stats using TFDV,
@@ -569,6 +564,9 @@ message NaturalLanguageDomain {
   //
   // For example, a two-sequence BERT model may look as follows:
   // S_(CLS)_ A_T_+ S_(SEP)_ A_T_+ S_(SEP)_ S_(PAD)_*
+  //
+  // Note: Support for this field is not yet implemented. Please do not use.
+  // TODO(b/188095987): Remove warning once field is implemented.
   optional string location_constraint_regex = 4;
 }
 
