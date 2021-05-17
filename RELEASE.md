@@ -4,6 +4,8 @@
 
 ## Major Features and Improvements
 
+*  Added public python interface for proto/* in proto/__init__.py
+
 ## Bug Fixes and Other Changes
 
 ## Breaking Changes

@@ -12,3 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Init module for tf.Metadata protos."""
+
+from tensorflow_metadata.proto.v0 import anomalies_pb2
+from tensorflow_metadata.proto.v0 import metric_pb2
+from tensorflow_metadata.proto.v0 import path_pb2
+from tensorflow_metadata.proto.v0 import problem_statement_pb2
+from tensorflow_metadata.proto.v0 import schema_pb2
+from tensorflow_metadata.proto.v0 import statistics_pb2
