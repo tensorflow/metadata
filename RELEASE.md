@@ -1,6 +1,16 @@
 <!-- mdlint off(HEADERS_TOO_MANY_H1) -->
 
-# Current version (not yet released; still in development)
+# Current Version (not yet released; still in development)
+
+## Major Features and Improvements
+
+## Bug Fixes and Other Changes
+
+## Breaking Changes
+
+## Deprecations
+
+# Version 1.0.0
 
 ## Major Features and Improvements
 
@@ -8,9 +18,15 @@
 
 ## Bug Fixes and Other Changes
 
+*   N/A
+
 ## Breaking Changes
 
+*   N/A
+
 ## Deprecations
+
+*   N/A
 
 # Version 0.30.0
 
