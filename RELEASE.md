@@ -4,6 +4,9 @@
 
 ## Major Features and Improvements
 
+*   Added `PositiveNegativeSpec` to `ProblemStatement.BinaryClassification` for
+    specifying positive and negative class values.
+
 ## Bug Fixes and Other Changes
 
 ## Breaking Changes

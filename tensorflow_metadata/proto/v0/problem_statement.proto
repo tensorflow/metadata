@@ -56,6 +56,24 @@ message BinaryClassification {
   }
   // (optional) The weight column.
   string example_weight = 2;
+
+  // Defines which label value is the positive and/or negative class.
+  message PositiveNegativeSpec {
+    // Specifies a label's value which can be used for positive/negative class
+    // specification.
+    message LabelValue {
+      oneof value_type {
+        string string_value = 1;
+      }
+    }
+    // This value is the positive class.
+    LabelValue positive_class_value = 1;
+    // This value is the negative class.
+    LabelValue negative_class_value = 2;
+  }
+
+  // (optional) specification of the positive and/or negative class value.
+  PositiveNegativeSpec positive_negative_spec = 4;
 }
 
 // Specifies a dynamic multiclass/multi-label problem where the number of label
