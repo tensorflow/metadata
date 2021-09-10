@@ -6,6 +6,9 @@
 
 ## Bug Fixes and Other Changes
 
+*   Added a new field to `FloatDomain` in schema to allow expression of
+    categorical floats.
+
 ## Breaking Changes
 
 ## Deprecations

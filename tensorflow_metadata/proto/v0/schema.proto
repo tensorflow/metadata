@@ -500,6 +500,10 @@ message FloatDomain {
   // can be useful for distinguishing fixed dimensional numeric features that
   // should be fed to a model unmodified.
   optional bool is_embedding = 7;
+
+  // If true then the domain encodes categorical values (i.e., ids) rather than
+  // continuous values.
+  optional bool is_categorical = 8;
 }
 
 // Domain for a recursive struct.
