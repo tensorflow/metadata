@@ -13,6 +13,8 @@
 
 ## Deprecations
 
+*   Deprecated Python 3.6 support.
+
 # Version 1.2.0
 
 ## Major Features and Improvements
