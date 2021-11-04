@@ -6,6 +6,9 @@
 
 ## Bug Fixes and Other Changes
 
+*   A `threshold_config` is added to MetaOptimizationTarget to allow for
+    expressing thresholded optimization goals.
+
 ## Breaking Changes
 
 ## Deprecations
