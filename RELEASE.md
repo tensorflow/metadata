@@ -8,7 +8,11 @@
 
 ## Breaking Changes
 
+*   Removes deprecated field `objective_function` from ProblemStatement.
+
 ## Deprecations
+
+*   Deprecates `multi_objective` field in ProblemStatement.
 
 # Version 1.5.0
 

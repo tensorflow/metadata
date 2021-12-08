@@ -236,6 +236,7 @@ message Type {
 // Multiple tasks in the same problem statement correspond to different outputs
 // of the model.
 message Task {
+  reserved 3;
   // Specification of the label and weight columns, and the type of the
   // prediction or classification.
   Type type = 1;
@@ -252,18 +253,10 @@ message Task {
   // tasks are weighted equally.
   double task_weight = 2;
 
-  // Deprecated since the objective function should be part of the estimator
-  // specification, not the problem specification.
-  //
-  // Objective function used to measure the loss for the head.
-  // These must be protos so the functions themselves can be parameterized (e.g.
-  // Huber)
-  ObjectiveFunction objective_function = 3 [deprecated = true];
-
   // This field includes performance metrics of this head that are important to
   // the problem owner and need to be monitored and reported. However, unlike
-  // fields such as "objective_function" or "meta_optimization_target", these
-  // metrics are not automatically used in optimization or meta-optimization.
+  // fields such as "meta_optimization_target", these metrics are not
+  // not automatically used in meta-optimization.
   repeated PerformanceMetric performance_metric = 4;
 }
 
@@ -315,7 +308,6 @@ message MetaOptimizationTarget {
     // If a model spec has multiple meta optimization targets, the weight
     // of each can be specified. The final objective is then a weighted
     // combination of the multiple objectives. If not specified, value is 1.
-    // If multi_objective is specified, then the weights are ignored.
     double weight = 4;
 
     // Secondary meta optimization targets can be thresholded, meaning that the
@@ -342,11 +334,9 @@ message ProblemStatement {
   // candidates, a tuning tool can use meta_optimization_target to decide which
   // candidate performs the best.
   // A repeated meta-optimization target implies the weighted sum of the
-  // meta_optimization targets if multi_objective=false, or independent
-  // objectives if multi_objective=true.
+  // meta_optimization targets of any non-thresholded metrics.
   repeated MetaOptimizationTarget meta_optimization_target = 7;
-  // See meta_optimization_target above for details.
-  bool multi_objective = 8;
+  bool multi_objective = 8 [deprecated = true];
 
   reserved 5;
 
