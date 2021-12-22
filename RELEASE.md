@@ -13,6 +13,7 @@
 ## Deprecations
 
 *   Deprecates `multi_objective` field in ProblemStatement.
+*   Deprecates several unused PerformanceMetrics
 
 # Version 1.5.0
 

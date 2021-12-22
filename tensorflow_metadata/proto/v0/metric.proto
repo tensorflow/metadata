@@ -63,6 +63,7 @@ message CategoricalCrossEntropy {
 // cosine(...)
 // cosine_proximity(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/cosine_proximity
+// DEPRECATED
 message Cosine {
   option (metric_type) = MINIMIZE;
 }
@@ -70,6 +71,7 @@ message Cosine {
 // Linear Hinge Loss
 // hinge(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/hinge
+// DEPRECATED
 message Hinge {
   option (metric_type) = MINIMIZE;
 }
@@ -78,6 +80,7 @@ message Hinge {
 // kullback_leibler_divergence(...)
 // KLD(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/kullback_leibler_divergence
+// DEPRECATED
 message KullbackLeiblerDivergence {
   option (metric_type) = MINIMIZE;
 }
@@ -115,12 +118,14 @@ message MeanSquaredLogarithmicError {
 }
 
 // poisson(...)
+// DEPRECATED
 message Poisson {
   option (metric_type) = MINIMIZE;
 }
 
 // squared_hinge(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/squared_hinge
+// DEPRECATED
 message SquaredHinge {
   option (metric_type) = MINIMIZE;
 }
@@ -133,6 +138,7 @@ message TopKCategoricalAccuracy {
 
 // sparse_top_k_categorical_accuracy(...)
 // https://www.tensorflow.org/api_docs/python/tf/keras/metrics/sparse_top_k_categorical_accuracy
+// DEPRECATED
 message SparseTopKCategoricalAccuracy {
   option (metric_type) = MAXIMIZE;
 }
@@ -152,6 +158,7 @@ message BinaryCrossEntropy {
 // -yln(p)-(1-y)ln(1-p)
 // TODO(martinz): if this is interpreted the same as binary_cross_entropy,
 // we may need to revisit the semantics.
+// DEPRECATED
 message LogisticRegression {
   option (metric_type) = MINIMIZE;
 }
@@ -236,6 +243,7 @@ message MultilabelCrossEntropy {
   option (metric_type) = MINIMIZE;
 }
 
+// DEPRECATED
 message BlockUtility {
   option (metric_type) = MAXIMIZE;
 
@@ -284,13 +292,14 @@ message PerformanceMetric {
     AUCPrecisionRecall auc_precision_recall = 26;
     BinaryAccuracy binary_accuracy = 2;
     BinaryCrossEntropy binary_cross_entropy = 3;
-    BlockUtility block_utility = 4;
+    BlockUtility block_utility = 4 [deprecated = true];
     CategoricalAccuracy categorical_accuracy = 5;
     CategoricalCrossEntropy categorical_cross_entropy = 6;
-    Cosine cosine = 7;
-    Hinge hinge = 8;
-    KullbackLeiblerDivergence kullback_leibler_divergence = 9;
-    LogisticRegression logistic_regression = 10;
+    Cosine cosine = 7 [deprecated = true];
+    Hinge hinge = 8 [deprecated = true];
+    KullbackLeiblerDivergence kullback_leibler_divergence = 9
+        [deprecated = true];
+    LogisticRegression logistic_regression = 10 [deprecated = true];
     MeanAbsoluteError mean_absolute_error = 11;
     MeanAbsolutePercentageError mean_absolute_percentage_error = 12;
     MeanSquaredError squared_error = 13;
@@ -298,10 +307,11 @@ message PerformanceMetric {
     MeanReciprocalRank mean_reciprocal_rank = 15;
     MicroAUC micro_auc = 27;
     MultilabelCrossEntropy multi_label_cross_entropy = 28;
-    Poisson poisson = 16;
+    Poisson poisson = 16 [deprecated = true];
     PrecisionAtK precision_at_k = 17;
-    SquaredHinge squared_hinge = 18;
-    SparseTopKCategoricalAccuracy sparse_top_k_categorical_accuracy = 19;
+    SquaredHinge squared_hinge = 18 [deprecated = true];
+    SparseTopKCategoricalAccuracy sparse_top_k_categorical_accuracy = 19
+        [deprecated = true];
     TopKCategoricalAccuracy top_k_categorical_accuracy = 20;
     CustomMetric custom_metric = 21;
     SensitivityAtSpecificity sensitivity_at_specificity = 22;
