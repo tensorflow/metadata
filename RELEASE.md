@@ -6,6 +6,11 @@
 
 ## Bug Fixes and Other Changes
 
+*  statistics.proto: Includes a field `invalid_utf8_count` in `StringStatistics`
+   to store the number of non-utf8 encoded strings for a feature.
+*  schema.proto: Includes a field `utf8_encoded` in `StringDomain` to indicate
+   that a string field is expected to contain utf8 encoded values.
+
 ## Breaking Changes
 
 *   Removes deprecated field `objective_function` from ProblemStatement.

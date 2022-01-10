@@ -279,6 +279,11 @@ message StringStatistics {
   // directory.  E.g. in TFX the feature statistics will live in a PPP and
   // vocabulary file names will be relative to this PPP.
   string vocabulary_file = 7;
+
+  // Counts the number of invalid utf8 strings present in leaf arrays for this
+  // feature. Validation is only performed for byte- or string-like features (
+  // those having type BYTES or STRING).
+  uint64 invalid_utf8_count = 8;
 }
 
 // Statistics for a feature containing a NL domain.
