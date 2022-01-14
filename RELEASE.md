@@ -10,6 +10,8 @@
    to store the number of non-utf8 encoded strings for a feature.
 *  schema.proto: Includes a field `utf8_encoded` in `StringDomain` to indicate
    that a string field is expected to contain utf8 encoded values.
+*  anomalies.proto: Added STRING_TYPE_NON_UTF8 to report unexpected non-utf8
+   strings.
 
 ## Breaking Changes
 
