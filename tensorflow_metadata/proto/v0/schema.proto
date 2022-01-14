@@ -525,9 +525,6 @@ message StringDomain {
 
   // The values appearing in the domain.
   repeated string value = 2;
-
-  // True if this field is expected to contain UTF8 encoded strings.
-  optional bool utf8_encoded = 3;
 }
 
 // Encodes information about the domain of a boolean attribute that encodes its
