@@ -51,7 +51,7 @@ message AnomalyInfo {
   // The comparison between the existing schema and the fixed schema.
   repeated DiffRegion diff_regions = 4;
 
-  // Next ID: 85
+  // Next ID: 84
   // LINT.IfChange
   enum Type {
     UNKNOWN_TYPE = 0;
@@ -158,8 +158,6 @@ message AnomalyInfo {
     STRING_TYPE_NOW_FLOAT = 38;
     // Expected STRING type, but it was INT.
     STRING_TYPE_NOW_INT = 39;
-    // Expected utf8 strings, but saw non-utf8.
-    STRING_TYPE_NON_UTF8 = 84;
     // Control data is missing (either scoring data or previous day).
     COMPARATOR_CONTROL_DATA_MISSING = 40;
     // Treatment data is missing (either treatment data or current day).
