@@ -8,6 +8,7 @@
 
 *  statistics.proto: Includes a field `invalid_utf8_count` in `StringStatistics`
    to store the number of non-utf8 encoded strings for a feature.
+*   Depends on `absl-py>=0.9,<2.0.0`.
 
 ## Breaking Changes
 
