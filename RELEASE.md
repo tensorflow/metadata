@@ -531,4 +531,3 @@ No significant changes. Upgrading to keep version alignment.
 
 *   Moved tf.Metadata code out of TF-Transform code tree, requiring package
     dependency updates and import updates.
-
