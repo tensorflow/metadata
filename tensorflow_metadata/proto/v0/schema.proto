@@ -101,7 +101,7 @@ message Schema {
   // Key "" (empty string) denotes the "default" group, which is what should
   // be used when a group name is not provided.
   // See the documentation at TensorRepresentationGroup for more info.
-  // Under development. DO NOT USE.
+  // Under development.
   map<string, TensorRepresentationGroup> tensor_representation_group = 13;
 }
 
