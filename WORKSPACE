@@ -25,6 +25,15 @@ http_archive(
 
 # Needed by com_google_protobuf.
 http_archive(
+    name = "zlib",
+    build_file = "@com_google_protobuf//:third_party/zlib.BUILD",
+    sha256 = "91844808532e5ce316b3c010929493c0244f3d37593afd6de04f71821d5136d9",
+    strip_prefix = "zlib-1.2.12",
+    urls = ["https://zlib.net/zlib-1.2.12.tar.gz"],
+)
+
+# Needed by com_google_protobuf.
+http_archive(
     name = "six_archive",
     build_file = "@com_google_protobuf//:six.BUILD",
     sha256 = "105f8d68616f8248e24bf0e9372ef04d3cc10104f1980f54d57b2ce73a5ad56a",
