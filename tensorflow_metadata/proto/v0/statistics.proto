@@ -22,6 +22,7 @@ package tensorflow.metadata.v0;
 
 import "google/protobuf/any.proto";
 import "tensorflow_metadata/proto/v0/path.proto";
+import "tensorflow_metadata/proto/v0/derived_feature.proto";
 
 option cc_enable_arenas = true;
 // GOOGLE-LEGACY option jspb_use_correct_proto2_semantics = false;  
@@ -56,6 +57,7 @@ message DatasetFeatureStatistics {
   repeated CrossFeatureStatistics cross_features = 5;
 }
 
+// NextID: 8
 message CrossFeatureStatistics {
   // The path of feature x.
   Path path_x = 1;
@@ -146,6 +148,7 @@ message LiftSeries {
 }
 
 // The complete set of statistics for a given feature name for a dataset.
+// NextID: 10
 message FeatureNameStatistics {
   // The types supported by the feature statistics. When aggregating
   // tf.Examples, if the bytelist contains a string, it is recommended to encode
@@ -187,6 +190,10 @@ message FeatureNameStatistics {
 
   // Any custom statistics can be stored in this list.
   repeated CustomStatistic custom_stats = 6;
+
+  // If set, indicates that that this feature is derived, and stores metadata
+  // about its source.
+  DerivedFeatureSource derived_source = 9;
 }
 
 // Common weighted statistics for all feature types. Statistics counting number

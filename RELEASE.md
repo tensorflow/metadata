@@ -4,6 +4,10 @@
 
 ## Major Features and Improvements
 
+*   Adds support within statistics.proto and schema.proto for marking features
+    that are derived during statistics generation for data exploration or
+    validation, but not actually present in input data.
+
 ## Bug Fixes and Other Changes
 
 ## Breaking Changes

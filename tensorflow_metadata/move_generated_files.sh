@@ -46,6 +46,9 @@ function tfmd::move_generated_files() {
 
     cp -f ${BUILD_WORKSPACE_DIRECTORY}/${GENFILES}/tensorflow_metadata/proto/v0/metric_pb2.py \
       ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
+
+    cp -f ${BUILD_WORKSPACE_DIRECTORY}/${GENFILES}/tensorflow_metadata/proto/v0/derived_feature_pb2.py \
+      ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
   else
     cp -f tensorflow_metadata/proto/v0/schema_pb2.py \
       ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
@@ -63,6 +66,9 @@ function tfmd::move_generated_files() {
       ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
 
     cp -f tensorflow_metadata/proto/v0/metric_pb2.py \
+      ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
+
+    cp -f tensorflow_metadata/proto/v0/derived_feature_pb2.py \
       ${BUILD_WORKSPACE_DIRECTORY}/tensorflow_metadata/proto/v0
   fi
 }

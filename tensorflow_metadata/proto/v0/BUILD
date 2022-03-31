@@ -30,6 +30,7 @@ cc_proto_library(
         "problem_statement.proto",
         "schema.proto",
         "statistics.proto",
+        "derived_feature.proto",
     ],
     deps = [
         # For well-known proto types like protobuf.Any.
@@ -51,6 +52,7 @@ py_proto_library(
         "problem_statement.proto",
         "schema.proto",
         "statistics.proto",
+        "derived_feature.proto",
     ],
     deps = [
         # For well-known proto types like protobuf.Any.

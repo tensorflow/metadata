@@ -19,6 +19,7 @@ package tensorflow.metadata.v0;
 
 import "google/protobuf/any.proto";
 import "tensorflow_metadata/proto/v0/path.proto";
+import "tensorflow_metadata/proto/v0/derived_feature.proto";
 
 // GOOGLE-LEGACY option jspb_use_correct_proto2_semantics = false;  
 option cc_enable_arenas = true;
@@ -38,6 +39,11 @@ enum LifecycleStage {
   DEBUG_ONLY = 6;     // Only exists for debugging purposes.
   DISABLED = 7;       // Generic indication that feature is disabled / excluded
                       // from models, regardless of specific reason.
+  DERIVED = 8;        // Indicates that this feature was derived from ordinary
+                      // features for the purposes of statistics generation or
+                      // validation. Consumers should expect that this feature
+                      // may be present in DatasetFeatureStatistics, but not in
+                      // input data.
 }
 
 //
@@ -110,7 +116,7 @@ message ValueCountList {
 }
 
 // Describes schema-level information about a specific feature.
-// NextID: 33
+// NextID: 34
 message Feature {
   // The name of the feature.
   optional string name = 1;  // required
@@ -208,6 +214,11 @@ message Feature {
   // Constraints on the number of unique values for a given feature.
   // This is supported for string and categorical features only.
   optional UniqueConstraints unique_constraints = 31;
+
+  // If set, indicates that that this feature is derived, and stores metadata
+  // about its source. If this field is set, this feature should have
+  // lifecycle_stage DERIVED or DISABLED.
+  optional DerivedFeatureSource derived_source = 33;
 }
 
 // Additional information about the schema or about a feature.
