@@ -1,6 +1,6 @@
 # TensorFlow Metadata
 
-[![Python](https://img.shields.io/pypi/pyversions/tensorflow-metadata.svg?style=plastic)](https://github.com/tensorflow/metadata)
+[![Python](https://img.shields.io/badge/python%20-3.7%7C3.8%7C3.9-blue)](https://github.com/tensorflow/metadata)
 [![PyPI](https://badge.fury.io/py/tensorflow-metadata.svg)](https://badge.fury.io/py/tensorflow-metadata)
 
 TensorFlow Metadata provides standard representations for metadata that are
