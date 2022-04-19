@@ -36,6 +36,7 @@ option java_multiple_files = true;
 // A list of features statistics for different datasets. If you wish to compare
 // different datasets using this list, then the DatasetFeatureStatistics
 // entries should all contain the same list of features.
+// LINT.IfChange
 message DatasetFeatureStatisticsList {
   repeated DatasetFeatureStatistics datasets = 1;
 }
@@ -550,3 +551,4 @@ message RankHistogram {
   // An optional descriptive name of the histogram, to be used for labeling.
   string name = 2;
 }
+// LINT.ThenChange(//tfx_bsl/cc/statistics/merge_util.cc)
