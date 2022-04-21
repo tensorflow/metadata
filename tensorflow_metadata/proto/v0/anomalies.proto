@@ -51,7 +51,7 @@ message AnomalyInfo {
   // The comparison between the existing schema and the fixed schema.
   repeated DiffRegion diff_regions = 4;
 
-  // Next ID: 85
+  // Next ID: 86
   // LINT.IfChange
   enum Type {
     UNKNOWN_TYPE = 0;
@@ -242,6 +242,10 @@ message AnomalyInfo {
     STATS_NOT_AVAILABLE = 83;
     // A derived feature had a schema lifecycle other than DERIVED or DISABLED.
     DERIVED_FEATURE_BAD_LIFECYCLE = 84;
+    // A derived feature is represented in the schema with an invalid or missing
+    // derived_source.
+    DERIVED_FEATURE_INVALID_SOURCE = 85;
+
   }
   // LINT.ThenChange(//tensorflow_data_validation/g3doc/anomalies.md)
   // Reason for the anomaly. There may be more than one reason,
