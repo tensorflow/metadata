@@ -241,6 +241,8 @@ message AnomalyInfo {
     // corresponding stats are not available.
     STATS_NOT_AVAILABLE = 83;
     // A derived feature had a schema lifecycle other than DERIVED or DISABLED.
+
+    // The following are experimental and subject to change.
     DERIVED_FEATURE_BAD_LIFECYCLE = 84;
     // A derived feature is represented in the schema with an invalid or missing
     // derived_source.

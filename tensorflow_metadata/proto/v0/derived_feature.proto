@@ -27,6 +27,7 @@ option java_multiple_files = true;
 // feature. Derived features are computed from ordinary features for the
 // purposes of statistics collection and validation, but do not exist in the
 // dataset.
+// Experimental and subject to change.
 // LINT.IfChange
 message DerivedFeatureSource {
   // The name of the deriver that generated this feature.

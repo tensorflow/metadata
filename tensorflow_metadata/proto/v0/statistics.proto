@@ -195,6 +195,7 @@ message FeatureNameStatistics {
   // If set, indicates that that this feature is derived, and stores metadata
   // about its source.
   DerivedFeatureSource derived_source = 9;
+  // Experimental and subject to change.
 }
 
 // Common weighted statistics for all feature types. Statistics counting number

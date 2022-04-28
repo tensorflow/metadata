@@ -44,6 +44,7 @@ enum LifecycleStage {
                       // validation. Consumers should expect that this feature
                       // may be present in DatasetFeatureStatistics, but not in
                       // input data.
+                      // Experimental and subject to change.
 }
 
 //
@@ -218,6 +219,7 @@ message Feature {
   // If set, indicates that that this feature is derived, and stores metadata
   // about its source. If this field is set, this feature should have
   // lifecycle_stage DERIVED or DISABLED.
+  // Experimental and subject to change.
   optional DerivedFeatureSource derived_source = 33;
 }
 
