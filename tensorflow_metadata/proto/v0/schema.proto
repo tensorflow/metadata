@@ -63,7 +63,7 @@ enum LifecycleStage {
   // Experimental and subject to change.
   VALIDATION_DERIVED = 9;
 
-  DERIVED = 8;  // To be deleted.
+  reserved 8;
 }
 
 //
@@ -239,8 +239,8 @@ message Feature {
   // about its source. If this field is set, this feature should have
   // lifecycle_stage VALIDATION_DERIVED or DISABLED.
   // Experimental and subject to change.
-  optional DerivedFeatureSource derived_source = 33; // Deprecated, will be deleted.
   optional DerivedFeatureSource validation_derived_source = 34;
+  reserved 33;
 }
 
 // Additional information about the schema or about a feature.

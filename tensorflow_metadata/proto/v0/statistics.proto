@@ -192,11 +192,11 @@ message FeatureNameStatistics {
   // Any custom statistics can be stored in this list.
   repeated CustomStatistic custom_stats = 6;
 
-  // If set, indicates that that this feature is derived, and stores metadata
-  // about its source.
-  DerivedFeatureSource derived_source = 9;  // Deprecated, will be deleted.
-  DerivedFeatureSource validation_derived_source = 10;
+  // If set, indicates that that this feature is derived for validation, and
+  // stores metadata about its source.
   // Experimental and subject to change.
+  DerivedFeatureSource validation_derived_source = 10;
+  reserved 9;
 }
 
 // Common weighted statistics for all feature types. Statistics counting number
