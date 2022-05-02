@@ -18,33 +18,52 @@ syntax = "proto2";
 package tensorflow.metadata.v0;
 
 import "google/protobuf/any.proto";
-import "tensorflow_metadata/proto/v0/path.proto";
 import "tensorflow_metadata/proto/v0/derived_feature.proto";
+import "tensorflow_metadata/proto/v0/path.proto";
 
 // GOOGLE-LEGACY option jspb_use_correct_proto2_semantics = false;  
 option cc_enable_arenas = true;
 option java_package = "org.tensorflow.metadata.v0";
 option java_multiple_files = true;
 
-// LifecycleStage. Only UNKNOWN_STAGE, BETA, PRODUCTION, and DERIVED features
-// are actually validated.
+// LifecycleStage. Only UNKNOWN_STAGE, BETA, PRODUCTION, and VALIDATION_DERIVED
+// features are actually validated.
 // PLANNED, ALPHA, DISABLED, and DEBUG are treated as DEPRECATED.
 enum LifecycleStage {
-  UNKNOWN_STAGE = 0;  // Unknown stage.
-  PLANNED = 1;        // Planned feature, may not be created yet.
-  ALPHA = 2;          // Prototype feature, not used in experiments yet.
-  BETA = 3;           // Used in user-facing experiments.
-  PRODUCTION = 4;     // Used in a significant fraction of user traffic.
-  DEPRECATED = 5;     // No longer supported: do not use in new models.
-  DEBUG_ONLY = 6;     // Only exists for debugging purposes.
-  DISABLED = 7;       // Generic indication that feature is disabled / excluded
-                      // from models, regardless of specific reason.
-  DERIVED = 8;        // Indicates that this feature was derived from ordinary
-                      // features for the purposes of statistics generation or
-                      // validation. Consumers should expect that this feature
-                      // may be present in DatasetFeatureStatistics, but not in
-                      // input data.
-                      // Experimental and subject to change.
+  // Unknown stage.
+  UNKNOWN_STAGE = 0;
+
+  // Planned feature, may not be created yet.
+  PLANNED = 1;
+
+  // Prototype feature, not used in experiments yet.
+  ALPHA = 2;
+
+  // Used in user-facing experiments.
+  BETA = 3;
+
+  // Used in a significant fraction of user traffic.
+  PRODUCTION = 4;
+
+  // No longer supported: do not use in new models.
+  DEPRECATED = 5;
+
+  // Only exists for debugging purposes.
+  DEBUG_ONLY = 6;
+
+  // Generic indication that feature is disabled / excluded
+  // from models, regardless of specific reason.
+  DISABLED = 7;
+
+  // Indicates that this feature was derived from ordinary
+  // features for the purposes of statistics generation or
+  // validation. Consumers should expect that this feature
+  // may be present in DatasetFeatureStatistics, but not in
+  // input data.
+  // Experimental and subject to change.
+  VALIDATION_DERIVED = 9;
+
+  DERIVED = 8;  // To be deleted.
 }
 
 //
@@ -117,7 +136,7 @@ message ValueCountList {
 }
 
 // Describes schema-level information about a specific feature.
-// NextID: 34
+// NextID: 35
 message Feature {
   // The name of the feature.
   optional string name = 1;  // required
@@ -218,9 +237,10 @@ message Feature {
 
   // If set, indicates that that this feature is derived, and stores metadata
   // about its source. If this field is set, this feature should have
-  // lifecycle_stage DERIVED or DISABLED.
+  // lifecycle_stage VALIDATION_DERIVED or DISABLED.
   // Experimental and subject to change.
-  optional DerivedFeatureSource derived_source = 33;
+  optional DerivedFeatureSource derived_source = 33; // Deprecated, will be deleted.
+  optional DerivedFeatureSource validation_derived_source = 34;
 }
 
 // Additional information about the schema or about a feature.

@@ -149,7 +149,7 @@ message LiftSeries {
 }
 
 // The complete set of statistics for a given feature name for a dataset.
-// NextID: 10
+// NextID: 11
 message FeatureNameStatistics {
   // The types supported by the feature statistics. When aggregating
   // tf.Examples, if the bytelist contains a string, it is recommended to encode
@@ -194,7 +194,8 @@ message FeatureNameStatistics {
 
   // If set, indicates that that this feature is derived, and stores metadata
   // about its source.
-  DerivedFeatureSource derived_source = 9;
+  DerivedFeatureSource derived_source = 9;  // Deprecated, will be deleted.
+  DerivedFeatureSource validation_derived_source = 10;
   // Experimental and subject to change.
 }
 
