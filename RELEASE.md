@@ -5,6 +5,18 @@
 ## Major Features and Improvements
 
 ## Bug Fixes and Other Changes
+
+## Breaking Changes
+
+## Deprecations
+
+# Version 1.8.0
+
+## Major Features and Improvements
+
+*   N/A
+
+## Bug Fixes and Other Changes
 *   Adds experimental support within statistics.proto and schema.proto for
     marking features that are derived during statistics generation for data
     exploration or validation, but not actually present in input data.
@@ -13,7 +25,11 @@
 
 ## Breaking Changes
 
+*   N/A
+
 ## Deprecations
+
+*   N/A
 
 # Version 1.7.0
 
