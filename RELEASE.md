@@ -283,7 +283,7 @@
     following command:
 
     ```
-    pip install -i https://pypi-nightly.tensorflow.org/simple tensorflow-metadata
+    pip install --extra-index-url https://pypi-nightly.tensorflow.org/simple tensorflow-metadata
     ```
 
     Note: These nightly packages are unstable and breakages are likely to
