@@ -21,11 +21,10 @@ syntax = "proto3";
 package tensorflow.metadata.v0;
 
 import "google/protobuf/any.proto";
-import "tensorflow_metadata/proto/v0/path.proto";
 import "tensorflow_metadata/proto/v0/derived_feature.proto";
+import "tensorflow_metadata/proto/v0/path.proto";
 
 option cc_enable_arenas = true;
-// GOOGLE-LEGACY option jspb_use_correct_proto2_semantics = false;  
 option java_package = "org.tensorflow.metadata.v0";
 option java_multiple_files = true;
 
