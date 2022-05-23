@@ -36,5 +36,10 @@ message DerivedFeatureSource {
   string description = 2;
   // The constituent features that went into generating this derived feature.
   repeated Path source_path = 3;
+  // A DerivedFeatureSource that is declaratively configured represents an
+  // intent for downstream processing to generate a derived feature
+  // (in the schema), or tracks that a feature was generated from such a
+  // configuration (in statistics).
+  bool declaratively_configured = 4;
 }
 // LINT.ThenChange(//tfx_bsl/cc/statistics/merge_util.cc)
