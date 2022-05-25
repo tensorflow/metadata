@@ -41,5 +41,22 @@ message DerivedFeatureSource {
   // (in the schema), or tracks that a feature was generated from such a
   // configuration (in statistics).
   bool declaratively_configured = 4;
+  // Optional configuration for canned derivers.
+  DerivedFeatureConfig config = 5;
 }
 // LINT.ThenChange(//tfx_bsl/cc/statistics/merge_util.cc)
+
+
+// Stores configuration for a variety of canned feature derivers.
+// TODO(b/227478330): Consider validating config in merge_util.cc.
+message DerivedFeatureConfig {
+  oneof type {
+    AllowlistDeriver allowlist = 1;
+  }
+}
+
+message AllowlistDeriver {
+  repeated bytes allowed_bytes_value = 1;
+  bytes placeholder_value = 2;  // If unset, placeholders will be dropped.
+}
+
