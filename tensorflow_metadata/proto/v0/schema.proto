@@ -236,8 +236,9 @@ message Feature {
   optional UniqueConstraints unique_constraints = 31;
 
   // If set, indicates that that this feature is derived, and stores metadata
-  // about its source. If this field is set, this feature should have
-  // lifecycle_stage VALIDATION_DERIVED or DISABLED.
+  // about its source. If this field is set, this feature should have a
+  // disabled stage (PLANNED, ALPHA, DEPRECATED, DISABLED, DEBUG_ONLY), or
+  // lifecycle_stage VALIDATION_DERIVED.
   // Experimental and subject to change.
   optional DerivedFeatureSource validation_derived_source = 34;
   reserved 33;
