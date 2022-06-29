@@ -299,7 +299,9 @@ message MetaOptimizationTarget {
     // achievable target to being unachievable (and thus yield no solution).
     // The units and range for the threshold will be the same as the
     // valid output range of the associated performance_metric.
-    double threshold = 1;
+    oneof type {
+      double threshold = 1;
+    }
   }
 
   // Describes how to combine with other objectives.

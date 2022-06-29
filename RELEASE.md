@@ -5,6 +5,7 @@
 ## Major Features and Improvements
 
 ## Bug Fixes and Other Changes
+*   ThresholdConfig.threshold field is made into a oneof
 
 ## Breaking Changes
 
