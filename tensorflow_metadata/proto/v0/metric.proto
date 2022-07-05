@@ -206,6 +206,34 @@ message RecallAtPrecision {
   google.protobuf.DoubleValue precision = 1;
 }
 
+message FalseNegativeRateAtThreshold {
+  option (metric_type) = MAXIMIZE;
+
+  // Threshold to apply to a prediction to determine positive vs negative.
+  // Note: if the model is calibrated, the threshold can be thought of as a
+  // probability so the threshold has a stable, intuitive semantic.
+  // However, not all solutions may be calibrated, and not all computations of
+  // the metric may operate on a calibrated score. In AutoTFX, the final model
+  // metrics are computed on a calibrated score, but the metrics computed within
+  // the model selection process are uncalibrated. Be aware of this possible
+  // skew in the metrics between model selection and final model evaluation.
+  google.protobuf.DoubleValue threshold = 1;
+}
+
+message FalsePositiveRateAtThreshold {
+  option (metric_type) = MAXIMIZE;
+
+  // Threshold to apply to a prediction to determine positive vs negative.
+  // Note: if the model is calibrated, the threshold can be thought of as a
+  // probability so the threshold has a stable, intuitive semantic.
+  // However, not all solutions may be calibrated, and not all computations of
+  // the metric may operate on a calibrated score. In AutoTFX, the final model
+  // metrics are computed on a calibrated score, but the metrics computed within
+  // the model selection process are uncalibrated. Be aware of this possible
+  // skew in the metrics between model selection and final model evaluation.
+  google.protobuf.DoubleValue threshold = 1;
+}
+
 message PrecisionAtK {
   option (metric_type) = MAXIMIZE;
 }
