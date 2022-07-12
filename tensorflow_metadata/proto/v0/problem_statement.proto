@@ -281,26 +281,27 @@ message MetaOptimizationTarget {
 
   // Configuration for thresholded meta-optimization targets.
   message ThresholdConfig {
-    // If specified, indicates a threshold that the user wishes the metric to
-    // stay under (for MINIMIZE type), or above (for MAXIMIZE type). The
-    // optimization process need not prefer models that are higher (or lower)
-    // on the thresholded metric so long as the threshold is respected.
-    // E.g., if `threshold` for a MAXIMIZE type metric X is .9, the optimization
-    // process will prefer a solution with X = .92 over a solution with X = .88,
-    // but may not prefer a solution with X = .95 over a solution with X = .92.
-    // Unless otherwise specified by the PerformanceMetric, threshold is
-    // best effort. It does not provide a hard guarantee about the properties of
-    // the final model, but rather serves as a "target" to guide the
-    // optimization process. The user is responsible for validating that final
-    // model metrics are in an acceptable range for the application.
-    // A problem statement may, however, be rejected if the specified target
-    // is impossible to achieve. Keep this in mind if running the optimization
-    // on a recurring basis, as shifts in the data could push a previously
-    // achievable target to being unachievable (and thus yield no solution).
-    // The units and range for the threshold will be the same as the
-    // valid output range of the associated performance_metric.
     oneof type {
+      // If specified, indicates a threshold that the user wishes the metric to
+      // stay under (for MINIMIZE type), or above (for MAXIMIZE type). The
+      // optimization process need not prefer models that are higher (or lower)
+      // on the thresholded metric so long as the threshold is respected.
+      // E.g., if `threshold` for a MAXIMIZE type metric X is .9, the
+      // optimization process will prefer a solution with X = .92 over a
+      // solution with X = .88, but may not prefer a solution with X = .95 over
+      // a solution with X = .92. Unless otherwise specified by the
+      // PerformanceMetric, threshold is best effort. It does not provide a hard
+      // guarantee about the properties of the final model, but rather serves as
+      // a "target" to guide the optimization process. The user is responsible
+      // for validating that final model metrics are in an acceptable range for
+      // the application. A problem statement may, however, be rejected if the
+      // specified target is impossible to achieve. Keep this in mind if running
+      // the optimization on a recurring basis, as shifts in the data could push
+      // a previously achievable target to being unachievable (and thus yield no
+      // solution). The units and range for the threshold will be the same as
+      // the valid output range of the associated performance_metric.
       double threshold = 1;
+
     }
   }
 
