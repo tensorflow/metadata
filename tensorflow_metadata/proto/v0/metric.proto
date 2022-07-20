@@ -292,25 +292,6 @@ message CustomMetric {
   // NEXT_TAG: 3;
 }
 
-// Objective functions are performance metrics that are differentiable, and
-// therefore can be directly optimized.
-// TODO(martinz): take metrics that are appropriate and make them objectives.
-message ObjectiveFunction {
-  oneof objective {
-    BinaryCrossEntropy binary_cross_entropy = 1;
-    LogisticRegression logistic_regression = 2;
-    MeanSquaredError squared_error = 3;
-    CustomMetric custom_metric = 4;
-    AUC auc = 5;
-    MeanAbsoluteError mean_absolute_error = 6;
-    MeanAbsolutePercentageError mean_absolute_percentage_error = 7;
-    MeanSquaredLogarithmicError mean_squared_logarithmic_error = 8;
-    CategoricalCrossEntropy categorical_cross_entropy = 9;
-    Poisson poisson = 10;
-  }
-  // NEXT_TAG: 11;
-}
-
 // Performance metrics measure the quality of a model. They need not be
 // differentiable.
 message PerformanceMetric {
