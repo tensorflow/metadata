@@ -6,6 +6,7 @@
 
 ## Bug Fixes and Other Changes
 *   ThresholdConfig.threshold field is made into a oneof
+*   Clarifies the meaning of num_non_missing in statistics.proto.
 
 ## Breaking Changes
 

@@ -442,9 +442,11 @@ message PresenceAndValencyStatistics {
 // (i.e., min_num_values, max_num_values, avg_num_values, and tot_num_values)
 // include NaNs.
 message CommonStatistics {
-  // The number of examples with at least one value for this feature.
+  // The number of examples that include this feature. Note that this includes
+  // examples that contain this feature with an explicitly empty list of values,
+  // which may be permitted for variable length features.
   uint64 num_non_missing = 1;
-  // The number of examples with no values for this feature.
+  // The number of examples missing this feature.
   uint64 num_missing = 2;
   // The minimum number of values in a single example for this feature.
   uint64 min_num_values = 3;
