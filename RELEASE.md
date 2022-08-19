@@ -11,6 +11,9 @@
 ## Breaking Changes
 
 ## Deprecations
+*   ProblemStatement Task.task_weight and MetaOptimizationTarget.weight are
+    deprecated.
+
 
 # Version 1.9.0
 

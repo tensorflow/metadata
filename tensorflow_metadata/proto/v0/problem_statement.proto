@@ -250,7 +250,7 @@ message Task {
   // Not meaningful for a problem with one task.
   // If the problem has multiple tasks and all task_weight=0 (unset) then all
   // tasks are weighted equally.
-  double task_weight = 2;
+  double task_weight = 2 [deprecated = true];
 
   // This field includes performance metrics of this head that are important to
   // the problem owner and need to be monitored and reported. However, unlike
@@ -310,7 +310,7 @@ message MetaOptimizationTarget {
     // If a model spec has multiple meta optimization targets, the weight
     // of each can be specified. The final objective is then a weighted
     // combination of the multiple objectives. If not specified, value is 1.
-    double weight = 4;
+    double weight = 4 [deprecated = true];
 
     // Secondary meta optimization targets can be thresholded, meaning that the
     // optimization process prefers solutions above (or below) the threshold,
