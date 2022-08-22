@@ -559,6 +559,16 @@ message StringDomain {
 
   // The values appearing in the domain.
   repeated string value = 2;
+
+  // Currently unused
+  // StringDomain consists of Categorical. This enum allows the user to
+  // specify the whether to treat the feature as categorical.
+  enum Categorical {
+    CATEGORICAL_UNSPECIFIED = 0;
+    CATEGORICAL_YES = 1;
+    CATEGORICAL_NO = 2;
+  }
+  optional Categorical is_categorical = 3;
 }
 
 // Encodes information about the domain of a boolean attribute that encodes its
