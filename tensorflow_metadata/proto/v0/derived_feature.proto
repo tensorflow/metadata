@@ -52,6 +52,8 @@ message DerivedFeatureSource {
 message DerivedFeatureConfig {
   oneof type {
     AllowlistDeriver allowlist = 1;
+    ArgmaxTopK argmax_top_k = 2;
+    ReduceOp reduce_op = 3;
   }
 }
 
@@ -60,3 +62,10 @@ message AllowlistDeriver {
   bytes placeholder_value = 2;  // If unset, placeholders will be dropped.
 }
 
+message ArgmaxTopK {
+  uint32 k = 1;
+}
+
+message ReduceOp {
+  string op_name = 1;
+}
