@@ -6,7 +6,9 @@
 
 ## Bug Fixes and Other Changes
 
-*   Add a categorical indicator to the schema for `StringDomain`
+*   Add a categorical indicator to the schema for `StringDomain`.
+*   Add ProblemStatement Task.is_auxiliary field to allow specifying auxiliary
+    tasks in multi-task learning problems.
 
 ## Breaking Changes
 

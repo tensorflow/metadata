@@ -241,7 +241,7 @@ message Task {
   Type type = 1;
 
   // The task name. Tasks within the same ProblemStatement should have unique
-  // names.
+  // names. This a REQUIRED field in case of multi-task learning problems.
   string name = 5;
 
   // If a Problem is composed of mulitple sub-tasks, the weight of each task
@@ -257,6 +257,14 @@ message Task {
   // fields such as "meta_optimization_target", these metrics are not
   // not automatically used in meta-optimization.
   repeated PerformanceMetric performance_metric = 4;
+
+  // True to indicate the task is an auxiliary task in a multi-task setting.
+  // Auxiliary tasks are of minor relevance for the application and they are
+  // added only to improve the performance on a primary task (by providing
+  // additional regularization or data augmentation), and thus are not
+  // considered in the meta optimization process (but may be utilized in the
+  // learner optimization).
+  bool is_auxiliary = 6;
 }
 
 // The high-level objectives described by this problem statement. These
