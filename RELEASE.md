@@ -6,6 +6,8 @@
 
 ## Bug Fixes and Other Changes
 
+*   Add a categorical indicator to the schema for `StringDomain`
+
 ## Breaking Changes
 
 ## Deprecations
