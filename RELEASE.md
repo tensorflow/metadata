@@ -12,6 +12,8 @@
 
 ## Breaking Changes
 
+*  Histogram Buckets include their upper bound instead of their lower bound.
+
 ## Deprecations
 
 # Version 1.10.0

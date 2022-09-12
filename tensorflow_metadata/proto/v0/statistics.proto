@@ -485,10 +485,9 @@ message Histogram {
   // infinity. They cannot be NaN or undefined. Counts of those special values
   // can be found in the numNaN and numUndefined fields.
   message Bucket {
-    // The low value of the bucket, inclusive.
+    // The low value of the bucket, exclusive except for the first bucket.
     double low_value = 1;
-    // The high value of the bucket, exclusive (unless the highValue is
-    // positive infinity).
+    // The high value of the bucket, inclusive.
     double high_value = 2;
 
     // The number of items in the bucket. Stored as a double to be able to
@@ -510,7 +509,8 @@ message Histogram {
 
   // The type of the histogram. A standard histogram has equal-width buckets.
   // The quantiles type is used for when the histogram message is used to store
-  // quantile information (by using equal-count buckets with variable widths).
+  // quantile information (by using approximately equal-count buckets with
+  // variable widths).
   enum HistogramType {
     STANDARD = 0;
     QUANTILES = 1;
