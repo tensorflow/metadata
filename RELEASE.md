@@ -9,6 +9,8 @@
 *   Add a categorical indicator to the schema for `StringDomain`.
 *   Add ProblemStatement Task.is_auxiliary field to allow specifying auxiliary
     tasks in multi-task learning problems.
+*   Add the SequenceMetadata field to the schema to specify if this feature
+    could be treated as a sequence feature.
 
 ## Breaking Changes
 

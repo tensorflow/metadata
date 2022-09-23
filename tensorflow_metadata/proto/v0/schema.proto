@@ -136,7 +136,7 @@ message ValueCountList {
 }
 
 // Describes schema-level information about a specific feature.
-// NextID: 35
+// NextID: 36
 message Feature {
   // The name of the feature.
   optional string name = 1;  // required
@@ -242,6 +242,10 @@ message Feature {
   // Experimental and subject to change.
   optional DerivedFeatureSource validation_derived_source = 34;
   reserved 33;
+
+  // This field specifies if this feature could be treated as a sequence
+  // feature which has meaningful element order.
+  optional SequenceMetadata sequence_metadata = 35;
 }
 
 // Additional information about the schema or about a feature.
@@ -899,4 +903,15 @@ message TensorRepresentation {
 // }
 message TensorRepresentationGroup {
   map<string, TensorRepresentation> tensor_representation = 1;
+}
+
+message SequenceMetadata {
+  // This enum specifies whether to treat the feature as a sequence which has
+  // meaningful element order.
+  enum SequentialStatus {
+    SEQUENTIAL_UNSPECIFIED = 0;
+    SEQUENTIAL_YES = 1;
+    SEQUENTIAL_NO = 2;
+  }
+  optional SequentialStatus sequential_status = 3;
 }
