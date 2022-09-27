@@ -249,6 +249,9 @@ message MaximumMeanDiscrepancy {
   string kernel = 1;
 }
 
+// The mean of the prediction across the dataset.
+message PredictionMean {}
+
 // Area under ROC-curve calculated globally for MultiClassClassification (model
 // predicts a single label) or MultiLabelClassification (model predicts class
 // probabilities). The area is calculated by treating the entire set of data as
