@@ -11,6 +11,7 @@
     tasks in multi-task learning problems.
 *   Add the SequenceMetadata field to the schema to specify if this feature
     could be treated as a sequence feature.
+*   Add a `CUSTOM_VALIDATION` Type in anomalies.proto.
 
 ## Breaking Changes
 
