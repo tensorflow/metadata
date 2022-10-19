@@ -727,9 +727,22 @@ message JensenShannonDivergence {
   optional double threshold = 1;
 }
 
+// DO NOT USE.
+// Checks that the absolute count difference relative to the total count of both
+// datasets is small. This metric is appropriate for comparing datasets that
+// are expected to have similar absolute counts, and not necessarily just
+// similar distributions.
+// Computed as max_i | x_i - y_i |  / sum_i(x_i + y_i) for aligned datasets
+// x and y. Results will be in the interval [0.0, 1.0] so sensible bounds should
+// be in the interval [0.0, 1.0).
+message NormalizedAbsoluteDifference {
+  optional double threshold = 1;
+}
+
 message FeatureComparator {
   optional InfinityNorm infinity_norm = 1;
   optional JensenShannonDivergence jensen_shannon_divergence = 2;
+  optional NormalizedAbsoluteDifference normalized_abs_difference = 3;
 }
 
 // Checks that the number of unique values is greater than or equal to the min,

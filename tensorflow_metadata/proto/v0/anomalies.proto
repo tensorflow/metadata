@@ -51,7 +51,7 @@ message AnomalyInfo {
   // The comparison between the existing schema and the fixed schema.
   repeated DiffRegion diff_regions = 4;
 
-  // Next ID: 87
+  // Next ID: 88
   // LINT.IfChange
   enum Type {
     UNKNOWN_TYPE = 0;
@@ -167,6 +167,8 @@ message AnomalyInfo {
     // Approximate Jensen-Shannon divergence between treatment and control is
     // high.
     COMPARATOR_JENSEN_SHANNON_DIVERGENCE_HIGH = 63;
+    // The normalized absolute difference between treatment and control is high.
+    COMPARATOR_NORMALIZED_ABSOLUTE_DIFFERENCE_HIGH = 87;
     // No examples in the span.
     NO_DATA_IN_SPAN = 43;
     // The value feature of a sparse feature is missing and at least one
@@ -275,6 +277,7 @@ message DriftSkewInfo {
       UNKNOWN = 0;
       L_INFTY = 1;
       JENSEN_SHANNON_DIVERGENCE = 2;
+      NORMALIZED_ABSOLUTE_DIFFERENCE = 3;
     }
     // Type of the measurement.
     optional Type type = 1;
