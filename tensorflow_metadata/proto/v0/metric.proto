@@ -17,6 +17,7 @@ syntax = "proto3";
 
 package tensorflow.metadata.v0;
 
+import "google/protobuf/any.proto";
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
 import "tensorflow_metadata/proto/v0/path.proto";
@@ -283,16 +284,34 @@ message BlockUtility {
 // A custom metric.
 // Prefer using or adding an explicit metric message
 // and only use this generic message as a last resort.
+// NEXT_TAG: 4
 message CustomMetric {
   option (metric_type) = CUSTOM;
 
-  // The name of a metric computed by the model.
+  // The display name of a metric computed by the model. The name should match
+  // ^[a-zA-Z0-9\s]{1,25}$ and must be unique across all performance metrics.
+  // Trailing and leading spaces will be truncated before matching.
   string name = 1;
 
   // True if the metric is maximized: false if it is minimized.
   // Must be specified if the CustomMetric is used as an objective.
   bool is_maximized = 2;
-  // NEXT_TAG: 3;
+
+  // RegistrySpec is a full specification of the custom metric and its
+  // construction based on the binary’s metric registry. New custom metrics must
+  // be linked to the binary and registered in its metric registry to be
+  // identifiable via this specification.
+  message RegistrySpec {
+    // Identifier of the metric class in the metric registry of the binary.
+    string key = 1;
+
+    // Generic proto describing the configuration for the metric to be computed.
+    // It's upto the implementer of the metric to parse this configuration.
+    google.protobuf.Any config = 2;
+  }
+
+  // Specification of the metric in the binary’s metric registry.
+  RegistrySpec registry_spec = 3;
 }
 
 // Performance metrics measure the quality of a model. They need not be
