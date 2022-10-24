@@ -727,7 +727,6 @@ message JensenShannonDivergence {
   optional double threshold = 1;
 }
 
-// DO NOT USE.
 // Checks that the absolute count difference relative to the total count of both
 // datasets is small. This metric is appropriate for comparing datasets that
 // are expected to have similar absolute counts, and not necessarily just
