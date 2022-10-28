@@ -49,7 +49,5 @@ bind(
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 protobuf_deps()
 
-
-load("//tensorflow_metadata:bazel_version_check.bzl", "check_bazel_version_at_least")
-
-check_bazel_version_at_least("0.24.1")
+load("@bazel_skylib//lib:versions.bzl", "versions")
+versions.check("0.24.1")
