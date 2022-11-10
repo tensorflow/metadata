@@ -6,6 +6,18 @@
 
 ## Bug Fixes and Other Changes
 
+## Breaking Changes
+
+## Deprecations
+
+# Version 1.11.0
+
+## Major Features and Improvements
+
+*   N/A
+
+## Bug Fixes and Other Changes
+
 *   Add a categorical indicator to the schema for `StringDomain`.
 *   Add ProblemStatement Task.is_auxiliary field to allow specifying auxiliary
     tasks in multi-task learning problems.
@@ -18,6 +30,8 @@
 *  Histogram Buckets include their upper bound instead of their lower bound.
 
 ## Deprecations
+
+*   N/A
 
 # Version 1.10.0
 
