@@ -808,6 +808,8 @@ message TensorRepresentation {
     repeated string index_column_names = 2;
     // The column that contains the values.
     optional string value_column_name = 3;
+    // Specify whether the values are already sorted by their index position.
+    optional bool already_sorted = 4;
   }
 
   // A tf.RaggedTensor that models nested lists.
