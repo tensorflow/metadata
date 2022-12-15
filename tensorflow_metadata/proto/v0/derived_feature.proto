@@ -46,7 +46,6 @@ message DerivedFeatureSource {
 }
 // LINT.ThenChange(//tfx_bsl/cc/statistics/merge_util.cc)
 
-
 // Stores configuration for a variety of canned feature derivers.
 // TODO(b/227478330): Consider validating config in merge_util.cc.
 message DerivedFeatureConfig {
@@ -54,6 +53,7 @@ message DerivedFeatureConfig {
     AllowlistDeriver allowlist = 1;
     ArgmaxTopK argmax_top_k = 2;
     ReduceOp reduce_op = 3;
+    SliceSql slice_sql = 4;
   }
 }
 
@@ -68,4 +68,17 @@ message ArgmaxTopK {
 
 message ReduceOp {
   string op_name = 1;
+}
+
+enum SliceValueTypes {
+  VALUE_TYPE_DEFAULT = 0;  // Default type is string
+  VALUE_TYPE_INTEGER = 1;
+  VALUE_TYPE_FLOAT = 2;
+  VALUE_TYPE_UNSUPPORTED = 3;
+}
+
+message SliceSql {
+  string expression = 1;
+  SliceValueTypes feature_value_type = 2;
+  bool drop_struct_name = 3;
 }
