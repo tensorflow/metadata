@@ -130,7 +130,8 @@ setup(
         'googleapis-common-protos>=1.52.0,<2',
         'protobuf>=3.13,<4',
     ],
-    python_requires='>=3.8,<4',
+    # TODO(b/236220616): Change the lower bound of this range to 3.8.
+    python_requires='>=3.7,<4',
     packages=find_packages(),
     include_package_data=True,
     description=('Library and standards for schema and statistics.'),
