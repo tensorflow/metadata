@@ -68,7 +68,7 @@ enum LifecycleStage {
 
 //
 // Message to represent schema information.
-// NextID: 14
+// NextID: 15
 message Schema {
   // Features described in this schema.
   repeated Feature feature = 1;
@@ -114,6 +114,13 @@ message Schema {
   // TODO(b/73109633): Change default to false, before removing this field.
   optional bool generate_legacy_feature_spec = 7 [default = true];
   END GOOGLE-LEGACY */
+
+  // Whether to represent variable length features as RaggedTensors. By default
+  // they are represented as ragged left-alighned SparseTensors. RaggedTensor
+  // representation is more memory efficient. Therefore, turning this on will
+  // likely yield data processing performance improvement.
+  // Experimental and may be subject to change.
+  optional bool represent_variable_length_as_ragged = 14;
 
   // Additional information about the schema as a whole. Features may also
   // be annotated individually.

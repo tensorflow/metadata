@@ -4,6 +4,9 @@
 
 ## Major Features and Improvements
 
+*   Introduce `Schema.represent_variable_length_as_ragged` knob to automatically
+    generate `RaggedTensor`s for variable length features.
+
 ## Bug Fixes and Other Changes
 
 ## Breaking Changes
