@@ -78,7 +78,13 @@ enum SliceValueTypes {
 }
 
 message SliceSql {
+  // Sql expression used to create a derived feature based on the extracted
+  // slice keys. It must return result of STRUCT type.
   string expression = 1;
+
+  // Value type of the derived feature. The default type is string.
   SliceValueTypes feature_value_type = 2;
+
+  // Indicates whether to drop struct name in the generated output.
   bool drop_struct_name = 3;
 }
