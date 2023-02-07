@@ -230,6 +230,7 @@ message Type {
   }
 }
 
+
 // Describes a single task in a model and all its properties.
 // A task corresponds to a single output of the model.
 // Multiple tasks in the same problem statement correspond to different outputs
@@ -265,6 +266,7 @@ message Task {
   // considered in the meta optimization process (but may be utilized in the
   // learner optimization).
   bool is_auxiliary = 6;
+
 }
 
 // The high-level objectives described by this problem statement. These
