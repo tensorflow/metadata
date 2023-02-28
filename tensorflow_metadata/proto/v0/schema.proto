@@ -726,12 +726,25 @@ message InfinityNorm {
   optional double threshold = 1;
 }
 
+message HistogramSelection {
+  // Type controls the source of the histogram used for numeric drift and
+  // skew calculations. Currently the default is STANDARD. Calculations
+  // based on QUANTILES are more robust to outliers.
+  enum Type {
+    DEFAULT = 0;
+    QUANTILES = 1;
+    STANDARD = 2;
+  }
+  optional Type type = 1;
+}
+
 // Checks that the approximate Jensen-Shannon Divergence is below a certain
 // threshold between the two distributions.
 message JensenShannonDivergence {
   // The JensenShannonDivergence will be in the interval [0.0, 1.0] so sensible
   // bounds should be in the interval [0.0, 1.0).
   optional double threshold = 1;
+  optional HistogramSelection source = 2;
 }
 
 // Checks that the absolute count difference relative to the total count of both
