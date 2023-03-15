@@ -56,7 +56,7 @@ py_proto_library(
     ],
     deps = [
         # For well-known proto types like protobuf.Any.
-        "@com_google_protobuf//:well_known_types_py_pb2",
+        "@com_google_protobuf//:protobuf_python",
     ],
 )
 

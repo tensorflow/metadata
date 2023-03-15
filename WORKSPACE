@@ -4,23 +4,23 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "bazel_skylib",
-    sha256 = "97e70364e9249702246c0e9444bccdc4b847bed1eb03c5a3ece4f83dfe6abc44",
-    urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.0.2/bazel-skylib-1.0.2.tar.gz",
-        "https://github.com/bazelbuild/bazel-skylib/releases/download/1.0.2/bazel-skylib-1.0.2.tar.gz",
-    ],
+    sha256 = "2ef429f5d7ce7111263289644d233707dba35e39696377ebab8b0bc701f7818e",
+    urls = ["https://github.com/bazelbuild/bazel-skylib/releases/download/0.8.0/bazel-skylib.0.8.0.tar.gz"],
 )
 
-_PROTOBUF_COMMIT = "90b73ac3f0b10320315c2ca0d03a5a9b095d2f66"  # 3.21.9
+# 310ba5ee72661c081129eb878c1bbcec936b20f0 is based on 3.8.0 with a fix for protobuf.bzl.
+PROTOBUF_URLS = [
+    "https://storage.googleapis.com/mirror.tensorflow.org/github.com/protocolbuffers/protobuf/archive/310ba5ee72661c081129eb878c1bbcec936b20f0.tar.gz",
+    "https://github.com/protocolbuffers/protobuf/archive/310ba5ee72661c081129eb878c1bbcec936b20f0.tar.gz",
+]
+PROTOBUF_SHA256 = "b9e92f9af8819bbbc514e2902aec860415b70209f31dfc8c4fa72515a5df9d59"
+PROTOBUF_STRIP_PREFIX = "protobuf-310ba5ee72661c081129eb878c1bbcec936b20f0"
 
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "f5ba48be0fd7a32daa6900b9bbf90b1cb0af9fc696ee7d71455149898f46ee46",
-    strip_prefix = "protobuf-%s" % _PROTOBUF_COMMIT,
-    urls = [
-        "https://storage.googleapis.com/mirror.tensorflow.org/github.com/protocolbuffers/protobuf/archive/%s.tar.gz" % _PROTOBUF_COMMIT,
-        "https://github.com/protocolbuffers/protobuf/archive/%s.tar.gz" % _PROTOBUF_COMMIT,
-    ],
+    sha256 = PROTOBUF_SHA256,
+    strip_prefix = PROTOBUF_STRIP_PREFIX,
+    urls = PROTOBUF_URLS,
 )
 
 # Needed by com_google_protobuf.
@@ -50,4 +50,4 @@ load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 protobuf_deps()
 
 load("@bazel_skylib//lib:versions.bzl", "versions")
-versions.check("5.3.0")
+versions.check("0.24.1")
