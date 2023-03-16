@@ -116,7 +116,6 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
-        'Programming Language :: Python :: 3.10',
         'Programming Language :: Python :: 3 :: Only',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
         'Topic :: Scientific/Engineering :: Mathematics',
@@ -130,8 +129,7 @@ setup(
         'googleapis-common-protos>=1.52.0,<2',
         'protobuf>=3.13,<4',
     ],
-    # TODO(b/236220616): Change the lower bound of this range to 3.8.
-    python_requires='>=3.7,<4',
+    python_requires='>=3.8,<4',
     packages=find_packages(),
     include_package_data=True,
     description=('Library and standards for schema and statistics.'),
