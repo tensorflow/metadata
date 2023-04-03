@@ -4,6 +4,16 @@
 
 ## Major Features and Improvements
 
+## Bug Fixes and Other Changes
+
+## Breaking Changes
+
+## Deprecations
+
+# Version 1.13.0
+
+## Major Features and Improvements
+
 *   Introduce `Schema.represent_variable_length_as_ragged` knob to automatically
     generate `RaggedTensor`s for variable length features.
 *   Introduces a Schema option `HistogramSelection` to allow numeric drift/skew
@@ -11,7 +21,11 @@
 
 ## Bug Fixes and Other Changes
 
+*   N/A
+
 ## Breaking Changes
+
+*   N/A
 
 ## Deprecations
 
