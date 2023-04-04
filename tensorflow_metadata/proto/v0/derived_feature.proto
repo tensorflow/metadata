@@ -54,6 +54,7 @@ message DerivedFeatureConfig {
     ArgmaxTopK argmax_top_k = 2;
     ReduceOp reduce_op = 3;
     SliceSql slice_sql = 4;
+    ImageQualityDeriver image_quality = 5;
   }
 }
 
@@ -87,4 +88,8 @@ message SliceSql {
 
   // Indicates whether to drop struct name in the generated output.
   bool drop_struct_name = 3;
+}
+
+message ImageQualityDeriver {
+  string model_name = 1;
 }
