@@ -6,6 +6,8 @@
 
 ## Bug Fixes and Other Changes
 
+*   Depends on `protobuf>=3.20.3,<5`.
+
 ## Breaking Changes
 
 ## Deprecations

@@ -20,7 +20,6 @@ licenses(["notice"])  # Apache 2.0
 
 package(default_visibility = ["//visibility:public"])
 
-
 cc_proto_library(
     name = "cc_metadata_v0_proto_cc",
     srcs = [
@@ -55,8 +54,8 @@ py_proto_library(
         "derived_feature.proto",
     ],
     deps = [
-        # For well-known proto types like protobuf.Any.
-        "@com_google_protobuf//:protobuf_python",
+      # For well-known proto types like protobuf.Any.
+      "@com_google_protobuf//:well_known_types_py_pb2"
     ],
 )
 
