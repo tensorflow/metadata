@@ -948,4 +948,12 @@ message SequenceMetadata {
     SEQUENTIAL_NO = 2;
   }
   optional SequentialStatus sequential_status = 3;
+  // An arbitrary string defining a "group" of features that could be modeled as
+  // a single joint sequence. For example, consider a dataset that contains
+  // three sequential features "purchase_time", "product_id", "purchase_price".
+  // These belong to the same sequence of purchases and could be modeled
+  // jointly. Specifying joint_group = "purchase" on all three sequences would
+  // communicate that the features can be considered part of a single conceptual
+  // sequence.
+  optional string joint_group = 4;
 }

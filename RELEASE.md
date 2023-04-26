@@ -5,6 +5,8 @@
 ## Major Features and Improvements
 
 ## Bug Fixes and Other Changes
+* Add `joint_group` to `SequenceMetadata` to specify which group this sequence
+feature belongs to so that they can be modeled jointly.
 
 ## Breaking Changes
 
