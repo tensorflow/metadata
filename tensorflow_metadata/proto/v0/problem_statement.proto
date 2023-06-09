@@ -211,15 +211,15 @@ message OneDimensionalRegression {
   // probability (e.g: probability of click).
   message Probability {}
 
-  // Defines a regression problem where the labels are counts.
-  message Poisson {}
+  // Defines a regression problem where the labels are counts i.e. integers >=0.
+  message Counts {}
 
   oneof label_type {
     // When set means the label is a probability in range [0..1].
     Probability probability = 4;
     // When set the label corresponds to counts from a poisson distribution.
     // Eg: Number of googlers contributing to memegen each year.
-    Poisson poisson = 5;
+    Counts counts = 5;
   }
 }
 
