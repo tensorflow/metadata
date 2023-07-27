@@ -51,7 +51,7 @@ message AnomalyInfo {
   // The comparison between the existing schema and the fixed schema.
   repeated DiffRegion diff_regions = 4;
 
-  // Next ID: 88
+  // Next ID: 89
   // LINT.IfChange
   enum Type {
     UNKNOWN_TYPE = 0;
@@ -77,6 +77,8 @@ message AnomalyInfo {
     BOOL_TYPE_UNEXPECTED_STRING = 9;
     // Boolean had float values other than 0 and 1.
     BOOL_TYPE_UNEXPECTED_FLOAT = 52;
+    // BoolDomain has invalid configuration.
+    BOOL_TYPE_INVALID_CONFIG = 88;
     // BYTES type when expected STRING type
     ENUM_TYPE_BYTES_NOT_STRING = 10;
     // FLOAT type when expected STRING type
@@ -254,7 +256,6 @@ message AnomalyInfo {
     // The following type is experimental and subject to change.
     // The statistics did not specify a custom validation condition.
     CUSTOM_VALIDATION = 86;
-
   }
   // LINT.ThenChange(//tensorflow_data_validation/g3doc/anomalies.md)
   // Reason for the anomaly. There may be more than one reason,

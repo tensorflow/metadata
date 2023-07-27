@@ -5,10 +5,11 @@
 ## Major Features and Improvements
 
 ## Bug Fixes and Other Changes
-* Add `joint_group` to `SequenceMetadata` to specify which group this sequence
+*   Add `joint_group` to `SequenceMetadata` to specify which group this sequence
 feature belongs to so that they can be modeled jointly.
 *   Depends on `protobuf>=3.20.3,<4.21`. Upper bound is required to avoid
     breaking changes.
+*   Add `BOOL_TYPE_INVALID_CONFIG` anomaly type.
 
 ## Breaking Changes
 
