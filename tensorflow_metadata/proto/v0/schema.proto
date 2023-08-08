@@ -549,6 +549,11 @@ message FloatDomain {
   // If true then the domain encodes categorical values (i.e., ids) rather than
   // continuous values.
   optional bool is_categorical = 8;
+
+  // This field specifies the embedding dimension and is only applicable if
+  // is_embedding is true. It is useful for use cases such as restoring shapes
+  // for flattened sequence of embeddings.
+  optional int64 embedding_dim = 9;
 }
 
 // Domain for a recursive struct.
@@ -956,4 +961,7 @@ message SequenceMetadata {
   // communicate that the features can be considered part of a single conceptual
   // sequence.
   optional string joint_group = 4;
+  // Specifies the maximum sequence length that should be processed. Sequences
+  // may exceed this limit but are expected to be truncated by modeling layers.
+  optional int64 sequence_truncation_limit = 5;
 }
