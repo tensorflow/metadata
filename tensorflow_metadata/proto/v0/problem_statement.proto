@@ -32,6 +32,7 @@ enum TaskType {
   TOP_K_CLASSIFICATION = 3;
   ONE_DIMENSIONAL_REGRESSION = 4;
   MULTI_LABEL_CLASSIFICATION = 5;
+  MULTI_DIMENSIONAL_REGRESSION = 6;
 }
 
 extend google.protobuf.MessageOptions {
@@ -220,6 +221,43 @@ message OneDimensionalRegression {
     // When set the label corresponds to counts from a poisson distribution.
     // Eg: Number of googlers contributing to memegen each year.
     Counts counts = 5;
+  }
+}
+
+// A multi-dimensional regression task.
+// Similar to OneDimensionalRegression, MultiDimensionalRegression predicts
+// continuous real numbers. However instead of predicting a single scalar value
+// per example, we predict a fixed dimensional vector of values. By default the
+// range is any float -inf to inf, but specific sub-types (e.g. probability)
+// define more narrow ranges.
+message MultiDimensionalRegression {
+  option (task_type) = MULTI_DIMENSIONAL_REGRESSION;
+
+  // The label column.
+  oneof label_id {  // oneof label_id is required.
+    // The name of the label. Assumes the label is a flat, top-level field.
+    string label = 1;
+    // A path can be used instead of a flat string if the label is nested.
+    Path label_path = 3;
+  }
+  // (optional) The weight column.
+  string weight = 2;
+
+  // Defines a regression problem where labels are in [0, 1] and represent a
+  // probability (e.g: probability of click).
+  message Probability {
+    // By default, MultiDimensionalRegression assumes that each value in the
+    //  predicted vector is independent. If predictions_sum_to_1 is true, this
+    //  indicates that the vector of values represent mutually exclusive rather
+    //  than independent probabilities (for example, the probabilities of
+    //  classes in a multi-class scenario). When this is set to true, we use
+    //  softmax instead of sigmoid in the loss function.
+    optional bool predictions_sum_to_1 = 1;
+  }
+
+  oneof label_type {
+    // When set means the label is a probability in range [0..1].
+    Probability probability = 4;
   }
 }
 
