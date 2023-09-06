@@ -252,7 +252,7 @@ message MultiDimensionalRegression {
     //  than independent probabilities (for example, the probabilities of
     //  classes in a multi-class scenario). When this is set to true, we use
     //  softmax instead of sigmoid in the loss function.
-    optional bool predictions_sum_to_1 = 1;
+    bool predictions_sum_to_1 = 1;
   }
 
   oneof label_type {
