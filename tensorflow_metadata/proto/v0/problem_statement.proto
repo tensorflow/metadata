@@ -17,6 +17,7 @@ syntax = "proto3";
 
 package tensorflow.metadata.v0;
 
+import "google/protobuf/struct.proto";
 import "google/protobuf/descriptor.proto";
 import "tensorflow_metadata/proto/v0/metric.proto";
 import "tensorflow_metadata/proto/v0/path.proto";
