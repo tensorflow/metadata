@@ -296,7 +296,7 @@ message Task {
   // Not meaningful for a problem with one task.
   // If the problem has multiple tasks and all task_weight=0 (unset) then all
   // tasks are weighted equally.
-  double task_weight = 2 [deprecated = true];
+  double task_weight = 2;
 
   // This field includes performance metrics of this head that are important to
   // the problem owner and need to be monitored and reported. However, unlike
