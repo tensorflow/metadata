@@ -10,6 +10,8 @@
 
 ## Deprecations
 
+*   Deprecated Python 3.8 support.
+
 # Version 1.14.0
 
 ## Major Features and Improvements

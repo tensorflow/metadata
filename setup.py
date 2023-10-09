@@ -114,7 +114,6 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3 :: Only',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
@@ -129,10 +128,10 @@ setup(
         'googleapis-common-protos>=1.52.0,<2',
         'protobuf>=3.20.3,<4.21',
     ],
-    python_requires='>=3.8,<4',
+    python_requires='>=3.9,<4',
     packages=find_packages(),
     include_package_data=True,
-    description=('Library and standards for schema and statistics.'),
+    description='Library and standards for schema and statistics.',
     long_description=_LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
     keywords='tensorflow metadata tfx',
@@ -141,4 +140,5 @@ setup(
     cmdclass={
         'build': _BuildCommand,
         'bazel_build': _BazelBuildCommand,
-    })
+    },
+)
