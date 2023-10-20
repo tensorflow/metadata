@@ -88,6 +88,15 @@ message SliceSql {
 
   // Indicates whether to drop struct name in the generated output.
   bool drop_struct_name = 3;
+
+  // Set default feature value when slice query fails. If the slice query fails
+  // and no default value is provided, the TFDV statistics generation pipeline
+  // will fail.
+  oneof default_feature_value_for_failed_sql {
+    int64 int64_default_feature_value = 4;
+    float float_default_feature_value = 5;
+    string string_default_feature_value = 6;
+  }
 }
 
 message ImageQualityDeriver {
