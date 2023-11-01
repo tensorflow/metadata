@@ -6,6 +6,9 @@
 
 ## Bug Fixes and Other Changes
 
+*   Bump the Ubuntu version on which TFMD is tested to 20.04 (previously
+    was 16.04).
+
 ## Breaking Changes
 
 ## Deprecations
@@ -396,7 +399,7 @@
 ## Major Features and Improvements
 
 *   Added new fields to NaturalLanguageDomain message in the schema, including
-    support for specifying vocabularies, constriants on sequence values
+    support for specifying vocabularies, constraints on sequence values
     (SequenceValueConstraints), constraints on vocabulary coverage
     (FeatureCoverageConstraints), and constraints on token location
     (location_constraints_regex).
