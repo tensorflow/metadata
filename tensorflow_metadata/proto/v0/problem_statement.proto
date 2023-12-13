@@ -34,6 +34,7 @@ enum TaskType {
   ONE_DIMENSIONAL_REGRESSION = 4;
   MULTI_LABEL_CLASSIFICATION = 5;
   MULTI_DIMENSIONAL_REGRESSION = 6;
+  TEXT_GENERATION = 7;
 }
 
 extend google.protobuf.MessageOptions {
@@ -262,6 +263,12 @@ message MultiDimensionalRegression {
   }
 }
 
+// Configuration for a text generation task where the model should predict
+// a sequence of natural language text.
+message TextGeneration {
+  string targets = 1;
+}
+
 // The type of a head or meta-objective. Specifies the label, weight,
 // and output type of the head.
 // TODO(martinz): add logistic regression.
@@ -272,6 +279,7 @@ message Type {
     MultiClassClassification multi_class_classification = 3;
     TopKClassification top_k_classification = 4;
     MultiLabelClassification multi_label_classification = 5;
+    TextGeneration text_generation = 6;
   }
 }
 
