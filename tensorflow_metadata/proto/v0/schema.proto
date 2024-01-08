@@ -307,8 +307,9 @@ message DatasetConstraints {
 // then tensor[2][0]=field[4]
 // then tensor[2][1]=field[5]
 //
-// The FixedShape message is identical with the TensorFlow TensorShape proto
-// message.
+// The FixedShape message is identical with the tensorflow.TensorShape proto
+// message for fully defined shapes. The FixedShape message cannot represent
+// unknown dimensions or an unknown rank.
 message FixedShape {
   // The dimensions that define the shape. The total number of values in each
   // example is the product of sizes of each dimension.
