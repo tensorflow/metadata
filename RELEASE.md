@@ -9,6 +9,8 @@
 *   Bump the Ubuntu version on which TFMD is tested to 20.04 (previously
     was 16.04).
 *   Bumped the minimum bazel version required to build `tfmd` to 6.1.0.
+*   Depends on `protobuf>=4.25.2,<5`.
+*   Depends on `googleapis-common-protos>=1.56.4,<2`
 
 ## Breaking Changes
 
