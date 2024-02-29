@@ -35,6 +35,9 @@
     sequence length that should be processed.
 *   Depends on `protobuf>=3.20.3,<4.21`. Upper bound is required to avoid
     breaking changes.
+*   Add `embedding_type` to `FloatDomain` to specify the semantic type of the
+    embedding. This is useful for use cases where the embedding dimension is
+    inferred from the embedding type.
 
 ## Breaking Changes
 

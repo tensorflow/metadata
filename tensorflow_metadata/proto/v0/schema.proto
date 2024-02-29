@@ -555,6 +555,9 @@ message FloatDomain {
   // is_embedding is true. It is useful for use cases such as restoring shapes
   // for flattened sequence of embeddings.
   optional int64 embedding_dim = 9;
+
+  // Specifies the semantic type of the embedding e.g. sbv4_semantic or pulsar.
+  optional string embedding_type = 10;
 }
 
 // Domain for a recursive struct.
