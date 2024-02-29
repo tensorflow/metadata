@@ -266,7 +266,12 @@ message MultiDimensionalRegression {
 // Configuration for a text generation task where the model should predict
 // a sequence of natural language text.
 message TextGeneration {
+  option (task_type) = TEXT_GENERATION;
+
   string targets = 1;
+
+  // (optional) The weight column.
+  string example_weight = 2;
 }
 
 // The type of a head or meta-objective. Specifies the label, weight,
@@ -298,7 +303,7 @@ message Task {
   // names. This a REQUIRED field in case of multi-task learning problems.
   string name = 5;
 
-  // If a Problem is composed of mulitple sub-tasks, the weight of each task
+  // If a Problem is composed of multiple sub-tasks, the weight of each task
   // determines the importance of solving each sub-task. It is used to
   // rank and select the best solution for multi-task problems.
   // Not meaningful for a problem with one task.
