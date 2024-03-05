@@ -17,7 +17,6 @@ import os
 import platform
 import shutil
 import subprocess
-import sys
 
 import setuptools
 from setuptools import find_packages
@@ -28,9 +27,6 @@ from setuptools import setup
 # https://setuptools.readthedocs.io/en/latest/history.html#v48-0-0
 from distutils.command import build
 # pylint: enable=g-bad-import-order
-
-
-_IS_PY311 = sys.version_info >= (3, 11)
 
 
 class _BuildCommand(build.build):
@@ -131,8 +127,10 @@ setup(
     namespace_packages=[],
     install_requires=[
         'absl-py>=0.9,<2.0.0',
-        f'googleapis-common-protos>={"1.56.4" if _IS_PY311 else "1.52.0"},<2',
-        f'protobuf>={"4.25.2,<5" if _IS_PY311 else "3.20.3,<4.21"}',
+        'googleapis-common-protos>=1.56.4,<2;python_version>="3.11"',
+        'googleapis-common-protos>=1.52.0,<2;python_version>="3.11"',
+        'protobuf>=4.25.2,<5;python_version>="3.11"',
+        'protobuf>=3.20.3,<4.21;python_version<"3.11"',
     ],
     python_requires='>=3.9,<4',
     packages=find_packages(),
