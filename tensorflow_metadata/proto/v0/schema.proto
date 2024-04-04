@@ -85,7 +85,6 @@ message Schema {
   // declared as top-level features in <feature>.
 // GOOGLE-LEGACY   repeated Sequence sequence = 2;  
 
-  // declared as top-level features in <feature>.
   // String domains referenced in the features.
   repeated StringDomain string_domain = 4;
 
