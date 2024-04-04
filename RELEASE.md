@@ -16,6 +16,9 @@
 
 ## Breaking Changes
 
+*   Removed `NaturalLanguageDomain.location_constraint_regex`.
+    It was documented as "please do not use" and never implemented.
+
 ## Deprecations
 
 *   Deprecated Python 3.8 support.
