@@ -13,6 +13,7 @@
     `protobuf>3.20.3,<4.21` for 3.9 and 3.10.
 *   Depends on `googleapis-common-protos>=1.56.4,<2` for Python 3.11 and on
     `googleapis-common-protos>=1.52.0,<2` for 3.9 and 3.10.
+*   Relax dependency on `absl-py` to include version 2.
 
 ## Breaking Changes
 
