@@ -6,6 +6,10 @@
 
 ## Bug Fixes and Other Changes
 
+*   For nested features with N nested levels (N > 1), the statistics counting
+    the number of values in `CommonStatistics` and `WeightedCommonStatistics`
+    will rely on the innermost level.
+
 ## Breaking Changes
 
 ## Deprecations
@@ -31,6 +35,8 @@
 
 *   Removed `NaturalLanguageDomain.location_constraint_regex`.
     It was documented as "please do not use" and never implemented.
+*   Change to the semantics of min/max/avg/tot num-values for nested features
+    (see above).
 
 ## Deprecations
 

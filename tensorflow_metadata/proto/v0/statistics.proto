@@ -201,7 +201,8 @@ message FeatureNameStatistics {
 // Common weighted statistics for all feature types. Statistics counting number
 // of values (i.e., avg_num_values and tot_num_values) include NaNs.
 // If the weighted column is missing, then this counts as a weight of 1
-// for that example.
+// for that example. For nested features with N nested levels (N > 1), the
+// statistics counting number of values will rely on the innermost level.
 message WeightedCommonStatistics {
   // Weighted number of examples not missing.
   double num_non_missing = 1;
@@ -210,9 +211,9 @@ message WeightedCommonStatistics {
   // as missing.
   double num_missing = 2;
   // average number of values, weighted by the number of examples.
+  // avg_num_values = tot_num_values / num_non_missing.
   double avg_num_values = 3;
-  // tot_num_values = avg_num_values * num_non_missing.
-  // This is calculated directly, so should have less numerical error.
+  // The total number of values in this feature.
   double tot_num_values = 4;
 }
 
@@ -440,7 +441,8 @@ message PresenceAndValencyStatistics {
 
 // Common statistics for all feature types. Statistics counting number of values
 // (i.e., min_num_values, max_num_values, avg_num_values, and tot_num_values)
-// include NaNs.
+// include NaNs. For nested features with N nested levels (N > 1), the
+// statistics counting number of values will rely on the innermost level.
 message CommonStatistics {
   // The number of examples that include this feature. Note that this includes
   // examples that contain this feature with an explicitly empty list of values,
@@ -453,9 +455,9 @@ message CommonStatistics {
   // The maximum number of values in a single example for this feature.
   uint64 max_num_values = 4;
   // The average number of values in a single example for this feature.
+  // avg_num_values = tot_num_values / num_non_missing.
   float avg_num_values = 5;
-  // tot_num_values = avg_num_values * num_non_missing.
-  // This is calculated directly, so should have less numerical error.
+  // The total number of values in this feature.
   uint64 tot_num_values = 8;
   // The quantiles histogram for the number of values in this feature.
   Histogram num_values_histogram = 6;
