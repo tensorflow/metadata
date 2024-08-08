@@ -88,6 +88,8 @@ message Schema {
   // String domains referenced in the features.
   repeated StringDomain string_domain = 4;
 
+  // TOP LEVEL FLOAT AND INT DOMAINS ARE UNSUPPORTED IN TFDV.
+  // TODO(b/63664182): Support this.
   // top level float domains that can be reused by features
   repeated FloatDomain float_domain = 9;
 
@@ -191,6 +193,8 @@ message Feature {
   // Domain for the values of the feature.
   oneof domain_info {
     // Reference to a domain defined at the schema level.
+    // NOTE THAT TFDV ONLY SUPPORTS STRING DOMAINS AT THE TOP LEVEL.
+    // TODO(b/63664182): Support this.
     string domain = 7;
     // Inline definitions of domains.
     IntDomain int_domain = 9;
