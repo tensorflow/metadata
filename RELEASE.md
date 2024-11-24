@@ -6,6 +6,8 @@
 
 ## Bug Fixes and Other Changes
 
+*   Add Audio as a schema domain.
+
 ## Breaking Changes
 
 ## Deprecations
