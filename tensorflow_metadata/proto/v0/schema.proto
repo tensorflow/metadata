@@ -144,7 +144,7 @@ message ValueCountList {
 }
 
 // Describes schema-level information about a specific feature.
-// NextID: 37
+// NextID: 38
 message Feature {
   // The name of the feature.
   optional string name = 1;  // required
@@ -206,6 +206,7 @@ message Feature {
     NaturalLanguageDomain natural_language_domain = 24;
     ImageDomain image_domain = 25;
     AudioDomain audio_domain = 36;
+    VideoDomain video_domain = 37;
     MIDDomain mid_domain = 26;
     URLDomain url_domain = 27;
     TimeDomain time_domain = 28;
@@ -640,6 +641,9 @@ message ImageDomain {
 
 // Audio data.
 message AudioDomain {}
+
+// Video data.
+message VideoDomain {}
 
 // Knowledge graph ID, see: https://www.wikidata.org/wiki/Property:P646
 message MIDDomain {}
