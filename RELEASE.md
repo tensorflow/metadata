@@ -8,6 +8,7 @@
 
 *   Add Audio as a schema domain.
 *   Add Video as a schema domain.
+*   Resolve issue where pre-release versions of protobuf are installed.
 
 ## Breaking Changes
 
