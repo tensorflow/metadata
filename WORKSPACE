@@ -11,14 +11,14 @@ http_archive(
     ],
 )
 
-_PROTOBUF_VERSION = "3.21.9"
+_PROTOBUF_VERSION = "4.25.6"
 
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "f66073dee0bc159157b0bd7f502d7d1ee0bc76b3c1eac9836927511bdc4b3fc1",
+    sha256 = "ff6e9c3db65f985461d200c96c771328b6186ee0b10bc7cb2bbc87cf02ebd864",
     strip_prefix = "protobuf-%s" % _PROTOBUF_VERSION,
     urls = [
-        "https://github.com/protocolbuffers/protobuf/archive/v%s.zip" % _PROTOBUF_VERSION
+        "https://github.com/protocolbuffers/protobuf/archive/v%s.zip" % _PROTOBUF_VERSION,
     ],
 )
 
@@ -49,4 +49,4 @@ load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 protobuf_deps()
 
 load("@bazel_skylib//lib:versions.bzl", "versions")
-versions.check("6.1.0")
+versions.check("6.5.0")
