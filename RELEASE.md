@@ -1,3 +1,21 @@
+# Version 1.17.1
+
+## Major Features and Improvements
+
+*   N/A
+
+## Bug Fixes and Other Changes
+
+*   Bumped the minimum bazel version required to build `tfmd` to 6.5.0.
+
+## Breaking Changes
+
+*   N/A
+
+## Deprecations
+
+*   N/A
+
 # Version 1.17.0
 
 ## Major Features and Improvements
