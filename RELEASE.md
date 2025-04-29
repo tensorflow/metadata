@@ -7,6 +7,7 @@
 ## Bug Fixes and Other Changes
 
 *   Relax dependency on Protobuf to include version 6.x
+*   Remove upper bound for Protobuf dependency
 
 ## Breaking Changes
 
