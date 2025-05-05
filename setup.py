@@ -133,6 +133,9 @@ setup(
     ],
     python_requires='>=3.9,<4',
     packages=find_packages(),
+    extra_requires={
+      "dev": ["precommit"],
+    },
     include_package_data=True,
     description='Library and standards for schema and statistics.',
     long_description=_LONG_DESCRIPTION,
