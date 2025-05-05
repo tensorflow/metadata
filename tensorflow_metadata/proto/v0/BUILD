@@ -66,4 +66,3 @@ py_proto_library(
         ":metadata_v0_proto",
     ],
 )
-

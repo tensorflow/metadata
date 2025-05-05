@@ -351,11 +351,3 @@ message PerformanceMetric {
   }
   // NEXT_TAG: 37;
 }
-
-
-
-
-
-
-
-
