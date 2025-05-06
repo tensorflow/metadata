@@ -21,7 +21,7 @@ import "google/protobuf/any.proto";
 import "tensorflow_metadata/proto/v0/derived_feature.proto";
 import "tensorflow_metadata/proto/v0/path.proto";
 
-// GOOGLE-LEGACY option jspb_use_correct_proto2_semantics = false;  
+// GOOGLE-LEGACY option jspb_use_correct_proto2_semantics = false;
 option cc_enable_arenas = true;
 option java_package = "org.tensorflow.metadata.v0";
 option java_multiple_files = true;
@@ -83,7 +83,7 @@ message Schema {
   // Sequences described in this schema. A sequence may be described in terms of
   // several features. Any features appearing within a sequence must *not* be
   // declared as top-level features in <feature>.
-// GOOGLE-LEGACY   repeated Sequence sequence = 2;  
+// GOOGLE-LEGACY   repeated Sequence sequence = 2;
 
   // String domains referenced in the features.
   repeated StringDomain string_domain = 4;
@@ -156,7 +156,7 @@ message Feature {
 
   // Comment field for a human readable description of the field.
   // TODO(b/123518108): remove this.
-// GOOGLE-LEGACY   optional string comment = 3 [deprecated = true];  
+// GOOGLE-LEGACY   optional string comment = 3 [deprecated = true];
 
   oneof presence_constraints {
     // Constraints on the presence of this feature in the examples.
@@ -422,7 +422,7 @@ message SparseFeature {
 
   // Comment field for a human readable description of the field.
   // TODO(martinz): delete, convert to annotation.
-// GOOGLE-LEGACY   optional string comment = 3 [deprecated = true];  
+// GOOGLE-LEGACY   optional string comment = 3 [deprecated = true];
 
   // Constraints on the presence of this feature in examples.
   // Deprecated, this is inferred by the referred features.
