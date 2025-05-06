@@ -39,9 +39,6 @@ select = [
     "NPY",
 ]
 
-[isort]
-profile = "black"
-
 ignore = [
     "D104", # Missing docstring in public package
     "D100", # Missing docstring in public module
@@ -60,6 +57,12 @@ ignore = [
     "D206", # Docstrings should be indented with spaces; unnecessary when running ruff-format
     "E501", # Line length too long; unnecessary when running ruff-format
     "W191", # Indentation contains tabs; unnecessary when running ruff-format
+
+    # REMOVE AFTER FIXING
+    "ANN001", # Missing type annotation for function argument `args`
+    "ANN202", # Missing Missing return type annotation for private function
+    "D103", # Missing docstring in public function
+    "D101", # Missing docstring in public class
 ]
 
 

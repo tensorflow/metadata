@@ -18,15 +18,15 @@ import platform
 import shutil
 import subprocess
 
-import setuptools
-from setuptools import find_packages
-from setuptools import setup
-
 # pylint: disable=g-bad-import-order
 # It is recommended to import setuptools prior to importing distutils to avoid
 # using legacy behavior from distutils.
 # https://setuptools.readthedocs.io/en/latest/history.html#v48-0-0
 from distutils.command import build
+
+import setuptools
+from setuptools import find_packages, setup
+
 # pylint: enable=g-bad-import-order
 
 

@@ -25,10 +25,9 @@ python build_tfmd_docs.py --output_dir=/tmp/tfmd-api
 
 """
 
-from absl import app
-from absl import flags
-
+from absl import app, flags
 from tensorflow_docs.api_generator import generate_lib
+
 import tensorflow_metadata as tfmd
 
 # `.proto` (which contains all the classes) is not imported by default

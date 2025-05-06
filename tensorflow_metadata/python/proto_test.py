@@ -13,11 +13,8 @@
 # limitations under the License.
 """Tests for tensorflow_metadata.python.proto."""
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 from absl.testing import absltest
+
 from tensorflow_metadata.proto.v0 import schema_pb2
 
 
