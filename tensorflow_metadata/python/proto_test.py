@@ -22,17 +22,16 @@ from tensorflow_metadata.proto.v0 import schema_pb2
 
 
 class ProtoTest(absltest.TestCase):
+    def test_import_works(self):
+        """Checks that the import of the tensorflow_metadata module works."""
+        # pylint:disable=unused-variable
+        # We don't explicitly check all the symbols we know about now, because we
+        # don't want to have to keep this test in sync with changes to the
+        # underlying library.
+        # Check for the presence of the Schema symbol.
+        dummy = schema_pb2.Schema
+        del dummy
 
-  def test_import_works(self):
-    """Checks that the import of the tensorflow_metadata module works."""
-    # pylint:disable=unused-variable
-    # We don't explicitly check all the symbols we know about now, because we
-    # don't want to have to keep this test in sync with changes to the
-    # underlying library.
-    # Check for the presence of the Schema symbol.
-    dummy = schema_pb2.Schema
-    del dummy
 
-
-if __name__ == '__main__':
-  absltest.main()
+if __name__ == "__main__":
+    absltest.main()
