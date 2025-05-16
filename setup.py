@@ -132,6 +132,11 @@ setup(
         'protobuf>=4.21.6,<4.22;python_version<"3.11"',
     ],
     python_requires='>=3.9,<4',
+    extras_require={
+        'test': [
+          'pytest>=8,<9',
+        ],
+    },
     packages=find_packages(),
     include_package_data=True,
     description='Library and standards for schema and statistics.',
