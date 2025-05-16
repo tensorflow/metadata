@@ -32,7 +32,3 @@ class ProtoTest(absltest.TestCase):
     # Check for the presence of the Schema symbol.
     dummy = schema_pb2.Schema
     del dummy
-
-
-if __name__ == '__main__':
-  absltest.main()
