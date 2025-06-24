@@ -1,3 +1,22 @@
+# Version 1.17.2
+
+## Major Features and Improvements
+
+*   N/A
+
+## Bug Fixes and Other Changes
+
+*   Relax dependency on Protobuf to include version 6.x
+*   Remove upper bound for Protobuf dependency
+
+## Breaking Changes
+
+*   N/A
+
+## Deprecations
+
+*   N/A
+
 # Version 1.17.1
 
 ## Major Features and Improvements
