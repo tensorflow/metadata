@@ -24,47 +24,51 @@ python build_tfmd_docs.py --output_dir=/tmp/tfmd-api
 ```
 
 """
-from absl import app
-from absl import flags
 
+from absl import app, flags
 from tensorflow_docs.api_generator import generate_lib
+
 import tensorflow_metadata as tfmd
 
 # `.proto` (which contains all the classes) is not imported by default
 import tensorflow_metadata.proto  # pylint: disable=unused-import
 
-_OUTPUT_DIR = flags.DEFINE_string('output_dir', '/tmp/tfmd_api/',
-                                  'The path to output the files to')
+_OUTPUT_DIR = flags.DEFINE_string(
+    "output_dir", "/tmp/tfmd_api/", "The path to output the files to"
+)
 
 _CODDE_URL_PREFIX = flags.DEFINE_string(
-    'code_url_prefix',
-    'https://github.com/tensorflow/metadata/tree/master/tensorflow_metadata/proto',
-    'The url prefix for links to code.')
+    "code_url_prefix",
+    "https://github.com/tensorflow/metadata/tree/master/tensorflow_metadata/proto",
+    "The url prefix for links to code.",
+)
 
 _SEARCH_HINTS = flags.DEFINE_bool(
-    'search_hints', True,
-    'Include metadata search hints in the generated files')
+    "search_hints", True, "Include metadata search hints in the generated files"
+)
 
 _SITE_PATH = flags.DEFINE_string(
-    'site_path',
-    'tfx/tensorflow_metadata/api_docs/python',
-    'Path prefix in the _toc.yaml')
+    "site_path",
+    "tfx/tensorflow_metadata/api_docs/python",
+    "Path prefix in the _toc.yaml",
+)
 
 
 def main(args):
-  if args[1:]:
-    raise ValueError('Unrecognized Command line args', args[1:])
+    if args[1:]:
+        raise ValueError("Unrecognized Command line args", args[1:])
 
-  doc_generator = generate_lib.DocGenerator(
-      root_title='TF-Metadata',
-      py_modules=[('tfmd.proto', tfmd.proto)],
-      code_url_prefix=_CODDE_URL_PREFIX.value,
-      search_hints=_SEARCH_HINTS.value,
-      site_path=_SITE_PATH.value,
-      callbacks=[])
+    doc_generator = generate_lib.DocGenerator(
+        root_title="TF-Metadata",
+        py_modules=[("tfmd.proto", tfmd.proto)],
+        code_url_prefix=_CODDE_URL_PREFIX.value,
+        search_hints=_SEARCH_HINTS.value,
+        site_path=_SITE_PATH.value,
+        callbacks=[],
+    )
 
-  doc_generator.build(_OUTPUT_DIR.value)
+    doc_generator.build(_OUTPUT_DIR.value)
 
 
-if __name__ == '__main__':
-  app.run(main)
+if __name__ == "__main__":
+    app.run(main)
