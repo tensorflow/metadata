@@ -140,8 +140,11 @@ setup(
     ],
     python_requires=">=3.9,<4",
     packages=find_packages(),
-    extra_requires={
+    extras_require={
         "dev": ["precommit"],
+        "test": [
+            "pytest>=8,<9",
+        ],
     },
     include_package_data=True,
     description="Library and standards for schema and statistics.",
