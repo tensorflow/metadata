@@ -138,10 +138,9 @@ setup(
         'protobuf>=4.25.2;python_version>="3.11"',
         'protobuf>=4.21.6,<4.22;python_version<"3.11"',
     ],
-    extras_require={},
     python_requires=">=3.9,<4",
     packages=find_packages(),
-    extra_requires={
+    extras_require={
         "dev": ["precommit"],
         "test": [
             "pytest>=8,<9",
