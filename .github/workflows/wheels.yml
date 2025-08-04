@@ -51,7 +51,7 @@ jobs:
     - name: Upload wheels
       uses: actions/upload-artifact@v4
       with:
-        name: wheels-${{ matrix.python-version }}-${{ matrix.os }}
+        name: build-${{ matrix.python-version }}-${{ matrix.os }}
         path: ./wheelhouse/*
 
   upload_to_pypi:
