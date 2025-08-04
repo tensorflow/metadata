@@ -44,7 +44,7 @@ jobs:
 
     - name: Build wheels
       run: |
-        python -m build
+        python -m build --wheel --sdist
         mkdir wheelhouse
         mv dist/*.whl wheelhouse/
 
