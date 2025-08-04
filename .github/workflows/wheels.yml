@@ -25,22 +25,6 @@ jobs:
     - name: install python dependencies
       run: pip install build twine
 
-    - uses: bazel-contrib/setup-bazel@0.14.0
-      name: Set up Bazel
-      with:
-        # Avoid downloading Bazel every time.
-        bazelisk-cache: true
-        # Store build cache per workflow.
-        disk-cache: ${{ github.workflow }}-${{ hashFiles('.github/workflows/wheels.yml') }}
-        # Share repository cache between workflows.
-        repository-cache: true
-
-    - name: Verify bazel installation
-      run: |
-        which bazel
-        bazel info
-        bazel version
-
     - name: build sdist
       run: |
         python -m build --sdist -o wheelhouse
