@@ -36,17 +36,11 @@ jobs:
       run: |
           python -m pip install --upgrade pip build
 
-    - name: Verify bazel installation
-      run: |
-        which bazel
-        bazel info
-        bazel version
-
     - name: Build wheels
       run: |
         python -m build --wheel --sdist
         mkdir wheelhouse
-        mv dist/*.whl wheelhouse/
+        mv dist/* wheelhouse/
 
     - name: List and check wheels
       run: |
@@ -58,7 +52,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: wheels-${{ matrix.python-version }}-${{ matrix.os }}
-        path: ./wheelhouse/*.whl
+        path: ./wheelhouse/*
 
   upload_to_pypi:
     name: Upload to PyPI
