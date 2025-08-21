@@ -7,4 +7,4 @@ bazel-out
 bazel-testlogs
 build/
 tensorflow_metadata.egg-info/
-tensorflow_metadata/proto/v0/*.py
+tensorflow_metadata/proto/v0/*_pb2.py

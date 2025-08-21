@@ -13,55 +13,20 @@
 # limitations under the License.
 """Package Setup script for tf.Metadata."""
 
-import os
+import pathlib
 import platform
 import shutil
 import subprocess
 
-# pylint: disable=g-bad-import-order
-# It is recommended to import setuptools prior to importing distutils to avoid
-# using legacy behavior from distutils.
-# https://setuptools.readthedocs.io/en/latest/history.html#v48-0-0
-from distutils.command import build
-
-import setuptools
 from setuptools import find_packages, setup
-
-# pylint: enable=g-bad-import-order
-
-
-class _BuildCommand(build.build):
-    """Build everything that is needed to install.
-
-    This overrides the original distutils "build" command to to run bazel_build
-    command before any sub_commands.
-
-    build command is also invoked from bdist_wheel and install command, therefore
-    this implementation covers the following commands:
-      - pip install . (which invokes bdist_wheel)
-      - python setup.py install (which invokes install command)
-      - python setup.py bdist_wheel (which invokes bdist_wheel command)
-    """
-
-    def _build_cc_extensions(self):
-        return True
-
-    # Add "bazel_build" command as the first sub_command of "build". Each
-    # sub_command of "build" (e.g. "build_py", "build_ext", etc.) is executed
-    # sequentially when running a "build" command, if the second item in the tuple
-    # (predicate method) is evaluated to true.
-    sub_commands = [
-        ("bazel_build", _build_cc_extensions),
-    ] + build.build.sub_commands
+from setuptools.command import build_py
 
 
-class _BazelBuildCommand(setuptools.Command):
-    """Build Bazel artifacts and move generated files to the ."""
+class _BazelBuildCommand(build_py.build_py):
+    """Build Bazel artifacts and move generated files to the source directory."""
 
     def initialize_options(self):
-        pass
-
-    def finalize_options(self):
+        super().initialize_options()
         self._bazel_cmd = shutil.which("bazel")
         if not self._bazel_cmd:
             raise RuntimeError(
@@ -69,10 +34,11 @@ class _BazelBuildCommand(setuptools.Command):
                 "https://docs.bazel.build/versions/master/install.html for "
                 "installation instruction."
             )
+
+        self._additional_build_options = []
         if platform.system() == "Windows":
             self._additional_build_options = ["--copt=-DWIN32_LEAN_AND_MEAN"]
-        else:
-            self._additional_build_options = []
+
 
     def run(self):
         subprocess.check_call(
@@ -86,8 +52,10 @@ class _BazelBuildCommand(setuptools.Command):
             ],
             # Bazel should be invoked in a directory containing bazel WORKSPACE
             # file, which is the root directory.
-            cwd=os.path.dirname(os.path.realpath(__file__)),
+            cwd=str(pathlib.Path(__file__).parent),
         )
+
+        super().run()
 
 
 with open("tensorflow_metadata/version.py") as fp:
@@ -117,7 +85,6 @@ setup(
         "Intended Audience :: Developers",
         "Intended Audience :: Education",
         "Intended Audience :: Science/Research",
-        "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
@@ -152,10 +119,7 @@ setup(
     keywords="tensorflow metadata tfx",
     download_url="https://github.com/tensorflow/metadata/tags",
     requires=[],
-    cmdclass={
-        "build": _BuildCommand,
-        "bazel_build": _BazelBuildCommand,
-    },
+    cmdclass={"build_py": _BazelBuildCommand},
     package_data={
         "tensorflow_metadata.proto.v0": ["*.proto"]
     }
