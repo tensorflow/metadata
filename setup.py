@@ -39,7 +39,6 @@ class _BazelBuildCommand(build_py.build_py):
         if platform.system() == "Windows":
             self._additional_build_options = ["--copt=-DWIN32_LEAN_AND_MEAN"]
 
-
     def run(self):
         subprocess.check_call(
             [
@@ -120,7 +119,5 @@ setup(
     download_url="https://github.com/tensorflow/metadata/tags",
     requires=[],
     cmdclass={"build_py": _BazelBuildCommand},
-    package_data={
-        "tensorflow_metadata.proto.v0": ["*.proto"]
-    }
+    package_data={"tensorflow_metadata.proto.v0": ["*.proto"]},
 )
