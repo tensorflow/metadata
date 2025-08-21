@@ -157,4 +157,7 @@ setup(
         "build": _BuildCommand,
         "bazel_build": _BazelBuildCommand,
     },
+    package_data={
+        "tensorflow_metadata.protobuf.v0": ["tensorflow_metadata/proto/v0/*.proto"]
+    }
 )
