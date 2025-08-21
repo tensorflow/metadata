@@ -146,7 +146,6 @@ setup(
             "pytest>=8,<9",
         ],
     },
-    include_package_data=True,
     description="Library and standards for schema and statistics.",
     long_description=_LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
@@ -158,6 +157,6 @@ setup(
         "bazel_build": _BazelBuildCommand,
     },
     package_data={
-        "tensorflow_metadata.protobuf.v0": ["tensorflow_metadata/proto/v0/*.proto"]
+        "tensorflow_metadata.proto.v0": ["*.proto"]
     }
 )
