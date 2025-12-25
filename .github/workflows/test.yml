@@ -13,12 +13,11 @@ env:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
-
-
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: ['3.9', '3.10', '3.11', '3.12']
+        os: [ubuntu-latest, macos-latest]
+        python-version: ['3.9', '3.10', '3.11', '3.12', '3.13']
 
     steps:
     - uses: actions/checkout@v4
