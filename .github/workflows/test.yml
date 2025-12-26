@@ -30,6 +30,18 @@ jobs:
         cache-dependency-path: |
           setup.py
 
+    - name: Install Bazel
+      run: |
+        mkdir -p ~/.local/bin
+        if [[ "${{ runner.os }}" == "Linux" ]]; then
+          wget --no-check-certificate -q https://github.com/bazelbuild/bazel/releases/download/${{ env.USE_BAZEL_VERSION }}/bazel-${{ env.USE_BAZEL_VERSION }}-linux-x86_64 -O ~/.local/bin/bazel
+        elif [[ "${{ runner.os }}" == "macOS" ]]; then
+          wget --no-check-certificate -q https://github.com/bazelbuild/bazel/releases/download/${{ env.USE_BAZEL_VERSION }}/bazel-${{ env.USE_BAZEL_VERSION }}-darwin-arm64 -O ~/.local/bin/bazel
+        fi
+        chmod +x ~/.local/bin/bazel
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+        bazel --version
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
