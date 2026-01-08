@@ -10,6 +10,24 @@
 
 ## Deprecations
 
+# Version 1.17.3
+
+## Major Features and Improvements
+
+*   N/A
+
+## Bug Fixes and Other Changes
+
+*   Depends on `protobuf>=4.21.6,<6.32` for 3.9 and 3.10
+
+## Breaking Changes
+
+*   N/A
+
+## Deprecations
+
+*   N/A
+
 # Version 1.17.2
 
 ## Major Features and Improvements
