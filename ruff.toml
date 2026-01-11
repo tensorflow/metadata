@@ -52,6 +52,7 @@ ignore = [
     "D105", # Missing docstring in magic method
     "D203", # 1 blank line before after class docstring
     "D204", # 1 blank line required after class docstring
+    "D213", # Make docstrings start on second line
     "D413", # 1 blank line after parameters
     "SIM108", # Simplify if/else to one line; not always clearer
     "D206", # Docstrings should be indented with spaces; unnecessary when running ruff-format

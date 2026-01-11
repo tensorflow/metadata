@@ -12,3 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Init module for tf.Metadata v0 protos."""
+
+import pathlib
+
+
+def get_protocol_buffer_path() -> pathlib.Path:
+    """Get the path to the directory containing the protocol buffers.
+
+    Returns
+    -------
+    pathlib.Path
+        Path to the directory containing *.proto files
+    """
+    return pathlib.Path(__file__).parent
