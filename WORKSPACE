@@ -26,9 +26,9 @@ http_archive(
 http_archive(
     name = "zlib",
     build_file = "@com_google_protobuf//:third_party/zlib.BUILD",
-    sha256 = "d8688496ea40fb61787500e863cc63c9afcbc524468cedeb478068924eb54932",
-    strip_prefix = "zlib-1.2.12",
-    urls = ["https://github.com/madler/zlib/archive/v1.2.12.tar.gz"],
+    sha256 = "17e88863f3600672ab49182f217281b6fc4d3c762bde361935e436a95214d05c",
+    strip_prefix = "zlib-1.3.1",
+    urls = ["https://github.com/madler/zlib/archive/v1.3.1.tar.gz"],
 )
 
 # Needed by com_google_protobuf.

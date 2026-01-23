@@ -1,0 +1,22 @@
+# Bazel configuration for C++ standard and build options
+
+# Enforce C++17 standard for both target and host (tools) compilation
+build --cxxopt=-std=gnu++17
+build --host_cxxopt=-std=gnu++17
+build --cxxopt=-fno-strict-aliasing
+build --host_cxxopt=-fno-strict-aliasing
+
+# Disable bzlmod (new module system) to use traditional WORKSPACE
+common --noenable_bzlmod
+
+# Don't keep state after build to prevent cache issues
+common --nokeep_state_after_build
+
+# Verbose logging for CI debugging
+build --verbose_failures
+
+# macOS specific settings
+build:macos --cxxopt=-std=gnu++17
+build:macos --host_cxxopt=-std=gnu++17
+build:macos --cxxopt=-fno-strict-aliasing
+build:macos --host_cxxopt=-fno-strict-aliasing
