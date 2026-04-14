@@ -121,7 +121,6 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
@@ -140,7 +139,7 @@ setup(
         'protobuf>=4.25.2;python_version>="3.11"',
         'protobuf>=4.21.6,<=6.32;python_version<"3.11"',
     ],
-    python_requires=">=3.9,<4",
+    python_requires=">=3.10,<4",
     packages=find_packages(),
     extras_require={
         "dev": ["precommit"],

@@ -4,21 +4,19 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "bazel_skylib",
-    sha256 = "97e70364e9249702246c0e9444bccdc4b847bed1eb03c5a3ece4f83dfe6abc44",
     urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.0.2/bazel-skylib-1.0.2.tar.gz",
-        "https://github.com/bazelbuild/bazel-skylib/releases/download/1.0.2/bazel-skylib-1.0.2.tar.gz",
+        "https://github.com/bazelbuild/bazel-skylib/releases/download/1.9.0/bazel-skylib-1.9.0.tar.gz",
     ],
 )
 
-_PROTOBUF_VERSION = "4.25.6"
+_PROTOBUF_VERSION = "6.31.1"
 
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "ff6e9c3db65f985461d200c96c771328b6186ee0b10bc7cb2bbc87cf02ebd864",
+    sha256 = "6e09bbc950ba60c3a7b30280210cd285af8d7d8ed5e0a6ed101c72aff22e8d88",
     strip_prefix = "protobuf-%s" % _PROTOBUF_VERSION,
     urls = [
-        "https://github.com/protocolbuffers/protobuf/archive/v%s.zip" % _PROTOBUF_VERSION,
+        "https://github.com/protocolbuffers/protobuf/archive/refs/tags/v%s.zip" % _PROTOBUF_VERSION,
     ],
 )
 
@@ -45,8 +43,22 @@ bind(
     actual = "@six_archive//:six",
 )
 
+http_archive(
+    name = "rules_python",
+    urls = ["https://github.com/bazelbuild/rules_python/archive/refs/tags/0.31.0.tar.gz"],
+    strip_prefix = "rules_python-0.31.0",
+)
+
+load("@rules_python//python:repositories.bzl", "py_repositories")
+py_repositories()
+
+local_repository(
+    name = "compatibility_proxy",
+    path = "third_party/dummy_compatibility_proxy",
+)
+
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 protobuf_deps()
 
 load("@bazel_skylib//lib:versions.bzl", "versions")
-versions.check("6.5.0")
+versions.check("7.4.1")
