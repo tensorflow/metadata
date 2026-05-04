@@ -7,7 +7,7 @@ on:
     types: [published]
 
 env:
-  USE_BAZEL_VERSION: "6.5.0"
+  USE_BAZEL_VERSION: "7.7.0"
 
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
       # fail-fast: true
       matrix:
         os: [ubuntu, macos]
-        python-version: ['3.9', '3.10', '3.11', '3.12', '3.13']
+        python-version: ['3.10', '3.11', '3.12', '3.13']
 
 
     runs-on: ${{ format('{0}-latest', matrix.os) }}
