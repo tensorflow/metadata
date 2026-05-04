@@ -9,7 +9,7 @@
 *   Align with TensorFlow 2.21 dependencies.
 *   Upgrade Protobuf to `6.31.1`.
 *   Upgrade `bazel_skylib` to `1.9.0`.
-*   Add support for Python 3.12.
+*   Add support for Python 3.12 and 3.13.
 
 ## Breaking Changes
 
