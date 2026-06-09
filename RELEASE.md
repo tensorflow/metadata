@@ -1,5 +1,3 @@
-<!-- mdlint off(HEADERS_TOO_MANY_H1) -->
-
 # Version 1.21.0
 
 ## Major Features and Improvements
