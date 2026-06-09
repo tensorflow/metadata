@@ -90,6 +90,7 @@ jobs:
       - name: Upload to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1.12
         with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
           packages-dir: wheels/
           # already checked, and the pkginfo/twine versions on this runner causes check to fail
           verify-metadata: false
