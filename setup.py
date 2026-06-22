@@ -136,8 +136,7 @@ setup(
     install_requires=[
         "absl-py>=0.9,<3.0.0",
         'googleapis-common-protos>=1.56.4,<2;python_version>="3.11"',
-        'protobuf>=4.25.2;python_version>="3.11"',
-        'protobuf>=4.21.6,<=6.32;python_version<"3.11"',
+        'protobuf>=6.31.1,<7',
     ],
     python_requires=">=3.10,<4",
     packages=find_packages(),
