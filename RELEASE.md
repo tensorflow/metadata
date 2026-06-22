@@ -1,3 +1,21 @@
+# Version 1.21.1
+
+## Major Features and Improvements
+
+*   N/A
+
+## Bug Fixes and Other Changes
+
+*   Align pip package protobuf dependency requirement to `protobuf>=6.31.1,<7` to match compiled C++ extensions.
+
+## Breaking Changes
+
+*   N/A
+
+## Deprecations
+
+*   N/A
+
 # Version 1.21.0
 
 ## Major Features and Improvements
